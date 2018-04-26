@@ -1,0 +1,7 @@
+To install a local deploy:
+
+Requirements: node package manager.
+
+run 'npm install' in the CS480ComicSite directory
+
+If running a local dynamo database, node scripts will have an endpoint commented out near the top of the source. Uncomment it. This will redirect you to the local dynamodb on port: 8000
