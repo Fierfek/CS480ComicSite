@@ -1,0 +1,12 @@
+
+.nav-link{
+	color:white;
+    background-color: #202020;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+	font-weight: bold;
+	margin-left:5px;
+}
