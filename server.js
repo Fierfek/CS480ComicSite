@@ -3,7 +3,7 @@ var express 		= require('express');
 var app 			= express();
 var aws 			= require("aws-sdk");
 var bodyParser 		= require('body-parser');
-var methodOverride 	= require('method-override');
+//var methodOverride 	= require('method-override');
 
 
 // configuration
@@ -19,7 +19,7 @@ aws.config.update({
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(bodyParser.urlencoded({extend:true}));
-app.use(methodOverride('X-HTTP-Method-Override'));
+//app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.use(express.static(__dirname + '/public'));
 
