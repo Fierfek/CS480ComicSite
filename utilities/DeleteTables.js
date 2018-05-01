@@ -2,7 +2,7 @@ var aws = require("aws-sdk");
 
 aws.config.update({
 	region: "us-west-2",
-	endpoint: "http://localhost:8000"
+	//endpoint: "http://localhost:8000"
 });
 
 var dynamodb = new aws.DynamoDB();

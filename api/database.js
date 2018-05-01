@@ -12,16 +12,26 @@ var docClient = new aws.DynamoDB.DocumentClient();
 router.post('/book/create', function(req, res) {
 	var params = {
 		TableName: "Book",
-		ProjectionExpression: "bookID, title"
+		Item: {
+			"bookID": req.bookID,
+			"title": req.title,
+			"issuesList": req.issuesList,
+		}
 	}
 	
-	docClient.scan(params, scan);
+	docClient.put(params, function(err, data) {
+		if(err) {
+			console.log("Unable to add item. Error JSON: " + JSON.stringify(err, null, 2));
+		} else {
+			console.log("Added Item:" + JSON.stringify(data, null, 2));
+		}
+	});
 });
 
 router.get('/book', function(req, res) {
 	var params = {
 		TableName: "Book",
-		ProjectionExpression: "bookID, title"
+		ProjectionExpression: "bookID, title, issueList"
 	}
 	
 	docClient.scan(params, function(err, data) {
@@ -41,9 +51,5 @@ router.get('/book', function(req, res) {
 router.get('/', function(req, res) {
 	console.log("get anything");
 });
-
-function scan(err, data, res) {
-	
-}
 
 module.exports = router;
