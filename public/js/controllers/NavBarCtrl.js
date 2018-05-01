@@ -8,4 +8,10 @@ navBar.controller('NavBarController', function($scope) {
 		var searchParams = search.searchData;
 		console.log("Search for: " + searchParams);
 	}
+	
+	$scope.category="Category";
+	
+	$scope.setCategory=function set(name){
+		$scope.category=name;
+	};
 });
