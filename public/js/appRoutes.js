@@ -4,9 +4,12 @@ angular.module('appRoutes', ['ngRoute']).config(function($routeProvider, $locati
             templateUrl: '/views/landing.html',
             controller: 'LandingPage'
         })
-		.when('/', {
+		.when('/profile/', {
             templateUrl: '/views/profile.html',
-            //controller: 'LandingPage'
-        });
+            controller: 'ProfileControlller'
+        })
+		.otherwise({
+			redirectTo: '/'
+		});
     $locationProvider.html5Mode(true);
 });
