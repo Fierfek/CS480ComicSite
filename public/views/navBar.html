@@ -1,47 +1,60 @@
 
 
-<div ng-app="navBarCtrl" ng-controller="NavBarController">
+<div ng-app= "navBarCtrl" ng-controller="NavBarController">
   
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-		<a class="navbar-brand" href="/" style="font-family:Lucida Console; font-size:2vw">ComicBash</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<a ng-click= "buttonAppear()" class="navbar-brand" di-href="/" style="font-family:Lucida Console; font-size:2vw; margin-right:100px">ComicBash</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+		aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-top:15px">
+			
 			<div  class="input-group mb-3" >
 				<div class="input-group-prepend">
-					<input id="choose" type="button" value="Choose" class="btn btn-outline-secondary"/ disabled style="color:white">
-					<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-					style="color:white">
-					<span class="sr-only">Toggle Dropdown</span>
-					</button>
-					<div class="dropdown-menu"div >
-						<a ng-repeat="item in data" href="#" class="dropdown-item" type="button" name={{item}} >{{item}} </a>
-						<div role="separator" class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"  type="button" onclick=getOption("User");>User</a>
-						<div role="separator" class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"  type="button" ;>Advanced Search</a>
-						<a></a>
-					</div>
+					<ul class="navbar-nav">
+						<li>
+							<ul ng-show = "showSeachBox" class="list-inline">
+								<li class="list-inline-item">
+									<input ng-value="category" class="btn btn-outline-secondary"/ disabled style="color:white ">
+								</li>
+								<li class="list-inline-item">
+									<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false" style="color:white;">
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu"div >
+										<a  ng-repeat="item in data"  ng-click= "setCategory(item)" href="#" class="dropdown-item" type="button" name={{item}}> {{item}}</a>
+										<div role="separator" class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item"  type="button"  ng-click= "setCategory('User')";>User</a>
+										<div role="separator" class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item"  type="button" ;>Advanced Search</a>
+									</div>
+								</li>
+								<li class="list-inline-item">
+									<input ng-model="search.searchData" class="form-control mr-sm-3" type="search" placeholder="Search" 
+									aria-label="seach input with segmented dropdown button" >
+								</li>
+								<li class="list-inline-item">
+									<a ng-click="startSearch(search)" class="btn btn-outline-secondary" type="submit" style="color:white; cursor:pointer;
+									background-color: #202020; margin-right="50px">Search</a>
+								</li>
+							</ul>
+						
+						</li>
+						<li class="nav-item">
+							<a ng-click="profilePage()" ng-show="showProfile" class="nav-link"  di-href="/profile/" style="font-weight: bold"  >Profile </a>
+						</li>
+						<li class="nav-item ">
+							<a ng-click= "loginPage()" ng-show="showLogin" class="nav-link" di-href="/login/" style="font-weight: bold">Login</a>
+						</li>
+						<li class="nav-item ">
+							<a ng-show="showSignUp" class="nav-link" href="#" style="font-weight: bold">Sign up</a>
+						</li>				
+					</ul>
 				</div>
-				<input ng-model="search.searchData" class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="seach input with segmented dropdown button"></input>
-				<a  ng-click="startSearch(search)" class="nav-link" type="submit" style="color:white">Search</a>
-				<ul class="nav justify-content-end">
-					<li class="nav-item active">
-						<a id="profile" class="nav-link" type="button" href="#" style="visibility:hidden">profile </a>
-					</li>
-					<li class="nav-item active">
-						<a id="login" class="nav-link" type="button"href="#">Login</a>
-					</li>
-					<li class="nav-item active">
-						<a id="signUp" class="nav-link" type="button" href="#">Sign up</a>
-					</li>
-				
-				</ul>
 			</div>
 		</div>
-		
-
 	</nav>
 </div>
