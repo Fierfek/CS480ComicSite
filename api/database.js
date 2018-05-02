@@ -3,8 +3,8 @@ var router = express.Router();
 var aws = require("aws-sdk");
 
 aws.config.update({
-	"accessKeyId": "AKIAJAX7OK37HX73JBLA",
-	"secretAccessKey": "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",
+	accessKeyId: "AKIAJAX7OK37HX73JBLA",
+	secretAccessKey: "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",
 	region: "us-west-2",
 	//endpoint: "http://localhost:8000"
 });
