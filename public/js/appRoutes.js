@@ -4,9 +4,16 @@ angular.module('appRoutes', ['ngRoute']).config(function($routeProvider, $locati
             templateUrl: '/views/landing.html',
             controller: 'LandingPage'
         })
-		.when('/profile', {
+		.when('/profile/', {
             templateUrl: '/views/profile.html',
-            //controller: 'LandingPage'
-        });
+            controller: 'ProfileController'
+        })
+		.when('/login/', {
+            templateUrl: '/views/login.html',
+            controller: 'LoginController'
+        })
+		.otherwise({
+			redirectTo: '/'
+		});
     $locationProvider.html5Mode(true);
 });
