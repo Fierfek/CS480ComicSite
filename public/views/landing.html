@@ -1,105 +1,106 @@
-<div ng-controller="LandingPage" class="container-fluid">
-<div class="row" position="relative">
-	<div class="col-sm-7">
-    	<div class="card">
-    		<div class="card-header">
-    			New Issues
-  			</div>
-  		</div>
-  		<!--Copy and paste this for every row-->
-  		<!--row 1-->
-		<div class="card">
-  			<div class="row">
-  				<div class="col-2">
-  					<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
-  				</div>
-  				<div class="col-4">
-					<div class="card-body">
-        				<h5 class="card-title">Issue title</h5>
-        				<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-		<!--row 2-->
-    	<div class="card">
-  			<div class="row">
-  				<div class="col-2">
-  					<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
-  				</div>
-  				<div class="col-4">
-					<div class="card-body">
-        				<h5 class="card-title">Issue title</h5>
-        				<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-    	<!--row 3-->
-    	<div class="card">
-  			<div class="row">
-  				<div class="col-2">
-  					<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
-  				</div>
-  				<div class="col-4">
-					<div class="card-body">
-        				<h5 class="card-title">Issue title</h5>
-        				<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-    	<!-- continue for more rows-->
-  	</div>
-  	<div class="col-sm-5">
-  		<div class="card">
-  			<div class="card-header">
-    			This Season's Series
-  			</div>
-  		</div>
-    	<!--Copy and paste this for every row-->
-    	<!--row1-->
-    	<div class="card">
-    		<div class="row">
-    			<div class="col-2">
-    				<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
-    			</div>
-    			<div class="col-4">
-      				<div class="card-body">
-        				<h5 class="card-title">Series Title</h5>
-        				<p class="card-text">Start Date, Number of Issues</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-    	    	<!--row2-->
-    	<div class="card">
-    		<div class="row">
-    			<div class="col-2">
-    				<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
-    			</div>
-    			<div class="col-4">
-      				<div class="card-body">
-        				<h5 class="card-title">Series Title</h5>
-        				<p class="card-text">Start Date, Number of Issues</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-    	    	<!--row3-->
-    	<div class="card">
-    		<div class="row">
-    			<div class="col-2">
-    				<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
-    			</div>
-    			<div class="col-4">
-      				<div class="card-body">
-        				<h5 class="card-title">Series Title</h5>
-        				<p class="card-text">Start Date, Number of Issues</p>
-      				</div>
-      			</div>
-  			</div>
-    	</div>
-  	</div>
+<div class="container-fluid">
+	<div class="row" position="relative">
+		<div class="col-sm-7">
+			<div class="card">
+				<div class="card-header">
+					New Issues
+				</div>
+			</div>
+			<!--Copy and paste this for every row-->
+			<!--row 1-->
+			<div class="card">
+				<div class="row">
+					<div class="col-2">
+						<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
+					</div>
+					<div class="col-4">
+						<div class="card-body">
+							<h5 class="card-title">Issue title</h5>
+							<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--row 2-->
+			<div class="card">
+				<div class="row">
+					<div class="col-2">
+						<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
+					</div>
+					<div class="col-4">
+						<div class="card-body">
+							<h5 class="card-title">Issue title</h5>
+							<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--row 3-->
+			<div class="card">
+				<div class="row">
+					<div class="col-2">
+						<img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image" href="issue/angularstuffhere">
+					</div>
+					<div class="col-4">
+						<div class="card-body">
+							<h5 class="card-title">Issue title</h5>
+							<p class="card-text">Volume/Issue numbers, Write, Illustrator, Year</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- continue for more rows-->
+		</div>
+		<div class="col-sm-5">
+			<div class="card">
+				<div class="card-header">
+					This Season's Series
+				</div>
+			</div>
+			<!--Copy and paste this for every row-->
+			<!--row1-->
+			<div class="card" ng-repeat="book in books">
+				<div class="row">
+					<div class="col-4">
+						<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
+					</div>
+					<div class="col-8">
+						<div class="card-body">
+							<h5 class="card-title">{{book.title}}</h5></h5>
+							<p class="card-text">Number of Issues: {{book.numberOfIssues}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+					<!--row2-->
+			<div class="card">
+				<div class="row">
+					<div class="col-2">
+						<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
+					</div>
+					<div class="col-4">
+						<div class="card-body">
+							<h5 class="card-title">Series Title</h5>
+							<p class="card-text">Start Date, Number of Issues</p>
+						</div>
+					</div>
+				</div>
+			</div>
+					<!--row3-->
+			<div class="card">
+				<div class="row">
+					<div class="col-2">
+						<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
+					</div>
+					<div class="col-4">
+						<div class="card-body">
+							<h5 class="card-title">Series Title</h5>
+							<p class="card-text">Start Date, Number of Issues</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
