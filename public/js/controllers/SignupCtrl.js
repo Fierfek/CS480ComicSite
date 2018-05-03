@@ -9,6 +9,10 @@ app.controller('SignupController', function($scope, $rootScope, $stateParams, $s
         $scope.password = '';
         $scope.passwordConfirm = '';
         $scope.email = '';
+        $scope.question1 = '';
+        $scope.answer1 = '';
+        $scope.question2 = '';
+        $scope.answer2 = '';
         $state.transitionTo('home');
       } else {
         $scope.error = "Invalid entry!";
