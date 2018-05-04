@@ -12,6 +12,10 @@ angular.module('appRoutes', ['ngRoute']).config(function($routeProvider, $locati
             templateUrl: '/views/login.html',
             controller: 'LoginController'
         })
+        .when('/signup/', {
+            templateUrl: '/views/signup.html',
+            controller: 'SignUpController'
+        })
 		.otherwise({
 			redirectTo: '/'
 		});
