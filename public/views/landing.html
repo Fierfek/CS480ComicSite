@@ -1,4 +1,22 @@
+<!--temp change for logged in landing page, will need to add to seperate div lager on.-->
 <div class="container-fluid">
+	<!-- TODO try to get the buttons looking aligned and not to cramped-->
+	<div class="row align-items-center">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  			<label class="btn btn-secondary active">
+  			<!-- this will be the same display as the the original landing page-->
+    			<input type="radio" name="loggedInLanding" id="Home" autocomplete="off" checked> Home
+  			</label>
+  			<label class="btn btn-secondary">
+  			<!--this will display a feed for the feed of info from users that the logged in user follows-->
+    			<input type="radio" name="loggedInLanding" id="followedUsers" autocomplete="off"> Followed Users
+  			</label>
+  			<!-- this will display a feed about info from comics the user follows-->
+  				<label class="btn btn-secondary">
+    		<input type="radio" name="loggedInLanding" id="follwedComics" autocomplete="off"> Followed Comics
+  			</label>
+		</div>
+	</div>
 	<div class="row" position="relative">
 		<div class="col-sm-7">
 			<div class="card">
@@ -59,6 +77,7 @@
 			</div>
 			<!--Copy and paste this for every row-->
 			<!--row1-->
+			<!-- will need to change the ng repeat later, so that it will be a set number, we wont be displaying all the books-->
 			<div class="card" ng-repeat="book in books">
 				<div class="row">
 					<div class="col-4">
@@ -104,3 +123,4 @@
 	</div>
 </div>
 </div>
+
