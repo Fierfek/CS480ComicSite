@@ -17,6 +17,7 @@ navBar.controller('NavBarController', function($scope) {
 	$scope.showProfile=true;
 	$scope.showSeachBox=true;
 	$scope.showLogin=true;
+	$scope.showLogout=true;
 	$scope.showSignUp=true;
 	
 	$scope.loginPage=function (){
@@ -30,6 +31,13 @@ navBar.controller('NavBarController', function($scope) {
 		$scope.showSeachBox=true;
 		$scope.showLogin=false;
 		$scope.showSignUp=false;
+	};
+	
+	$scope.buttonAppear=function(){
+		$scope.showProfile=true;
+		$scope.showSeachBox=true;
+		$scope.showLogin=true;
+		$scope.showSignUp=true;
 	};
 	
 	$scope.buttonAppear=function(){
