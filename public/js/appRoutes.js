@@ -2,11 +2,6 @@ var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/', {
-            templateUrl: '/views/landing.html',
-            controller: 'LandingPage',
-			title:'Comic Bash!'
-        })
 		.when('/profil'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
@@ -23,7 +18,9 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 			title:'Signup'
         })
 		.otherwise({
-			redirectTo: '/'
+			redirectTo: '/',
+			templateUrl: '/views/landing.html',
+            controller: 'LandingPage'
 		});
     $locationProvider.html5Mode(true);
 }]);
