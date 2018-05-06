@@ -1,18 +1,21 @@
 var loginPage = angular.module('LoginCtrl', []);
 
-loginPage.controller('LoginController', function ($scope, RestApiClientService) {
+loginPage.controller('LoginController', function ($scope, $rootScope, $location, RestApiClientService) {
  
     //initially set those objects to null to avoid undefined error
     $scope.login = {};
  
-    $scope.doLogin = function (customer) {
+    $scope.doLogin = function (user) {
         RestApiClientService.post('login', {
-            customer: customer
+            user: user
         }).then(function (results) {
            // RestApiClientService.toast(results);
             if (results.status == "success") {
-                $location.path('profile');
-            }
+				$rootScope.currentUser=user;
+                $location.path('profile/+user._id'); //user._id or other name
+            }else {
+				$scope.error='user not found';
+			}
         });
     };
 });
