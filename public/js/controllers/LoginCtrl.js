@@ -1,6 +1,6 @@
 var loginPage = angular.module('LoginCtrl', []);
 
-loginPage.controller('LoginController', function ($scope, RestApiClientService) {
+loginPage.controller('LoginController', function ($scope, $rootScope, $location, RestApiClientService) {
  
     //initially set those objects to null to avoid undefined error
     $scope.login = {};
