@@ -1,23 +1,29 @@
-<div class="col-md-12">
-	<h3>Login</h3>
+<div class="container">
+	<div class ="row">
+		<div class="col-md-12" style =" vertical-align: middle;">
+			<h3>Login</h3>
       
-    <form ng-submit="formSubmit()" class="form-center">
+			<form ng-submit="formSubmit()" class="form-center">
         
-		<div class="col-md-4">
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="login.username" placeholder="username" required focus/>
-          </div> 
+			<div class="col-md-5">
+				<div class="form-group">
+				<input type="text" class="form-control" ng-model="user.username" placeholder="username" required focus/>
+			</div> 
 
-          <div class="form-group">
-            <input type="password" class="form-control" ng-model="login.password" placeholder="password" required=""/>
-          </div>
+			<div class="form-group">
+				<input type="password" class="form-control" ng-model="user.password" placeholder="password" required=""/>
+			</div>
 
-          <div class="form-group" style = "margin-left:10px">
-          <div class="form-group" style = "margin-left:10px">
-            <button type="submit" class="btn btn-success" style= "margin-right:15px">Login</button>
-			<a href="" class="text-info" style="cursor:pointer; margin-right:15px">Forgot Password?</a>
-			<a href="/signup" class="text-info" style="cursor:pointer ">Create Account</a>
-          </div>
-        </div>
-    </form>
+			<div class="form-group" style = "margin-left:10px">
+				<div class="form-group" style = "margin-left:10px">
+					<button ng-click="doLogin(user)" type="submit" class="btn btn-success" style= "margin-right:15px">Login</button>
+					<a href="" class="text-info" style="cursor:pointer; margin-right:15px">Forgot Password?</a>
+					<a href="/signup" class="text-info" style="cursor:pointer ">Create Account</a>
+				</div>
+			</div>
+			</form>
+			</div>
+			<div  ng-show= "error" class="alert alert-danger" role="alert">{{error}}<div>
+		</div>	
+	</div>
 </div>

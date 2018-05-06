@@ -2,24 +2,40 @@ var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/landing', {
+        .when('/', {
             templateUrl: '/views/landing.html',
-            controller: 'LandingPage'
+            controller: 'LandingPage',
+			title:'Comic Bash!'
         })
-		.when('/profile', {
+		.when('/profil'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
-            controller: 'ProfileController'
+            controller: 'ProfileController',
+			title:'Profile'
         })
 		.when('/login', {
             templateUrl: '/views/login.html',
-            controller: 'LoginController'
+            controller: 'LoginController',
+			title:'Login'
         })
         .when('/signup', {
             templateUrl: '/views/signup.html',
-            controller: 'SignupController'
+            controller: 'SignupController',
+			title:'Signup'
         })
 		.otherwise({
-			redirectTo: '/landing'
+			redirectTo: '/'
 		});
     $locationProvider.html5Mode(true);
+}]);
+
+//Update title
+app.run(['$location', '$rootScope', function($location, $rootScope) {
+
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
+    {
+		if(current.$$route) {
+            // Set current page title
+			$rootScope.title = current.$$route.title;
+		}
+    });
 }]);

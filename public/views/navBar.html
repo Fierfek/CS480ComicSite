@@ -3,7 +3,7 @@
 <div ng-controller="NavBarController">
   
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-		<a ng-click= "buttonAppear()" class="navbar-brand" href="/landing" style="font-family:Lucida Console; font-size:2vw; margin-right:200px">ComicBash</a>
+		<a ng-click= "buttonAppear()" class="navbar-brand" href="/" style="font-family:Lucida Console; font-size:2vw; margin-right:200px">ComicBash</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -13,7 +13,7 @@
 				<div class="input-group-prepend">
 					<ul class="navbar-nav">
 						<li>
-							<ul ng-show = "showSeachBox" class="list-inline" >
+							<ul class="list-inline" >
 								<li class="list-inline-item">
 									<input ng-value="category" class="btn btn-outline-secondary"/ disabled style="color:white ">
 								</li>
@@ -42,16 +42,16 @@
 						
 						</li>
 						<li class="nav-item" >
-							<a ng-click="profilePage()" ng-show="showProfile" class="nav-link"  href="/profile" style="font-weight: bold"  >Profile </a>
+							<a ng-show="!currentUser" class="nav-link"  href="/profil" style="font-weight: bold"  >Profile </a><!--/{{currentUser._id}}-->
 						</li>
 						<li class="nav-item ">
-							<a ng-click= "loginPage()" ng-show="showLogin" class="nav-link" href="/login" style="font-weight: bold">Login</a>
+							<a  ng-show="!currentUser" class="nav-link" href="/login" style="font-weight: bold">Login</a>
 						</li>
 						<li class="nav-item ">
-							<a ng-show="showSignUp" class="nav-link" href="/signup" style="font-weight: bold">Signup</a>
+							<a ng-show="!currentUser" class="nav-link" href="/signup" style="font-weight: bold">Signup</a>
 						</li>
 						<li class="nav-item ">
-							<a ng-show="showLogout" class="nav-link" href="/logOut" style="font-weight: bold">Logout</a>
+							<a ng-show="currentUser" class="nav-link" href="/logOut" style="font-weight: bold">Logout</a>
 						</li>
 					</ul>
 				</div>

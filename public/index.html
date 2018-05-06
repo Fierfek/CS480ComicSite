@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="comicBash">
 	<head>
 		<meta charset="UTF-8">
-		<title>Comic Bash!</title>
+		<title ng-bind= "title">Comic Bash!</title>
 		<base href="/" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		
@@ -23,7 +23,7 @@
 		
 		
 	</head>
-	<body ng-app="comicBash">
+	<body>
 		<navBar></navBar>
 		<div ng-view class="container-fluid"></div>
 	</body>
