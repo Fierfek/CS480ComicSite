@@ -19,8 +19,8 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
         })
 		.otherwise({
 			redirectTo: '/',
-+			templateUrl: '/views/landing.html',
-+           controller: 'LandingPage'
+			templateUrl: '/views/landing.html',
+           controller: 'LandingPage',
 			title: 'Comic Bash!'
 		});
     $locationProvider.html5Mode(true);
