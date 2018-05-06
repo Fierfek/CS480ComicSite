@@ -1,6 +1,6 @@
 var signUpPage = angular.module('SignupCtrl', []);
 
-signUpPage.controller('SignupController', function ($scope, $rootScope, $routeParams, $location, $http, RestApiClientService) {
+signUpPage.controller('SignupController', function ($scope, RestApiClientService) {
  
     $scope.signup = {};
  
@@ -18,6 +18,3 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $routePa
     };
  
 });
-
-
-
