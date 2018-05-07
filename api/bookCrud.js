@@ -30,19 +30,17 @@ router.post('/create', function(req, res) {
 	});
 });
 
-router.post('/create', function(req, res) {
+router.get('/read/:id', function(req, res) {
 	var params = {
 		TableName: "Book",
-		Item: {
-			"bookID": req.bookID,
-			"title": req.title,
-			"issuesList": req.issuesList,
+		Key: {
+			"bookID": req.bookID
 		}
 	}
 	
-	docClient.put(params, function(err, data) {
+	docClient.get(params, function(err, data) {
 		if(err) {
-			console.log("Unable to add item. Error JSON: " + JSON.stringify(err, null, 2));
+			console.log("Unable to read item. Error JSON: " + JSON.stringify(err, null, 2));
 		} else {
 			console.log("Added Item:" + JSON.stringify(data, null, 2));
 		}
@@ -66,7 +64,45 @@ router.get('/read', function(req, res) {
 			});
 		}
 	});
+});
+
+router.post('/update', function(req, res) {
+	var params = {
+		TableName: "Book",
+		Key: {
+			"bookID": req.bookID
+		}
+		UpdateExpression: "set info.title = :t, info.issueList = :i",
+		ExpressionAttributeValues: {
+			"t": req.title,
+			"i": req.issuesList
+		}
+	}
 	
+	docClient.delete(params, function(err, data) {
+		if(err) {
+			console.log("Unable to delete item. Error JSON: " + JSON.stringify(err, null, 2));
+		} else {
+			console.log("Added Item:" + JSON.stringify(data, null, 2));
+		}
+	});
+});
+
+router.post('/delete', function(req, res) {
+	var params = {
+		TableName: "Book",
+		Key: {
+			"bookID": req.bookID
+		}
+	}
+	
+	docClient.delete(params, function(err, data) {
+		if(err) {
+			console.log("Unable to delete item. Error JSON: " + JSON.stringify(err, null, 2));
+		} else {
+			console.log("Added Item:" + JSON.stringify(data, null, 2));
+		}
+	});
 });
 
 module.exports = router;
