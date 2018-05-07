@@ -12,10 +12,11 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
         }).then(function (results) {
             RestApiClientService.toast(results);
             if (results.status == "success") {
-				$rootScope.currentUser=user;
-                $location.path('user/+ user._id');
+				$rootScope.loggedIn=true;
+               // $location.path('user/+ user._id');
 			}else {
 				$scope.error='account cannot be created';
+				$rootScope.loggedIn=false;
 			}
         });
     };
