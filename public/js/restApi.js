@@ -3,7 +3,7 @@ var app=  angular.module('Service',[/*'toater'*/]);
 app.factory("RestApiClientService", ['$http', /*'toaster',*/
     function ($http, toaster) { // This service connects to our REST API
  
-        var serviceBase = 'api/';
+        var serviceBase = '/api';
  
         var obj = {};
        /* obj.toast = function (data) {
@@ -14,17 +14,19 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
                 return results.data;
             });
         };
+		obj.get = function (q, object) {
+            return $http.get(serviceBase + q, object).then(function (results) {
+                return results.data;
+            });
+        };
         obj.post = function (q, object) {
- 
-            obj.post = function (q, object) {
-                return $http.post(serviceBase + q, object).then(function (results) {
-                    return results.data;
-                },function(results){
- 
-                    var err = {status:"error",message:"An Internal Error Occured"};
-                    return err;
-                });
-            };
+			return $http.post(serviceBase + q, object).then(function (results) {
+				return results.data;
+			},function(results){
+
+				var err = {status:"error",message:"An Internal Error Occured"};
+				return err;
+			});
         };
  
         obj.put = function (q, object) {
@@ -37,11 +39,6 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
                 return results.data;
             });
         };
- 
-		obj.ask= function (q, object){
-			return $http.ask(serviceBase + q ,object).then(function (results) {
-                return results.data;
-            });
-		};
+
         return obj;
 }]);

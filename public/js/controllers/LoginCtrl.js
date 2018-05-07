@@ -6,17 +6,12 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
     $scope.login = {};
  
     $scope.doLogin = function (user) {
-        RestApiClientService.ask('loggedIn', {
+        RestApiClientService.post('/signedIn', {
             user: user
-        }).then(function (results) {
-           // RestApiClientService.toast(results);
-            if (results) {
-				$rootScope.loggedIn = results;
-                $location.path('profile/+user._id'); //user._id or other name
-            }else {
-				$scope.error='user not found';
-			}
-        });
+        }).then(function(result) {
+			$rootScope.loggedIn = result;
+			console.log($rootScope);
+		});
     };
 });
   

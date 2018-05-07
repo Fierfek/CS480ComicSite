@@ -40,16 +40,16 @@
 						
 						</li>
 						<li class="nav-item" >
-							<a ng-show="!currentUser" class="nav-link"  href="/profil" style="font-weight: bold"  >Profile </a><!--/{{currentUser._id}}-->
+							<a ng-show="loggedIn" class="nav-link"  href="/profil" style="font-weight: bold"  >Profile </a><!--/{{currentUser._id}}-->
 						</li>
 						<li class="nav-item ">
-							<a  ng-show="!currentUser" class="nav-link" href="/login" style="font-weight: bold">Login</a>
+							<a  ng-show="!loggedIn" class="nav-link" href="/login" style="font-weight: bold">Login</a>
 						</li>
 						<li class="nav-item ">
-							<a ng-show="!currentUser" class="nav-link" href="/signup" style="font-weight: bold">Signup</a>
+							<a ng-show="!loggedIn" class="nav-link" href="/signup" style="font-weight: bold">Signup</a>
 						</li>
 						<li class="nav-item ">
-							<a ng-show="currentUser" class="nav-link" href="/logOut" style="font-weight: bold">Logout</a>
+							<a ng-show="loggedIn" class="nav-link" href="/logOut" style="font-weight: bold">Logout</a>
 						</li>
 					</ul>
 				</div>

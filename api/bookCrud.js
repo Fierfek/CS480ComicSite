@@ -47,7 +47,7 @@ router.get('/read/:id', function(req, res) {
 	});
 });
 
-router.get('/read', function(req, res) {
+router.get('/', function(req, res) {
 	var params = {
 		TableName: "Book",
 		ProjectionExpression: "bookID, title, issueList"
@@ -66,12 +66,12 @@ router.get('/read', function(req, res) {
 	});
 });
 
-router.post('/update', function(req, res) {
+/*router.post('/update', function(req, res) {
 	var params = {
 		TableName: "Book",
 		Key: {
 			"bookID": req.bookID
-		}
+		},
 		UpdateExpression: "set info.title = :t, info.issueList = :i",
 		ExpressionAttributeValues: {
 			"t": req.title,
@@ -86,7 +86,7 @@ router.post('/update', function(req, res) {
 			console.log("Added Item:" + JSON.stringify(data, null, 2));
 		}
 	});
-});
+});*/
 
 router.post('/delete', function(req, res) {
 	var params = {
