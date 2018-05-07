@@ -39,7 +39,7 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
         };
  
 		obj.ask= function (q, object){
-			return $http.ask(serviceBase + q,object).then(function (results) {
+			return $http.ask(serviceBase + q ,object).then(function (results) {
                 return results.data;
             });
 		};
