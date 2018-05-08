@@ -2,22 +2,28 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-var tableName = "Book";
+var tableName = "User";
 
 router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
-			"bookID": req.bookID,
-			"title": req.title,
-			"issuesList": req.issuesList,
+			"userID": req.userID,
+			"username": req.username,
+			"password": req.password,
+			"email": req.email,
+			"firstName": req.firstName,
+			"lastName": req.lastName,
+			"profilePic": req.profilePic,
+			"Bio": req.bio,
+			"loggedIn": loggedIn
 		}
 	}
 	
 	db.put(params, res);
 });
 
-router.get('/:id', function(req, res) {
+/*router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -31,7 +37,7 @@ router.get('/:id', function(req, res) {
 router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
-		ProjectionExpression: "bookID, title, issueList"
+		ProjectionExpression: "userID, title, issueList"
 	}
 	
 	db.scan(params, res);
@@ -55,7 +61,7 @@ router.post('', function(req, res) {
 
 router.delete('/:id', function(req, res) {
 	var params = {
-		TableName: tableName,
+		TableName: TableName,
 		Key: {
 			"bookID": parseInt(req.params.id)
 		},
@@ -66,6 +72,6 @@ router.delete('/:id', function(req, res) {
 	}
 	
 	db.delete(params);
-});
+});*/
 
 module.exports = router;

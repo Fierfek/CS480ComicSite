@@ -2,66 +2,62 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-var tableName = "Book";
+var tableName = "IssueIllustrator";
 
 router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
-			"bookID": req.bookID,
-			"title": req.title,
-			"issuesList": req.issuesList,
+			"issueID": req.userID,
+			"illustrator": req.illustrator
 		}
 	}
 	
 	db.put(params, res);
 });
 
-router.get('/:id', function(req, res) {
+/*router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
-			"bookID": parseInt(req.params.id)
+			"issueID": parseInt(req.params.id)
 		}
 	}
 	
 	db.get(params, res);
-});
+});*/
 
-router.get('', function(req, res) {
+/*router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		ProjectionExpression: "bookID, title, issueList"
 	}
 	
 	db.scan(params, res);
-});
+});*/
 
 router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
-			"bookID": req.bookID
+			"issueID": req.issueID,
+			"illustrator": req.illustrator,
 		},
-		UpdateExpression: "set info.title = :t, info.issueList = :i",
+		UpdateExpression: "set info.illustrator = :illustrator",
 		ExpressionAttributeValues: {
-			":t": req.title,
-			":i": req.issuesList
+			":illustrator": req.illustrator,
 		}
 	}
 	
 	db.update(params);
 });
 
-router.delete('/:id', function(req, res) {
+router.delete('/:issue/:illustrator', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
-			"bookID": parseInt(req.params.id)
-		},
-		ConditionExpression: "info.bookID == :bookID",
-		ExpressionAttributeValues: {
-			":bookID": parseInt(req.params.id)
+			"issueID": parseInt(req.params.id),
+			"illustrator": req.params.illustrator
 		}
 	}
 	
