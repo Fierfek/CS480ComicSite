@@ -4,7 +4,6 @@ var router = express.Router();
 router.use('/book', require(__dirname + '/bookCrud.js'));
 
 router.post('/signedIn', function(req, res) {
-	console.log(req.body);
 	var signedIn = true;
 	res.send(signedIn);
 });
