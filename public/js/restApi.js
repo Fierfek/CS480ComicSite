@@ -3,7 +3,7 @@ var app=  angular.module('Service',[/*'toater'*/]);
 app.factory("RestApiClientService", ['$http', /*'toaster',*/
     function ($http, toaster) { // This service connects to our REST API
  
-        var serviceBase = 'api/';
+        var serviceBase = '/api';
  
         var obj = {};
        /* obj.toast = function (data) {
@@ -13,10 +13,8 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
             return $http.get(serviceBase + q).then(function (results) {
                 return results.data;
             });
-        };
+        }; 
         obj.post = function (q, object) {
- 
-            obj.post = function (q, object) {
                 return $http.post(serviceBase + q, object).then(function (results) {
                     return results.data;
                 },function(results){
@@ -37,11 +35,6 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
                 return results.data;
             });
         };
- 
-		obj.ask= function (q, object){
-			return $http.ask(serviceBase + q,object).then(function (results) {
-                return results.data;
-            });
-		};
+
         return obj;
 }]);
