@@ -2,7 +2,7 @@ var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
-		.when('/profil'/*/:userId'*/, {
+		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
 			title:'Profile'
@@ -16,6 +16,16 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             templateUrl: '/views/signup.html',
             controller: 'SignupController',
 			title:'Signup'
+        })
+        .when('/book', {
+            templateUrl: '/views/bookInfo.html',
+            controller: 'BookInfoController',
+            title:'Book Info'
+        })
+        .when('/issue', {
+            templateUrl: '/views/issueInfo.html',
+            controller: 'IssueInfoController',
+            title:'Issue Info'
         })
 		.otherwise({
 			redirectTo: '/',
