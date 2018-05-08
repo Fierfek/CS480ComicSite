@@ -11,7 +11,9 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
         }).then(function(result) {
 			$rootScope.loggedIn = result;
 			console.log($rootScope);
-		});
+            }else {
+				$scope.error='user not found';
+			}
     };
 });
   
