@@ -22,7 +22,6 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
                     var err = {status:"error",message:"An Internal Error Occured"};
                     return err;
                 });
-            };
         };
  
         obj.put = function (q, object) {
