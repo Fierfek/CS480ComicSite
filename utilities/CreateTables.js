@@ -25,9 +25,23 @@ var bookTable = {
 			AttributeName: "bookID", //Primary Key
 			KeyType: "HASH"
 		},
+	],
+	GlobalSecondaryIndexes: [
 		{
-			AttributeName: "title", //Sort Key
-			KeyType: "RANGE"
+			IndexName: "byTitle",
+			KeySchema: [
+				{
+					AttributeName: "title", //Primary Key
+					KeyType: "HASH",
+				},
+			],
+			Projection: {
+				ProjectionType: "ALL"
+			},
+			ProvisionedThroughput: {
+				ReadCapacityUnits: 3,
+				WriteCapacityUnits: 3,
+			},
 		},
 	],
 	ProvisionedThroughput: {
