@@ -2,18 +2,11 @@
 var express 		= require('express');
 var app 			= express();
 var router			= express.Router();
-var aws 			= require("aws-sdk");
 var bodyParser 		= require('body-parser');
 //var methodOverride 	= require('method-override');
 
 // configuration
 var port = process.env.PORT || 8080;
-
-var dynamodb = new aws.DynamoDB();
-aws.config.update({
-	region: "us-west-2",
-	//endpoint: "http://localhost:8000"
-});
 
 //Middleware
 app.use(bodyParser.json());
