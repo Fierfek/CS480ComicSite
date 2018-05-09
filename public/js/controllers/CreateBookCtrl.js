@@ -1,6 +1,6 @@
-var bookInfo = angular.module('BookInfoCtrl',[]);
+var bookInfo = angular.module('CreatBookCtrl',[]);
 
-bookInfo.controller('BookInfoController', function($scope, RestApiClientService) {
+createBook.controller('CreateBookController', function($scope, RestApiClientService) {
 	
     $scope.newBook = function (user) {
 
