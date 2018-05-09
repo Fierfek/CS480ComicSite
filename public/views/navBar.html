@@ -38,7 +38,7 @@
 					<a ng-show="!loggedIn" class="nav-link text-white" href="/signup" style="font-weight: bold">Signup</a>
 				</li>
 				<li class="nav-item">
-					<a ng-show="loggedIn" class="nav-link text-white" href="/logOut" style="font-weight: bold">Logout</a>
+					<a ng-click='logOut()' ng-show="loggedIn" class="nav-link text-white" href="/" style="font-weight: bold">Logout</a>
 				</li>
 			</ul>
 		</div>
