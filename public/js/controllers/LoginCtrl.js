@@ -9,11 +9,14 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
         RestApiClientService.post('/signedIn', {
             user: user
         }).then(function(result) {
-			$rootScope.loggedIn = result;
-			console.log($rootScope);
+			if(result){
+				$rootScope.loggedIn = result;
+				$location.path('profile');
+				console.log($rootScope);
             }else {
 				$scope.error='user not found';
 			}
-    };
+	});	};
 });
+
   

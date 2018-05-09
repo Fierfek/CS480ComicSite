@@ -2,26 +2,26 @@ var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
-		.when('/profil'/*/:userId'*/, {
+		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
-			title:'Profile'
+			
         })
 		.when('/login', {
             templateUrl: '/views/login.html',
             controller: 'LoginController',
-			title:'Login'
+			
         })
         .when('/signup', {
             templateUrl: '/views/signup.html',
             controller: 'SignupController',
-			title:'Signup'
+			
         })
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
            controller: 'LandingPage',
-			title: 'Comic Bash!'
+			
 		});
     $locationProvider.html5Mode(true);
 }]);
