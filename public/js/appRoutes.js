@@ -18,7 +18,12 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 			title:'Signup'
         })
         .when('/book', {
-            templateUrl: '/views/bookInfo.html',
+            templateUrl: '/views/createBook.html',
+            controller: 'BookInfoController',
+            title:'Book Info'
+        })
+        .when('/book/:bookID', {
+            templateUrl: '/views/Book.html',
             controller: 'BookInfoController',
             title:'Book Info'
         })
