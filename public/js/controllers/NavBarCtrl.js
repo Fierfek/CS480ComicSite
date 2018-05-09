@@ -9,7 +9,12 @@ navBar.controller('NavBarController', function($scope, $rootScope) {
 		console.log("Search for: " + searchParams);
 	}
 	
-	$rootScope.loggedIn = false;
+	$scope.logOut = function () {
+		console.log('logout')
+	   if ($rootlologgedIn)
+            $rootScope.loggedIn=false;
+    };
+    
 	
 	$scope.category="Category";
 	
