@@ -2,7 +2,7 @@ var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
-		.when('/profil'/*/:userId'*/, {
+		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
 			title:'Profile'
@@ -20,7 +20,7 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
-           controller: 'LandingPage',
+            controller: 'LandingPage',
 			title: 'Comic Bash!'
 		});
     $locationProvider.html5Mode(true);
