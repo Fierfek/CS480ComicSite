@@ -11,6 +11,8 @@ router.put('', function(req, res) {
 			"bookID": req.bookID,
 			"title": req.title,
 			"issuesList": req.issuesList,
+			"publisher": req.publisher,
+			"publishDate": req.publishDate
 		}
 	}
 	
@@ -43,10 +45,12 @@ router.post('', function(req, res) {
 		Key: {
 			"bookID": req.bookID
 		},
-		UpdateExpression: "set info.title = :t, info.issueList = :i",
+		UpdateExpression: "set info.title = :t, info.issueList = :i, info.publisher = :p, info.publishDate = :pd",
 		ExpressionAttributeValues: {
 			":t": req.title,
-			":i": req.issuesList
+			":i": req.issuesList,
+			":p": req.publisher,
+			":pd": req.publishDate
 		}
 	}
 	

@@ -17,6 +17,10 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
+router.post('/signUp', function(req, res) {
+	
+});
+
 router.get('/', function(req, res) {
 	console.log("get anything");
 });
