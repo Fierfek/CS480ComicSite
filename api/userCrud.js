@@ -14,8 +14,6 @@ router.put('', function(req, res) {
 			"email": req.email,
 			"firstName": req.firstName,
 			"lastName": req.lastName,
-			"profilePic": req.profilePic,
-			"Bio": req.bio,
 			"loggedIn": loggedIn
 		}
 	}

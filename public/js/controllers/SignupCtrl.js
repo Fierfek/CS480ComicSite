@@ -5,8 +5,8 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
     $scope.signup = {};
  
     $scope.createAccount = function (user) {
-		
-        RestApiClientService.post('/signup', {
+		console.log(user);
+        RestApiClientService.post('/functions/signup', {
             user: user
         }).then(function (results) {
             //RestApiClientService.toast(results);

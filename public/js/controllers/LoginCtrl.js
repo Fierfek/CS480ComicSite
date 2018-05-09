@@ -7,7 +7,7 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
  
     $scope.doLogin = function (user) {
 
-        RestApiClientService.post('/signedIn', {
+        RestApiClientService.post('/functions/signedIn', {
             user: user
         }).then(function(result) {
 			if (result){
