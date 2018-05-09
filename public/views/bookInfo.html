@@ -1,24 +1,17 @@
-<div class="container">
-	<!--approx template:-->
-<div class="card w-90">
-  <div class="card-body">
-    <h5 class="card-title">Book</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Button</a>
-  </div>
-</div>
-</div>
-</div>
-	<div class="card" ng-repeat="book in books">
-		<div class="row">
-			<div class="col-4">
-				<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
+<div class="container bg-light">
+	<div class="row w-100">
+		<div class="col-md-8 mx-auto">
+			<div class="w-50 mx-auto">
+				<h3 style="text-align: center">{{book.title}}</h3>
+				<h4 style="text-align: center">{{book.publisher}}</h4>
+				<h4 style="text-align: center">{{book.publishDate}}</h4>
 			</div>
-			<div class="col-8">
-				<div class="card-body">
-					<h5 class="card-title">{{book.title}}</h5></h5>
-					<p class="card-text">Number of Issues: {{book.numberOfIssues}}</p>
-				</div>
+			<div class="card" ng-repeat="issue in list">
+				{{issue}}
+			</div>
+			{{numIssues}}
+			<div class="mx-auto">
+				<button type="button" class="btn btn-primary" href="/book/{{book.id}}/issue">Add New Issue</button>
 			</div>
 		</div>
 	</div>

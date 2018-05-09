@@ -4,18 +4,14 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 	
 	console.log("book/" + $route.current.params.bookID);
 
+	$scope.list;
+
 	RestApiClientService.get("/book/" + $route.current.params.bookID).then(function(response){
 
-		var books = response;
+		$scope.book = response;
 
-		console.log(books)
-
-
-
-
+		$scope.list = $scope.book.issueList.split(',');
+		$scope.numIssues = $scope.list.length;
+		
 	});
-
-
-
-   		
 });
