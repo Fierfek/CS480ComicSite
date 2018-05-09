@@ -1,15 +1,21 @@
 var bookInfo = angular.module('BookInfoCtrl',[]);
 
-bookInfo.controller('BookInfoController', function($scope, RestApiClientService) {
+bookInfo.controller('BookInfoController', function($scope, $route, RestApiClientService) {
 	
-    $scope.newBook = function (user) {
+	console.log("book/" + $route.current.params.bookID);
 
-        RestApiClientService.post('/book',
-			{
-				book: book
-			}
-		).then(function(result) {
-			
-		});
-	}	
+	RestApiClientService.get("/book/" + $route.current.params.bookID).then(function(response){
+
+		var books = response;
+
+		console.log(books)
+
+
+
+
+	});
+
+
+
+   		
 });

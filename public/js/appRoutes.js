@@ -23,7 +23,7 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             title:'Book Info'
         })
         .when('/book/:bookID', {
-            templateUrl: '/views/Book.html',
+            templateUrl: '/views/bookInfo.html',
             controller: 'BookInfoController',
             title:'Book Info'
         })
