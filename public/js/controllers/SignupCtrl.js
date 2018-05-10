@@ -9,10 +9,9 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
         RestApiClientService.post('signup', {
             user: user
         }).then(function (results) {
-            //RestApiClientService.toast(results);
-            if (results.status == "success") {
+            if (results) {
 				$rootScope.loggedIn=true;
-                $location.path('user/+ user._id');
+                $location.path('profile');
 			}else {
 				$scope.error='account cannot be created';
 				$rootScope.loggedIn=false;

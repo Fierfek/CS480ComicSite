@@ -1,6 +1,6 @@
 <div ng-controller="NavBarController">
   
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand font-weight-bold" href="/" style="font-family:Lucida Console; margin-right:20px">ComicBash</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@
 						</button>
 						
 						<div class="dropdown-menu">
-							<a ng-repeat="item in data" ng-click="setCategory(item)" class="dropdown-item" name={{item}}>{{item}}</a>
+							<a ng-repeat="item in data" ng-click="setCategory(item)" class="dropdown-item" name={{item}} style="cursor:pointer">{{item}}</a>
 							<div role="separator" class="dropdown-divider"></div>
 							<a class="dropdown-item" ng-click= "setCategory('User')";>User</a>
 							<!-- <div role="separator" class="dropdown-divider"></div>
@@ -38,7 +38,7 @@
 					<a ng-show="!loggedIn" class="nav-link text-white" href="/signup" style="font-weight: bold">Signup</a>
 				</li>
 				<li class="nav-item">
-					<a ng-show="loggedIn" class="nav-link text-white" href="/logOut" style="font-weight: bold">Logout</a>
+					<a ng-click='logOut()' ng-show="loggedIn" class="nav-link text-white" href="/" style="font-weight: bold">Logout</a>
 				</li>
 			</ul>
 		</div>

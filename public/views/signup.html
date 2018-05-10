@@ -1,11 +1,11 @@
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<h3>Sign Up</h3>
+	<div class="row" style="margin:5%">
+		<div class="col-md-7 bg-dark">
+			<h3 class="text-light" style="margin:3%">Sign Up</h3>
       
 			<form ng-submit="formSubmit()" class="form-center">
         
-				<div class="col-md-4">
+				<div class="col-md-11">
 					<div class="form-group">
 						<input type="email" class="form-control" ng-model="signup.email" placeholder="Email" required focus/>
 					</div>
@@ -43,10 +43,13 @@
 
 					<div class="form-group" style="margin-left:10px">
 						<button type="submit" ng-click="createAccount(signup)" class="btn btn-success">Create Account</button>
-						<a href="/login" class="text-info" style="cursor:pointer">Already Have an Account? Sign in!</a>
 					</div>
+					<div style="margin-bottom:3%">
+						<a href="/login" class="text-light" style="cursor:pointer">Already Have an Account? Sign in!</a>
+					</div>	
 				</div>
 			</form>
+			<div  ng-show= "error" class="alert alert-danger" role="alert">{{error}}</div>
 		</div>
 	</div>
 </div>
