@@ -7,11 +7,12 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
  
     $scope.doLogin = function (user) {
 
-        RestApiClientService.post('/functions/signedIn', {
+        RestApiClientService.post('/functions/signIn', {
             user: user
         }).then(function(result) {
 			if (result){
-				$rootScope.loggedIn = result;
+				console.log(result);
+				$rootScope.loggedIn = result.signedIn;
 			}else {
 				$scope.error='user not found';
 			}

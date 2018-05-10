@@ -43,7 +43,7 @@ router.post('', function(req, res) {
 			"issueID": req.issueID,
 			"writer": req.writer,
 		},
-		UpdateExpression: "set info.writer = :writer",
+		UpdateExpression: "set writer = :writer",
 		ExpressionAttributeValues: {
 			":writer": req.writer,
 		}

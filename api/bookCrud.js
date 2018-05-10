@@ -45,7 +45,7 @@ router.post('', function(req, res) {
 		Key: {
 			"bookID": req.bookID
 		},
-		UpdateExpression: "set info.title = :t, info.issueList = :i, info.publisher = :p, info.publishDate = :pd",
+		UpdateExpression: "set title = :t, issueList = :i, publisher = :p, publishDate = :pd",
 		ExpressionAttributeValues: {
 			":t": req.title,
 			":i": req.issuesList,

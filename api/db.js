@@ -31,6 +31,18 @@ db.get = function (params, res) {
 	});
 };
 
+db.query = function(params) {
+	return new Promise((res, rej) => {		  
+		docClient.query(params, function(err, data) {
+			if (err) {
+				console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+			} else {
+				res(data.Items);
+			}
+		});
+	})
+};
+
 db.scan = function (params, res) {
 	docClient.scan(params, function(err, data) {
 		if(err) {

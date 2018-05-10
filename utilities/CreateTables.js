@@ -50,6 +50,26 @@ var bookTable = {
 	}
 };
 
+var uidTable = {
+	TableName: "UID",
+	AttributeDefinitions: [
+		{
+			AttributeName: "type",
+			AttributeType: "S"
+		},
+	],
+	KeySchema: [
+		{
+			AttributeName: "type",
+			KeyType: "HASH",
+		},
+	],
+	ProvisionedThroughput: {
+		ReadCapacityUnits: 1,
+		WriteCapacityUnits: 3,
+	}
+};
+
 var SecurityQuestions = {
 	TableName: "SecurityQuestions",
 	AttributeDefinitions: [
@@ -439,6 +459,14 @@ function errorLog(log) {
 function successLog(log) {
 	console.log("Created table. Table description JSON:", JSON.stringify(log, null, 2));
 }
+
+dynamodb.createTable(uidTable, function(err, data) {
+	if (err) {
+		errorLog(err);
+	} else {
+		successLog(data);
+	}
+});
 
 dynamodb.createTable(bookTable, function(err, data) {
 	if (err) {
