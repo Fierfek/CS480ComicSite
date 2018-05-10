@@ -76,25 +76,51 @@ router.post('/signUp', function(req, res) {
 		}
 		
 		db.put(secParams);
+		
+		var favParams = {
+			TableName: "UserFavorites",
+			Item: {
+				"userID": id,
+				"issues": "0",
+				"books": "0",
+				"illustrators": "nobody",
+				"authors": "nobody",
+				"bio": "Start your bio",
+				"profilePic": "http://via.placeholder.com/300x250"
+			}
+		}
+		
+		db.put(favParams);
+		
+		var followsParams = {
+			TableName: "UserFollows",
+			Item: {
+				"userID": id,
+				"books": "0",
+				"users": "0"
+			}
+		}
+		
+		db.put(followsParams);
 	});
 });
 
 var generateId = function(type) {
 	
-	return new Promise((res, rej) => {
-		var params = {
-			TableName: "UID",
-			Key:{
-				"type": type,
-			},
-			UpdateExpression: "set id = id + :incr",
-			ExpressionAttributeValues:{
-				":incr": 1
-			},
-			ReturnValues:"UPDATED_NEW"
-		};
-		  
-		docClient.update(params).promise().then(data => {
+	var params = {
+		TableName: "UID",
+		Key:{
+			"type": type,
+		},
+		UpdateExpression: "set id = id + :incr",
+		ExpressionAttributeValues:{
+			":incr": 1
+		},
+		ReturnValues:"UPDATED_NEW"
+	};
+	
+	return new Promise((res, rej) => {		  
+		db.update2(params).then(data => {
 			res(parseInt(data.Attributes.id));
 		}).catch(err => {
 			rej(err);

@@ -30,9 +30,9 @@ var tableName = "User";
 	}
 	
 	db.get(params, res);
-});
+});*/
 
-router.get('', function(req, res) {
+/*router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		ProjectionExpression: "userID, title, issueList"
