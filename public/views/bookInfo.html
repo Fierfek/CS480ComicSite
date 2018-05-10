@@ -7,7 +7,7 @@
 				<h4 style="text-align: center">{{book.publishDate}}</h4>
 			</div>
 			<div class="card" ng-repeat="issue in list">
-				{{issue}}
+				<button type="button" class="btn btn-primary" href="/book/{{book.id}}/{{issue}}">{{issue}}</button><!-- change to issue title later?-->
 			</div>
 			{{numIssues}}
 			<div class="mx-auto">
