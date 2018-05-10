@@ -5,29 +5,29 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
-			title:'Profile'
         })
 		.when('/login', {
             templateUrl: '/views/login.html',
             controller: 'LoginController',
-			title:'Login'
         })
         .when('/signup', {
             templateUrl: '/views/signup.html',
             controller: 'SignupController',
-			title:'Signup'
         })
+		.when('/issue', {
+            templateUrl: '/views/issueInfo.html',
+            controller: 'IssuePage',
+        })		
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
             controller: 'LandingPage',
-			title: 'Comic Bash!'
 		});
     $locationProvider.html5Mode(true);
 }]);
 
 //Update title
-app.run(['$location', '$rootScope', function($location, $rootScope) {
+/*app.run(['$location', '$rootScope', function($location, $rootScope) {
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
     {
@@ -37,3 +37,4 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
 		}
     });
 }]);
+*/
