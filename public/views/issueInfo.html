@@ -1,0 +1,25 @@
+<div class="container">
+	<!--approx template:-->
+<div class="card w-90">
+  <div class="card-body">
+    <h5 class="card-title">Issue</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Button</a>
+  </div>
+</div>
+</div>
+</div>
+	<div class="card" ng-repeat="issue in issues">
+		<div class="row">
+			<div class="col-4">
+				<img class="card-img-top" src="placeholder.png" alt="Series image" href="/issue/angularstuffhere">
+			</div>
+			<div class="col-8">
+				<div class="card-body">
+					<h5 class="card-title">{{issue.title}}</h5></h5>
+					<p class="card-text">Date: {{issue.date}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

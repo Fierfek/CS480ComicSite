@@ -17,6 +17,21 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'SignupController',
 			title:'Signup'
         })
+        .when('/book', {
+            templateUrl: '/views/createBook.html',
+            controller: 'CreateBookController',
+            title:'Book Info'
+        })
+        .when('/book/:bookID', {
+            templateUrl: '/views/bookInfo.html',
+            controller: 'BookInfoController',
+            title:'Book Info'
+        })
+        .when('/issue', {
+            templateUrl: '/views/issueInfo.html',
+            controller: 'IssueInfoController',
+            title:'Issue Info'
+        })
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
