@@ -43,7 +43,7 @@ router.post('', function(req, res) {
 			"issueID": req.issueID,
 			"illustrator": req.illustrator,
 		},
-		UpdateExpression: "set info.illustrator = :illustrator",
+		UpdateExpression: "set illustrator = :illustrator",
 		ExpressionAttributeValues: {
 			":illustrator": req.illustrator,
 		}

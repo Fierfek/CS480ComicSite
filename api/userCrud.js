@@ -4,7 +4,7 @@ var db = require('./db.js');
 
 var tableName = "User";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -14,14 +14,12 @@ router.put('', function(req, res) {
 			"email": req.email,
 			"firstName": req.firstName,
 			"lastName": req.lastName,
-			"profilePic": req.profilePic,
-			"Bio": req.bio,
 			"loggedIn": loggedIn
 		}
 	}
 	
 	db.put(params, res);
-});
+});*/
 
 /*router.get('/:id', function(req, res) {
 	var params = {

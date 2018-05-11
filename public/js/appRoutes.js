@@ -14,10 +14,20 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             templateUrl: '/views/signup.html',
             controller: 'SignupController',
         })
-		.when('/issue', {
+        .when('/book', {
+            templateUrl: '/views/createBook.html',
+            controller: 'CreateBookController',
+            title:'Book Info'
+        })
+        .when('/book/:bookID', {
+            templateUrl: '/views/bookInfo.html',
+            controller: 'BookInfoController',
+            title:'Book Info'
+        })
+        .when('/issue', {
             templateUrl: '/views/issueInfo.html',
             controller: 'IssuePage',
-        })		
+            title:'Issue Info'
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',

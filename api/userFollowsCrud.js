@@ -43,7 +43,7 @@ router.post('', function(req, res) {
 		Key: {
 			"userID": req.userID
 		},
-		UpdateExpression: "set info.users = :users, info.books = :books",
+		UpdateExpression: "set users = :users, books = :books",
 		ExpressionAttributeValues: {
 			":users": req.users,
 			":books": req.books

@@ -1,9 +1,10 @@
 var landingPage = angular.module('LandingCtrl',[]);
 
-landingPage.controller('LandingPage', function($scope, RestApiClientService) {
+landingPage.controller('LandingPage', function($scope, $route, RestApiClientService) {
 	$scope.tagline = 'To the moon and back!';
 
-	
+
+
 	RestApiClientService.get('/book').then(function(response) {
 		
 		$scope.books = response;
