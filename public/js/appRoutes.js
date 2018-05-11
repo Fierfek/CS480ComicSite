@@ -29,20 +29,20 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
         })
         .when('/issue', {
             templateUrl: '/views/issueInfo.html',
-            controller: 'IssueInfoController',
+            controller: 'IssuePage',
             title:'Issue Info'
-        })
+		})
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
             controller: 'LandingPage',
-			title: 'Comic Bash!'
+			title:'Comic Bash!'
 		});
     $locationProvider.html5Mode(true);
 }]);
 
 //Update title
-app.run(['$location', '$rootScope', function($location, $rootScope) {
+/*app.run(['$location', '$rootScope', function($location, $rootScope) {
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
     {
@@ -52,3 +52,4 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
 		}
     });
 }]);
+*/

@@ -22,9 +22,12 @@
 		<script src="/js/controllers/SignupCtrl.js"></script>
 		<script src="/js/controllers/BookInfoCtrl.js"></script>
 		<script src="/js/controllers/CreateBookCtrl.js"></script>
+		<script src="/js/controllers/IssueCtrl.js"></script>
+		
 		
 	</head>
-	<body background="comics.png" style= "background-repeat: no-repeat;background-size: cover">
+	<body background="comics.png" class = "mx-auto" style= "background-repeat: no-repeat;background-size: cover">
+	<!--body ng-class="bgService.getCurrentBg()" ng-style="bodyBg" >-->
 		<navBar></navBar>
 		<div ng-view class="container-fluid"></div>
 	</body>
