@@ -1,7 +1,8 @@
 var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
-    $routeProvider
+
+	$routeProvider
 		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
@@ -17,17 +18,37 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'SignupController',
 			title:'Signup'
         })
+        .when('/book', {
+            templateUrl: '/views/createBook.html',
+            controller: 'CreateBookController',
+            title:'Book Info'
+        })
+        .when('/book/:bookID', {
+            templateUrl: '/views/bookInfo.html',
+            controller: 'BookInfoController',
+            title:'Book Info'
+        })
+        .when('/issue', {///book/:bookID
+            templateUrl: '/views/issueInfo.html',
+            controller: 'IssuePage',
+            title:'Issue Info'
+		})
+		.when('/book/:bookID/createIssue', {
+            templateUrl: '/views/createIssue.html',
+            controller: 'CreateIssueController',
+            title:'Issue Info'
+        })
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
             controller: 'LandingPage',
-			title: 'Comic Bash!'
+			title:'Comic Bash!'
 		});
     $locationProvider.html5Mode(true);
 }]);
 
 //Update title
-app.run(['$location', '$rootScope', function($location, $rootScope) {
+/*app.run(['$location', '$rootScope', function($location, $rootScope) {
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
     {
@@ -37,3 +58,4 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
 		}
     });
 }]);
+*/
