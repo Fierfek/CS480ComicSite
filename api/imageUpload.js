@@ -1,14 +1,16 @@
 var formidable = require('formidable');
 var fs = require('fs');
-
-var form = new formidable.IncomingForm();
-form.uploadDir = path.join(__dirname + "/uploads");
+var path = require('path');
 
 var uploader = {};
 
-uploader.uploadImage = function(){
+uploader.uploadImage = function(req, res){
 	
-	forms.on('file', function(field, file) {
+	var form = new formidable.IncomingForm();
+	
+	form.uploadDir = path.join(__dirname + "/uploads");
+	
+	form.on('file', function(field, file) {
 		fs.rename(file.path, path.join(form.uploadDir, fileName));
 	});
 	
@@ -16,9 +18,11 @@ uploader.uploadImage = function(){
 		console.log('An error has occured: \n' + err);
 	});
 	
-	forms.on('end', function(err) {
+	form.on('end', function(err) {
 		//res.send('success');
 	});
 	
 	form.parse(req);
 }
+
+module.exports = uploader;

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
+var imager = require('./imageUpload.js');
 
 
 var aws = require("aws-sdk");
@@ -17,6 +18,11 @@ var docClient = new aws.DynamoDB.DocumentClient();
 router.post('/signedIn', function(req, res) {
 	var signedIn = true;
 	res.send(signedIn);
+});
+
+router.get('/image', function(req, res) {
+	console.log("called");
+	imager.uploadImage(req, res);
 });
 
 router.post('/signIn', function(req, res) {
@@ -104,6 +110,8 @@ router.post('/signUp', function(req, res) {
 		db.put(followsParams);
 	});
 });
+
+
 
 var generateId = function(type) {
 	
