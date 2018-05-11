@@ -4,7 +4,7 @@ createBook.controller('CreateBookController', function($scope, RestApiClientServ
 	
     $scope.newBook = function (user) {
 
-        RestApiClientService.post('/book',
+        RestApiClientService.post('/functions/book',
 			{
 				book: book
 			}
