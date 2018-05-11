@@ -1,7 +1,8 @@
 var app= angular.module('appRoutes', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
-    $routeProvider
+
+	$routeProvider
 		.when('/profile'/*/:userId'*/, {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
@@ -27,11 +28,16 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'BookInfoController',
             title:'Book Info'
         })
-        .when('/issue', {
+        .when('/issue', {///book/:bookID
             templateUrl: '/views/issueInfo.html',
             controller: 'IssuePage',
             title:'Issue Info'
 		})
+		.when('/book/:bookID/createIssue', {
+            templateUrl: '/views/createIssue.html',
+            controller: 'CreateIssueController',
+            title:'Issue Info'
+        })
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',
