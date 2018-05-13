@@ -20,9 +20,21 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
-router.get('/image', function(req, res) {
-	console.log("called");
-	imager.uploadImage(req, res);
+router.post('/image', function(req, res) {
+	console.log(req.body);
+	
+	generateId("image").then((id) => {
+		imager.uploadImage(req, res, id);
+	});
+});
+
+router.post('/image/:id', function(req, res) {
+	console.log("2: " + req.params.id);
+	console.log(req.body);
+	
+	generateId("image").then((id) => {
+		imager.uploadImage(req, res, id);
+	});
 });
 
 router.post('/signIn', function(req, res) {

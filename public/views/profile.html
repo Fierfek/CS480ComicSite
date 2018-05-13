@@ -1,62 +1,45 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<style>
-			* {
-				box-sizing: border-box;
-			}
-
-			.column {
-				float: left;
-				width: 25%;
-				padding: 5px;
-			}
-
-			/* Clearfix (clear floats) */
-			.row::after {
-				content: "";
-				clear: both;
-				display: table;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="column">
-					<h1>William Hang </h1>
-					<img src="http://via.placeholder.com/300x250"/>
-				</div>
-				<div class="column">
-					<h2>Bio</h2>
-					<textarea class="form-control" id="bioText" rows="8" ng-disabled="all"></textarea>
-					<div>Edit Off: <input type="checkbox" ng-model="all"></div>
-				</div>
-			</div>
-			<div class="row-md-8">
-				<p>
-					Hello, welcome to my profile page where you will see what comic books I've been reading.
-				</p>
-				<h2> Favorites</h2>
-				I like this. 
-				<img src="http://via.placeholder.com/100x100"/>
-				And this.
-				<img src="http://via.placeholder.com/100x100"/>
-				And also this.
-				<img src="http://via.placeholder.com/100x100"/>
-				</p>
-				 <h2>Comments: </h2>
-				 <p>
-					Dan: Your profile is trash like your taste in comics.
-				 </p>
-			</div>
-			<div class="row-md-4">
-				<h2> William's Activities</h2>
-				<p>	William liked this "Comic Title"</p>
-				<p> William added "Title" to his Favorites</p>
-				<p> William followed Brennan</p>
-				<h2> Blah blah blah</h2>
-			</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h1>{{user.name}}</h1>
+			<img ng-model="user.image" src="{{user.image}}"/>
+			<input type="file" file-model="myFile">
+			<button ng-click="getImage()" class="btn btn-success"> Upload Image</button>
 		</div>
-	</body>
-</html>
+		
+		<!--<form action="/api/functions/image" enctype="multipart/form-data" method="post">
+			<input type="file" name="upload" multiple>
+			<input type="submit" value="Upload">
+		</form>-->
+		
+		<div class="column">
+			<h2>Bio</h2>
+			<textarea class="form-control" id="bioText" rows="8" ng-disabled="all"></textarea>
+			<!--<div>Edit Off: <input type="checkbox" ng-model="all"></div>-->
+		</div>
+	</div>
+	<div class="row-md-8">
+		<p>
+			Hello, welcome to my profile page where you will see what comic books I've been reading.
+		</p>
+		<h2> Favorites</h2>
+		I like this. 
+		<img src="http://via.placeholder.com/100x100"/>
+		And this.
+		<img src="http://via.placeholder.com/100x100"/>
+		And also this.
+		<img src="http://via.placeholder.com/100x100"/>
+		</p>
+		 <h2>Comments: </h2>
+		 <p>
+			Dan: Your profile is trash like your taste in comics.
+		 </p>
+	</div>
+	<div class="row-md-4">
+		<h2> William's Activities</h2>
+		<p>	William liked this "Comic Title"</p>
+		<p> William added "Title" to his Favorites</p>
+		<p> William followed Brennan</p>
+		<h2> Blah blah blah</h2>
+	</div>
+</div>
