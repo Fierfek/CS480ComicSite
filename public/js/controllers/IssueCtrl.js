@@ -1,11 +1,10 @@
 var issuePage = angular.module('IssueCtrl',[]);
 
-issuePage.controller('IssuePage',function($scope,$route, RestApiClientService){
-	
-	
-	/*RestApiClientService.get('/issue/'+$route.current.params.issueID).then(function(response){
-		$scope.issue=response;
-	});*/
+issuePage.controller('IssueController',function($scope, $route, RestApiClientService){
+		
+	RestApiClientService.get('/issue/' + $route.current.params.issueID).then(function(response){
+		$scope.issue = response;
+	});
 	
 	/*RestApiClientService.get('/issueWriter/'+$route.current.params.issueID).then(function(response){
 		$scope.writer=response;
@@ -22,10 +21,5 @@ issuePage.controller('IssuePage',function($scope,$route, RestApiClientService){
 	/*RestApiClientService.get('/comment/'+$route.current.params.issueID).then(function(response){
 		$scope.comments=response;
 	});*/
-	
-	var user;
-	$scope.isUser=function (user){
-		return this.user==user;
-	};
 });
 

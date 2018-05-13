@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
-var imager = require('./imageUpload.js');
+var loadForm = require('./handleForm.js');
 
 
 var aws = require("aws-sdk");
@@ -20,20 +20,85 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
-router.post('/image', function(req, res) {
-	console.log(req.body);
-	
+router.post('/image', function(req, res) {	
 	generateId("image").then((id) => {
-		imager.uploadImage(req, res, id);
+		loadForm.uploadImage(req, res, id);
 	});
 });
 
 router.post('/image/:id', function(req, res) {
-	console.log("2: " + req.params.id);
-	console.log(req.body);
-	
 	generateId("image").then((id) => {
-		imager.uploadImage(req, res, id);
+		loadForm.uploadImage(req, res, id);
+	});
+});
+
+router.post('/createIssue', function(req, res) {
+	generateId("issue").then((issueId) => {
+		generateId("image").then((imageId) => {
+			loadForm.createIssue(req, imageId).then((issueString) => {
+				
+				var response = {};
+				console.log("issue: " + issueString);
+				
+				var issue = JSON.parse(issueString);
+				var issueParams = {
+					TableName: "Issue",
+					Item: {
+						"issueID": issueId,
+						"coverImage": "https://s3-us-west-2.amazonaws.com/comicbashimages/" + imageId + ".jpg",
+						"title": issue.title,
+						"summary": issue.summary,
+						"synopsis": issue.synopsis,
+						"volume": parseInt(issue.volume),
+						"issueNum": parseInt(issue.issueNum),
+						"year": parseInt(issue.year),
+						"rating": parseInt(issue.rating),
+						"bookId": parseInt(issue.bookId)
+					}
+				}
+				
+				db.put2(issueParams).then((result) => {
+					response.status = result;
+					
+					if(result == "success") {
+						response.issueId = issueId;
+					}
+					
+					res.send(response);
+				});
+				
+			});
+		});
+	});
+});
+
+router.post('/createBook', function(req, res) {	
+	
+	var response = {};
+	
+	generateId("book").then((id) => {
+		console.log("creating book: " + id);
+		
+		var bookParams = {
+			TableName: "Book",
+			Item: {
+				"bookID": id,
+				"title": req.body.book.title,
+				"issueList": "0",
+				"publisher": req.body.book.publisher,
+				"publishDate": req.body.book.publishDate
+			}
+		}
+		
+		db.put2(bookParams).then((result) => {
+				response.status = result;
+				
+				if(result == "success") {
+					response.id = id;
+				}
+				
+				res.send(response);
+		});
 	});
 });
 

@@ -21,6 +21,20 @@ db.put = function(params) {
 	});	
 };
 
+db.put2 = function(params) {
+	return new Promise((res, rej) => {		  
+		docClient.put(params, function(err, data) {
+			if (err) {
+				console.log("Unable to add item. Error JSON: " + JSON.stringify(err, null, 2));
+				res("error");
+			} else {
+				console.log("Added Item:" + JSON.stringify(data, null, 2));
+				res("success");
+			}
+		});
+	})
+};
+
 db.get = function (params, res) {
 	return docClient.get(params, function(err, data) {
 		if(err) {

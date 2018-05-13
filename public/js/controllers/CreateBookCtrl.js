@@ -1,15 +1,19 @@
 var createBook = angular.module('CreateBookCtrl',[]);
 
-createBook.controller('CreateBookController', function($scope, RestApiClientService) {
+createBook.controller('CreateBookController', function($scope, $location, RestApiClientService) {
 	
-    $scope.newBook = function (user) {
+	$scope.book = {};
+	
+    $scope.createBook = function (bookData) {
 
-        RestApiClientService.post('/functions/book',
+        RestApiClientService.post('/functions/createBook',
 			{
-				book: book
+				book: bookData
 			}
 		).then(function(result) {
-			
+			if(result.status == "success") {
+				$location.path('/book/' + result.id);
+			}
 		});
 	}	
 });

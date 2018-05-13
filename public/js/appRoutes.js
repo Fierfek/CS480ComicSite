@@ -28,15 +28,15 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'BookInfoController',
             title:'Book Info'
         })
-        .when('/issue', {///book/:bookID
+		.when('/issue/:issueID', {
             templateUrl: '/views/issueInfo.html',
-            controller: 'IssuePage',
-            title:'Issue Info'
+            controller: 'IssueController',
+            title:'Issue'
 		})
 		.when('/book/:bookID/createIssue', {
             templateUrl: '/views/createIssue.html',
             controller: 'CreateIssueController',
-            title:'Issue Info'
+            title:'Create Issue'
         })
 		.otherwise({
 			redirectTo: '/',
