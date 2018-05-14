@@ -9,7 +9,7 @@
 						</div>
 						<div class="col-8">
 							<div class="card-body">
-								<p class="card-text">Volume #: {{issue.volumeNum}}</p>
+								<p class="card-text">Volume #: {{issue.volume}}</p> <!-- change {{issue.volume}}{{issue.volumeNum}}-->
 								<p class="card-text">Issue #: {{issue.issueNum}}</p>
 								<p class="card-text">Year: {{issue.year}}</p>
 								<p class="card-text">Writer(s): {{writer}} </p>
@@ -27,13 +27,15 @@
 						</div>
 						<div class= "col-md-10 mx-auto mb-5"><h5 class="text-light bg-dark"> Comments</h5>
 							<div class= "border mb-3 p-3 mx-auto" style="height:50%;line-height:2em;overflow:auto">
-						<ul style="list-style:none" ><!--ng-repeat="info in comments| limitTo:5"-->
+						<ul style="list-style:none" ng-repeat="info in comments| limitTo:5">
 							<li>
-								<div>
+								<div class = "border border-secondary rounded">
 									<label class="font-weight-bold">username {{info.userID.username}}</label> <!--I do not know if I can do this-->
 									<p class="">Hello this is a test comment.{{info.comment}}</p>			
-									<span class="date sub-text">on March 5th, 2014 {{info.timestamp}}</span><br>
-									<a ng-show="isUser(username)" href="#" class ="float-right">delete</a>
+								</div>
+								<div>
+								<span class="date sub-text">on March 5th, 2014 {{info.timestamp}}</span>
+								<a ng-show="isUser(username)" href="#" class ="float-right">delete</a>
 								</div>
 							</li>
 						</ul>

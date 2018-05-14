@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-var tableName = "IssueIllustrator";
+var tableName = "IssueIllustrators";
 
 /*router.put('', function(req, res) {
 	var params = {
