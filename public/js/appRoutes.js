@@ -28,7 +28,7 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'BookInfoController',
             title:'Book Info'
         })
-        .when('/issue', {///book/:bookID
+        .when('/issue/:issueID', {///book/:bookID
             templateUrl: '/views/issueInfo.html',
             controller: 'IssuePage',
             title:'Issue Info'

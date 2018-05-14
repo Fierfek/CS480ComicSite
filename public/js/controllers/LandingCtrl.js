@@ -17,6 +17,14 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 	RestApiClientService.get('/issue').then(function(response) {
 		
 		$scope.issues = response;
-	});	
+	});
+	
+	
+	//for testing purpose
+	RestApiClientService.get('/issue/1').then(function(response) {
+		
+		$scope.test = response;
+	});
+
 	
 });

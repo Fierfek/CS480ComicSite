@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-var tableName = "Issues";
+var tableName = "Issue";
 
 router.put('', function(req, res) {
 	var params = {
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
-			"issueID": parseInt(req.params.id)
+			"issueID": 1
 		}
 	}
 	
