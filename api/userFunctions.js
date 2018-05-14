@@ -67,6 +67,49 @@ router.post('/createIssue', function(req, res) {
 					res.send(response);
 				});
 				
+				var writers = issue.writer.split(',');
+				var characters = issue.characters.split(',');
+				var illustrators = issue.illustrators.split(',');
+				
+				var writerParams = {
+					TableName: "IssueWriters",
+					Item: {
+						"issueID": issueId
+					}
+				}
+				
+				for(var i = 0; i < writers.length; i++) {
+					writerParams.Item.writer = writers[i];
+					
+					db.put(writerParams);
+				}
+				
+				var illustratorParams = {
+					TableName: "IssueIllustrators",
+					Item: {
+						"issueID": issueId
+					}
+				}
+				
+				for(var k = 0; k < illustrators.length; k++) {
+					illustratorParams.Item.illustrator = illustrators[k];
+					
+					db.put(illustratorParams);
+				}
+				
+				var characterParams = {
+					TableName: "IssueCharacters",
+					Item: {
+						"issueID": issueId
+					}
+				}
+				
+				for(var j = 0; j < writers.length; j++) {
+					characterParams.Item.character = characters[j];
+					
+					db.put(characterParams);
+				}
+				
 			});
 		});
 	});

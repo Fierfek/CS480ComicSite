@@ -4,7 +4,7 @@ var db = require('./db.js');
 
 var tableName = "IssueIllustrator";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -14,9 +14,10 @@ router.put('', function(req, res) {
 	}
 	
 	db.put(params, res);
-});
+});*/
 
-/*router.get('/:id', function(req, res) {
+//Make this a query
+router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -25,7 +26,7 @@ router.put('', function(req, res) {
 	}
 	
 	db.get(params, res);
-});*/
+});
 
 /*router.get('', function(req, res) {
 	var params = {
@@ -36,7 +37,7 @@ router.put('', function(req, res) {
 	db.scan(params, res);
 });*/
 
-router.post('', function(req, res) {
+/*router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -62,6 +63,6 @@ router.delete('/:issue/:illustrator', function(req, res) {
 	}
 	
 	db.delete(params);
-});
+});*/
 
 module.exports = router;

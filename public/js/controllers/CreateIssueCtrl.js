@@ -10,7 +10,7 @@ issueCreator.controller('CreateIssueController', function ($scope, $route, $loca
 		
         fd.append('file', file);
 		fd.append('title', $scope.issue.title);
-		fd.append('writers', $scope.issue.writers);
+		fd.append('writer', $scope.issue.writer);
 		fd.append('characters', $scope.issue.characters);
 		fd.append('illustrators', $scope.issue.illustrators);
 		fd.append('year', $scope.issue.year);

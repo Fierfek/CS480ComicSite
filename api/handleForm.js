@@ -35,6 +35,8 @@ uploader.createIssue = function(req, imageId) {
 		form.on('field', function(name, value) {			
 			issue.rating = 0;
 			
+			console.log(name + ": " + value);
+			
 			switch(name) {
 				case "title":
 					issue.title = value;
@@ -64,8 +66,7 @@ uploader.createIssue = function(req, imageId) {
 					issue.synopsis = value;
 					break;
 				case "bookId":
-					issue.bookId = value;
-					res(JSON.stringify(issue));
+					issue.bookId = value;	
 					break;
 			}
 		});
@@ -95,6 +96,7 @@ uploader.createIssue = function(req, imageId) {
 					} if (data) {
 						console.log("Upload Success", data.Location);
 					}
+					res(JSON.stringify(issue));
 				});
 			});		
 		});
@@ -126,9 +128,6 @@ uploader.uploadImage = function(req, res, id){
 		.toFile(__dirname + "/uploads/" + id + ".jpg")
 		.then(function() {
 			console.log("resized");
-			// output.tiff is a 200 pixels wide and 300 pixels high image
-			// containing a nearest-neighbour scaled version, embedded on a white canvas,
-			// of the image data in inputBuffer
 			
 			var fileStream2 = fs.createReadStream(__dirname + "/uploads/" + id + ".jpg");
 			

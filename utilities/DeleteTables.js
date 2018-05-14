@@ -32,7 +32,7 @@ function successLog(log) {
 function deleteAllTables() {
 	for (var i = 0; i < tableNames.length; i++) {
 		console.log(tableNames[i]);
-		dynamodb.deleteTable(tableNames[i], function(err, data) {
+		dynamodb.deleteTable(tableNames[5], function(err, data) {
 			if (err) {
 				errorLog(err);
 			} else {
