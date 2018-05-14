@@ -127,7 +127,6 @@ router.post('/createBook', function(req, res) {
 			Item: {
 				"bookID": id,
 				"title": req.body.book.title,
-				"issueList": "0",
 				"publisher": req.body.book.publisher,
 				"publishDate": req.body.book.publishDate
 			}
