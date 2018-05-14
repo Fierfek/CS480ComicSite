@@ -12,6 +12,7 @@ router.use('/issueWriter', require(__dirname + '/issueWritersCrud.js'));
 router.use('/issueIllustrator', require(__dirname + '/issueIllustratorsCrud.js'));
 router.use('/comment', require(__dirname + '/commentsCrud.js'));
 router.use('/functions', require(__dirname + '/userFunctions.js'));
+router.use('/query', require(__dirname + '/queries.js'));
 
 router.get('/', function(req, res) {
 	console.log("get anything");

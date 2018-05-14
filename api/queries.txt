@@ -1,0 +1,26 @@
+//queries
+var express = require('express');
+var router = express.Router();
+var db = require('./db.js');
+
+router.
+	var params = {
+		TableName: "User",
+		IndexName: "userpass",
+		KeyConditionExpression: "username = :username and password = :password",
+		ExpressionAttributeValues: {
+			":username": user.username,
+			":password": user.password
+		}
+	};
+	
+	
+	db.query(params).then((data) => {
+		if(data[0]) {
+			response.signedIn = true;	
+			//response.cookie  Send cookie
+		} else {
+			response.signedIn = false;
+		}
+		res.send(response);
+	});
