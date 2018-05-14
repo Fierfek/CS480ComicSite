@@ -23,6 +23,16 @@ app.factory("RestApiClientService", ['$http', /*'toaster',*/
                     return err;
                 });
         };
+		
+		obj.post = function (q, object, params) {
+                return $http.post(serviceBase + q, object, params).then(function (results) {
+                    return results.data;
+                },function(results){
+ 
+                    var err = {status:"error",message:"An Internal Error Occured"};
+                    return err;
+                });
+        };
  
         obj.put = function (q, object) {
             return $http.put(serviceBase + q, object).then(function (results) {

@@ -4,7 +4,7 @@ var db = require('./db.js');
 
 var tableName = "UserFavorites";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -19,7 +19,7 @@ router.put('', function(req, res) {
 	}
 	
 	db.put(params, res);
-});
+});*/
 
 router.get('/:id', function(req, res) {
 	var params = {
@@ -41,13 +41,14 @@ router.get('/:id', function(req, res) {
 	db.scan(params, res);
 });*/
 
+//This should be moved to user functions
 router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
 			"userID": req.userID
 		},
-		UpdateExpression: "set info.issues = :issues, info.books = :books, info.illustrators = :illustrators, info.authors = :authors, info.bio = :bio, info.profilePic = :profilePic",
+		UpdateExpression: "set issues = :issues, books = :books, illustrators = :illustrators, authors = :authors, bio = :bio, profilePic = :profilePic",
 		ExpressionAttributeValues: {
 			":issues": req.issues,
 			":books": req.books,

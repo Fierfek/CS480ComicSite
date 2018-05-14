@@ -50,6 +50,26 @@ var bookTable = {
 	}
 };
 
+var uidTable = {
+	TableName: "UID",
+	AttributeDefinitions: [
+		{
+			AttributeName: "type",
+			AttributeType: "S"
+		},
+	],
+	KeySchema: [
+		{
+			AttributeName: "type",
+			KeyType: "HASH",
+		},
+	],
+	ProvisionedThroughput: {
+		ReadCapacityUnits: 1,
+		WriteCapacityUnits: 3,
+	}
+};
+
 var SecurityQuestions = {
 	TableName: "SecurityQuestions",
 	AttributeDefinitions: [
@@ -322,7 +342,11 @@ var IssueCharacters = {
 		{
 			AttributeName: "issueID", //Primary Key
 			KeyType: "HASH"
-		}
+		},
+		{
+			AttributeName: "character", //Sort Key
+			KeyType: "RANGE"
+		},
 	],
 	GlobalSecondaryIndexes: [
 		{
@@ -356,7 +380,7 @@ var IssueWriters = {
 			AttributeType: "N"
 		},
 		{
-			AttributeName: "writers",
+			AttributeName: "writer",
 			AttributeType: "S"
 		}
 	],
@@ -365,13 +389,17 @@ var IssueWriters = {
 			AttributeName: "issueID", //Primary Key
 			KeyType: "HASH"
 		},
+		{
+			AttributeName: "writer", //Primary Key
+			KeyType: "RANGE"
+		},
 	],
 	GlobalSecondaryIndexes: [
 		{
 			IndexName: "by-writer",
 			KeySchema: [
 				{
-					AttributeName: "writers", //Primary Key
+					AttributeName: "writer", //Primary Key
 					KeyType: "HASH",
 				},
 			],
@@ -398,7 +426,7 @@ var IssueIllustrators = {
 			AttributeType: "N"
 		},
 		{
-			AttributeName: "illustrators",
+			AttributeName: "illustrator",
 			AttributeType: "S"
 		},
 	],
@@ -406,14 +434,18 @@ var IssueIllustrators = {
 		{
 			AttributeName: "issueID", //Primary Key
 			KeyType: "HASH"
-		}
+		},
+		{
+			AttributeName: "illustrator", //Primary Key
+			KeyType: "RANGE"
+		},
 	],
 	GlobalSecondaryIndexes: [
 		{
 			IndexName: "by-illustrator",
 			KeySchema: [
 				{
-					AttributeName: "illustrators", //Primary Key
+					AttributeName: "illustrator", //Primary Key
 					KeyType: "HASH",
 				},
 			],
@@ -439,6 +471,14 @@ function errorLog(log) {
 function successLog(log) {
 	console.log("Created table. Table description JSON:", JSON.stringify(log, null, 2));
 }
+
+/*dynamodb.createTable(uidTable, function(err, data) {
+	if (err) {
+		errorLog(err);
+	} else {
+		successLog(data);
+	}
+});
 
 dynamodb.createTable(bookTable, function(err, data) {
 	if (err) {
@@ -502,7 +542,7 @@ dynamodb.createTable(IssueTable, function(err, data) {
 	} else {
 		successLog(data);
 	}
-});
+});*/
 
 dynamodb.createTable(IssueCharacters, function(err, data) {
 	if (err) {

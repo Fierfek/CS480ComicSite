@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row mx-5 my-5">
+		<div class="col-md-7 bg-dark">
+			<h2 class = "text-light font-weight-bold" style="margin:3%">Create Issue</h2>
+      
+			<form ng-submit="formSubmit()" class="form-center">
+        
+				<div class="col-md-11">
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.title" placeholder="Title" required focus/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.coverPage" placeholder="Cover Page URL" required focus/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.writer" placeholder="Writer(s)" required/>
+					</div> 
+
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.characters" placeholder="Character(s)" required/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.illustrators" placeholder="Illustrator(s)" required/>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.year" placeholder="Year" required/>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.volume" placeholder="Volume" required/>
+					</div> 
+
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.issueNum" placeholder="Issue Number" required/>
+					</div>
+					<div class="form-group">
+						<input type="file" file-model="issueCover" class="form-control" required/></textarea>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" ng-model="issue.summary" placeholder="Summary" required=""/></textarea>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" ng-model="issue.synopsis" placeholder="Synopsis" required/></textarea>
+					</div>
+
+					<div class="form-group" style="margin-left:10px">
+						<button type="submit" ng-click="createIssue(issue)" class="btn btn-success">Submit</button>
+					</div>
+						
+				</div>
+			</form>
+			<div  ng-show= "error" class="alert alert-danger" role="alert">{{error}}</div>
+		</div>
+	</div>
+</div>

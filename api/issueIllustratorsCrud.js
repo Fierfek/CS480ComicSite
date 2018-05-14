@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-var tableName = "IssueIllustrator";
+var tableName = "IssueIllustrators";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -14,9 +14,10 @@ router.put('', function(req, res) {
 	}
 	
 	db.put(params, res);
-});
+});*/
 
-/*router.get('/:id', function(req, res) {
+//Make this a query
+router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -25,7 +26,7 @@ router.put('', function(req, res) {
 	}
 	
 	db.get(params, res);
-});*/
+});
 
 /*router.get('', function(req, res) {
 	var params = {
@@ -36,14 +37,14 @@ router.put('', function(req, res) {
 	db.scan(params, res);
 });*/
 
-router.post('', function(req, res) {
+/*router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
 			"issueID": req.issueID,
 			"illustrator": req.illustrator,
 		},
-		UpdateExpression: "set info.illustrator = :illustrator",
+		UpdateExpression: "set illustrator = :illustrator",
 		ExpressionAttributeValues: {
 			":illustrator": req.illustrator,
 		}
@@ -62,6 +63,6 @@ router.delete('/:issue/:illustrator', function(req, res) {
 	}
 	
 	db.delete(params);
-});
+});*/
 
 module.exports = router;

@@ -11,11 +11,7 @@ router.use('/issueCharacter', require(__dirname + '/issueCharactersCrud.js'));
 router.use('/issueWriter', require(__dirname + '/issueWritersCrud.js'));
 router.use('/issueIllustrator', require(__dirname + '/issueIllustratorsCrud.js'));
 router.use('/comment', require(__dirname + '/commentsCrud.js'));
-
-router.post('/signedIn', function(req, res) {
-	var signedIn = true;
-	res.send(signedIn);
-});
+router.use('/functions', require(__dirname + '/userFunctions.js'));
 
 router.get('/', function(req, res) {
 	console.log("get anything");

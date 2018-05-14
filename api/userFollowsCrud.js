@@ -4,7 +4,7 @@ var db = require('./db.js');
 
 var tableName = "UserFollows";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -15,7 +15,7 @@ router.put('', function(req, res) {
 	}
 	
 	db.put(params, res);
-});
+});*/
 
 router.get('/:id', function(req, res) {
 	var params = {
@@ -43,7 +43,7 @@ router.post('', function(req, res) {
 		Key: {
 			"userID": req.userID
 		},
-		UpdateExpression: "set info.users = :users, info.books = :books",
+		UpdateExpression: "set users = :users, books = :books",
 		ExpressionAttributeValues: {
 			":users": req.users,
 			":books": req.books
