@@ -4,7 +4,7 @@ var db = require('./db.js');
 
 var tableName = "Issue";
 
-router.put('', function(req, res) {
+/*router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
@@ -21,7 +21,7 @@ router.put('', function(req, res) {
 	}
 	
 	db.put(params, res);
-});
+});*/
 
 router.get('/:id', function(req, res) {
 	var params = {
@@ -43,7 +43,7 @@ router.get('/:id', function(req, res) {
 	db.scan(params, res);
 });*/
 
-router.post('', function(req, res) {
+/*router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -63,7 +63,7 @@ router.post('', function(req, res) {
 	}
 	
 	db.update(params);
-});
+});*/
 
 /*router.delete('/:id', function(req, res) {
 	var params = {

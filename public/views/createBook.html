@@ -7,28 +7,19 @@
         
 				<div class="col-md-4">
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="createBook.ID" placeholder="ID" required=""/>
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" ng-model="createBook.title" placeholder="Title" required=""/>
+						<input type="text" class="form-control" ng-model="book.title" placeholder="Title" required=""/>
 					</div> 
-
+					
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="createBook.numberOfIssues" placeholder="Number of Issues" required=""/>
-					</div>
-
-
-					<div class="form-group">
-						<input type="text" class="form-control" ng-model="createBook.publisher" placeholder="Publisher" required=""/>
+						<input type="text" class="form-control" ng-model="book.publisher" placeholder="Publisher" required=""/>
 					</div>
 
 					<div class="form-group">
-						<input type="date" class="form-control" ng-model="createBook.publishDate" placeholder="Publish Date" required=""/>
+						<input type="month" class="form-control" ng-model="book.publishDate" placeholder="Publish Date" required=""/>
 					</div>
 
 					<div class="form-group" style="margin-left:10px">
-						<button type="submit" ng-click="newBook(createBook)" class="btn btn-success">Create Book</button>
+						<button type="submit" ng-click="createBook(book)" class="btn btn-success">Create Book</button>
 					</div>
 				</div>
 			</form>

@@ -13,38 +13,39 @@
 						<input type="text" class="form-control" ng-model="issue.coverPage" placeholder="Cover Page URL" required focus/>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.writer" placeholder="Writer(s)" required=""/>
+						<input type="text" class="form-control" ng-model="issue.writer" placeholder="Writer(s)" required/>
 					</div> 
 
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.charaters" placeholder="Character(s)" required=""/>
+						<input type="text" class="form-control" ng-model="issue.characters" placeholder="Character(s)" required/>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.illustrator" placeholder="Illustrator(s)" required=""/>
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.year" placeholder="Year" required=""/>
+						<input type="text" class="form-control" ng-model="issue.illustrators" placeholder="Illustrator(s)" required/>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.volume" placeholder="Volume" required=""/>
+						<input type="text" class="form-control" ng-model="issue.year" placeholder="Year" required/>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="issue.volume" placeholder="Volume" required/>
 					</div> 
 
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="issue.issueNum" placeholder="Issue Number" required=""/>
+						<input type="text" class="form-control" ng-model="issue.issueNum" placeholder="Issue Number" required/>
 					</div>
-
-
+					<div class="form-group">
+						<input type="file" file-model="issueCover" class="form-control" required/></textarea>
+					</div>
 					<div class="form-group">
 						<textarea class="form-control" ng-model="issue.summary" placeholder="Summary" required=""/></textarea>
 					</div>
 					<div class="form-group">
-						<textarea class="form-control" ng-model="issue.synpsis" placeholder="Synopsis" required=""/></textarea>
+						<textarea class="form-control" ng-model="issue.synopsis" placeholder="Synopsis" required/></textarea>
 					</div>
 
 					<div class="form-group" style="margin-left:10px">
-						<button type="submit" ng-click="createAccount(issue)" class="btn btn-success">Submit</button>
+						<button type="submit" ng-click="createIssue(issue)" class="btn btn-success">Submit</button>
 					</div>
 						
 				</div>

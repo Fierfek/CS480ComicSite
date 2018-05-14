@@ -1,8 +1,6 @@
 var bookInfo = angular.module('BookInfoCtrl',[]);
 
 bookInfo.controller('BookInfoController', function($scope, $route, RestApiClientService) {
-	
-	console.log("book/" + $route.current.params.bookID);
 
 	$scope.list;
 
@@ -10,8 +8,15 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 
 		$scope.book = response;
 
-		$scope.list = $scope.book.issueList.split(',');
-		$scope.numIssues = $scope.list.length;
+		/*$scope.list = $scope.book.issueList.split(',');
+		
+		for (var i = 0; i < $scope.list.length; i++) {
+			if($scope.list[i] == "0") {
+				$scope.list.splice(i, i+1);
+			}
+		}*/
+		
+		//$scope.numIssues = $scope.list.length;
 		
 	});
 });
