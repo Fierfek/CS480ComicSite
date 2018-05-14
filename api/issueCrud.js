@@ -27,7 +27,7 @@ router.get('/:id', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
-			"issueID": 1
+			"issueID": parseInt(req.params.id)
 		}
 	}
 	
