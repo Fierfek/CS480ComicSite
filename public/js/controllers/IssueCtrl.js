@@ -8,20 +8,19 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 		console.log(response);
 	});
 	
-	
-	/*RestApiClientService.get('/issueWriter/'+$route.current.params.issueID).then(function(response){
-		$scope.writer=response;
+	RestApiClientService.get('/query/issueWriters/byIssue/'+$route.current.params.issueID).then(function(response){
+		$scope.writers=response;
 	});
 	
-	RestApiClientService.get('/issueCharacter/'+$route.current.params.issueID).then(function(response){
-		$scope.character=response;
+	RestApiClientService.get('/query/issueCharacters/byIssue/'+$route.current.params.issueID).then(function(response){
+		$scope.characters=response;
 	});
 	
-	RestApiClientService.get('/issueIllustrator/'+$route.current.params.issueID).then(function(response){
-		$scope.illustrator=response;
+	RestApiClientService.get('/query/issueIllustrators/byIssue/'+$route.current.params.issueID).then(function(response){
+		$scope.illustrators=response;
 	});
 	
-	RestApiClientService.get('/comment/'+$route.current.params.issueID).then(function(response){
+	/*RestApiClientService.get('/comment/'+$route.current.params.issueID).then(function(response){
 		$scope.comments=response;
 	});*/
 	

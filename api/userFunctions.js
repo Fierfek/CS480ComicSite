@@ -20,7 +20,7 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
-router.post('/image', function(req, res) {	
+router.post('/image', function(req, res) {
 	generateId("image").then((id) => {
 		loadForm.uploadImage(req, res, id);
 	});
