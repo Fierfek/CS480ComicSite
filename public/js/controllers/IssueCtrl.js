@@ -8,6 +8,7 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 		console.log(response);
 	});
 	
+	
 	/*RestApiClientService.get('/issueWriter/'+$route.current.params.issueID).then(function(response){
 		$scope.writer=response;
 	});

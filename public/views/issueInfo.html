@@ -1,12 +1,21 @@
 <div class="container-fluid" >
 	<div class="row my-5">
 		<div class="col-md-10 mx-auto bg-light">
+			<div class= "mt-5 text-dark"><a href= "/book/{{issue.bookId}}" > go back to Book</a></div>
 			<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">{{issue.title}}</h2></div>								
 				<div class="card md-10 mx-auto bg-light border-0">
 					<div class="row">
 						<div class="mx-auto col-2">
 							<img src="{{issue.coverImage}}" style="width:225px; height:250px;" alt="Issue Image">
+							<div class ="my-3"> Rating
+								<span class="fa fa-star-o ml-2"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
 						</div>
+						
 						<div class="col-8">
 							<div class="card-body">
 								<p class="card-text">Volume #: {{issue.volume}}</p> <!-- change {{issue.volume}}{{issue.volumeNum}}-->
