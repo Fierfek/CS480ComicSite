@@ -14,16 +14,12 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 		}*/
 	});	
 	
-	RestApiClientService.get('/issue').then(function(response) {
-		$scope.issues = response;
+	RestApiClientService.get("/query/issue/byBook/2" ).then(function(response){
+
+		$scope.issueList = response;
 	});
 	
 	
-	/*for testing purpose
-	RestApiClientService.get('/issue/1').then(function(response) {
-		
-		$scope.test = response;
-	});
-	*/
+	
 	
 });

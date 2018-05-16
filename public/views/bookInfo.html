@@ -7,16 +7,16 @@
 				<h6 style="text-align: left">{{month}} {{year}}</h6>
 				<p>{{numOfIssues}} Issues</p>
 			</div>
-			<div class="card" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
+			<div class="card my-2" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
 				<div class="row">
 					<div class="col">
 						<a href="/issue/{{issue.issueID}}">
-							<img class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
+							<img style="width:50%; height:75%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
 						</a>
 					</div>
 					<div class="col pt-1 my-auto mx-auto">
-				 			<h6 class="card-text">	{{issue.title}}<br />
-				 									Volume: {{issue.volume}}<br />
+				 			<h6 class="card-text font-weight-bold">	{{issue.title}}</h6>
+				 			<h6 class="card-text">	Volume: {{issue.volume}}<br />
 				 									Issue Number: {{issue.issueNum}}<br />
 				 									Average User Rating: {{issue.rating}}
 

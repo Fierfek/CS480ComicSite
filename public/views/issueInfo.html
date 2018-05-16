@@ -1,12 +1,14 @@
 <div class="container-fluid" >
 	<div class="row my-5">
 		<div class="col-md-10 mx-auto bg-light">
-			<div class= "mt-5 "><a class="ml-1 text-dark" href= "/book/{{issue.bookId}}" > go back to Book</a></div>
+			<div class= "mt-5 ">
+				<i class="fa fa-arrow-left"></i>
+				<a class="ml-1 text-dark" href= "/book/{{issue.bookId}}" >  go back to Book</a></div>
 			<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">{{issue.title}}</h2></div>								
 				<div class="card md-10 mx-auto bg-light border-0">
 					<div class="row">
 						<div class="mx-auto col-4">
-							<img src="{{issue.coverImage}}" style="width:225px; height:250px;" alt="Issue Image">
+							<img src="{{issue.coverImage}}" style="width:50%; height:75%;" alt="Issue Image">
 							<div class ="my-3 text-danger"> Rating:
 								<span class="fa fa-star-o ml-2"></span>
 								<span class="fa fa-star-o"></span>
@@ -32,10 +34,10 @@
 						</div>
 						<div class= "col-md-10 mx-auto mb-3">
 							<h5 class="text-light bg-dark"> Synopsis</h5>
-							<button type="button" class="btn btn-dark float-right mb-5" data-toggle="collapse" ng-click="isHidden()" data-target="#synopsis">{{label}}</button>
-							<div id="synopsis" class="collapse">
-							<p>{{issue.synopsis}}</p>
-						</div>	
+							<button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="collapse" ng-click="isHidden()" data-target="#synopsis">{{label}}</button>
+							<div id="synopsis" class="collapse mt-5">
+								<p>{{issue.synopsis}}</p>
+							</div>	
 						</div>
 						<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
 							<div class= "border mb-3 p-3 mx-auto" style="height:50%;line-height:2em;overflow:auto">
