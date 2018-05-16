@@ -1,7 +1,7 @@
 <div class="container bg-light my-5">
 	<div class="row">
 		<div class="col-md-8 mx-auto pt-2">
-			<div class="py-auto">
+			<div class="pt-2">
 				<h3 style="text-align: left">{{book.title}}</h3>
 				<h4 style="text-align: left">{{book.publisher}}</h4>
 				<h6 style="text-align: left">{{month}} {{year}}</h6>
@@ -11,16 +11,20 @@
 				<div class="row">
 					<div class="col">
 						<a href="/issue/{{issue.issueID}}">
-							<img style="width:50%; height:75%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
+							<div class="pb-3">
+								<img style="width:55%; height:80%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
+							</div>
 						</a>
 					</div>
 					<div class="col pt-1 my-auto mx-auto">
+						<a href="/issue/{{issue.issueID}}">
 				 			<h6 class="card-text font-weight-bold">	{{issue.title}}</h6>
-				 			<h6 class="card-text">	Volume: {{issue.volume}}<br />
-				 									Issue Number: {{issue.issueNum}}<br />
-				 									Average User Rating: {{issue.rating}}
+				 		</a>
+				 		<h6 class="card-text">	Volume: {{issue.volume}}<br />
+				 								Issue Number: {{issue.issueNum}}<br />
+				 								Average User Rating: {{issue.rating}}
 
-				 			</h6>
+				 		</h6>
 				 	</div>
 				</div>
 			</div>
