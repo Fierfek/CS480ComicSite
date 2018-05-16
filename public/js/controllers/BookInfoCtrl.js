@@ -8,8 +8,6 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 
 		$scope.book = response;
 
-		console.log($scope.book.publishDate);
-
 		$scope.year = new Date($scope.book.publishDate).getFullYear();
 		monthNum = new Date($scope.book.publishDate).getMonth();
 		const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -17,22 +15,12 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 		];
 
 		$scope.month = monthNames[monthNum];
-
-
-		/*$scope.list = $scope.book.issueList.split(',');
-		
-		for (var i = 0; i < $scope.list.length; i++) {
-			if($scope.list[i] == "0") {
-				$scope.list.splice(i, i+1);
-			}
-		}*/
-		
-		//$scope.numIssues = $scope.list.length;
 		
 	});
-	RestApiClientService.get("/api/query/issue/byBook/:bookId" + $route.current.params.bookID).then(function(response){
+	RestApiClientService.get("/query/issue/byBook/" + $route.current.params.bookID).then(function(response){
 
-		$scope.issue = response;
-		//console.log(response);
+		$scope.issueList = response;
+		$scope.numOfIssues = response.length;
+		console.log(response);
 	});
 });
