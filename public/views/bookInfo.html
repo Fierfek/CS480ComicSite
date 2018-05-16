@@ -1,15 +1,29 @@
 <div class="container bg-light my-5">
-	<div class="row w-100">
-		<div class="col-md-8 mx-auto my-5">
-			<div class="w-50 mx-auto">
-				<h3 style="text-align: center">{{book.title}}</h3>
-				<h4 style="text-align: center">{{book.publisher}}</h4>
-				<h4 style="text-align: center">{{book.publishDate}}</h4>
+	<div class="row">
+		<div class="col-md-8 mx-auto pt-2">
+			<div class="py-auto">
+				<h3 style="text-align: left">{{book.title}}</h3>
+				<h4 style="text-align: left">{{book.publisher}}</h4>
+				<h6 style="text-align: left">{{month}} {{year}}</h6>
+				<p>{{numOfIssues}} Issues</p>
 			</div>
-			<div class="card" ng-repeat="issue in list">
-				<a class="btn btn-primary" role="button">{{issue}}</a><button type="button" class="btn btn-primary" href="/book/{{book.bookID}}/{{issue}}"><!-- change to issue title later?-->
+			<div class="card" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
+				<div class="row">
+					<div class="col">
+						<a href="/issue/{{issue.issueID}}">
+							<img class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
+						</a>
+					</div>
+					<div class="col pt-1 my-auto mx-auto">
+				 			<h6 class="card-text">	{{issue.title}}<br />
+				 									Volume: {{issue.volume}}<br />
+				 									Issue Number: {{issue.issueNum}}<br />
+				 									Average User Rating: {{issue.rating}}
+
+				 			</h6>
+				 	</div>
+				</div>
 			</div>
-			{{numIssues}}
 			<div class="mx-auto my-5">
 				<a class="btn btn-primary" href="/book/{{book.bookID}}/createIssue" role="button">Add New Issue</a>
 			</div>
