@@ -23,8 +23,7 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 		console.log($scope.books);
 	});	
 	
-	RestApiClientService.get("/query/issue/byBook/2" ).then(function(response){
-
+	RestApiClientService.get("/issue").then(function(response){
 		$scope.issueList = response;
 	});
 }); 
