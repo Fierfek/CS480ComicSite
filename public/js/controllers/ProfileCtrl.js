@@ -1,13 +1,30 @@
 var profile = angular.module('ProfileCtrl', []);
 
-profile.controller('ProfileController', function($scope,$rootScope, RestApiClientService) {
+profile.controller('ProfileController', function($scope,$rootScope, $route, RestApiClientService) {
 	
-	$scope.user = {
-		name: "William Hang",
-		image: "http://via.placeholder.com/300x250"
-	}
+	RestApiClientService.get("/userFavorites/" + $route.current.params.userId).then(function(response){
+		$scope.user=response;
+		console.log(response);
+	});
 	
-	$scope.getImage = function () {
+	$scope.editEnabled = function(){
+		$scope.bio = "Welcome to my profile!";
+		$scope.editModeEnabled = false;
+		
+		$scope.enableEditor = function(){
+			$scope.editModeEnabled = true;
+			$scope.editableBio = $scope.bio;
+		};
+		$scope.disableEditor = function(){
+			$scope.editModeEnabled = false;
+		};
+		$scope.save = function(){
+			$scope.bio = $scope.editableBio;
+			$scope.disableEditor();
+		};
+	}:
+	
+	/*$scope.getImage = function () {
 		
 		console.log($scope);
 		
@@ -21,5 +38,5 @@ profile.controller('ProfileController', function($scope,$rootScope, RestApiClien
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         });
-    };
+    };*/
 });

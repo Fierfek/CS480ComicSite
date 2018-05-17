@@ -25,7 +25,7 @@ var tableName = "User";
 	var params = {
 		TableName: tableName,
 		Key: {
-			"bookID": parseInt(req.params.id)
+			"userID": parseInt(req.params.id)
 		}
 	}
 	
