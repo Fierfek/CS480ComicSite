@@ -10,7 +10,7 @@ router.put('', function(req, res) {
 		Item: {
 			"bookID": req.bookID,
 			"title": req.title,
-			"issuesList": req.issuesList,
+			"issueList": req.issuesList,
 			"publisher": req.publisher,
 			"publishDate": req.publishDate
 		}

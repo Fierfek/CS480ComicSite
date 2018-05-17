@@ -5,10 +5,10 @@
 			<div class="card">
 				<div class="card-header bg-dark text-light font-weight-bold" >New Issues</div>
 			</div>
-			<div class="card" ng repeat= "issue in issues| limitTo:10">
+			<div class="card" ng-repeat= "issue in issueList| limitTo:10">
 				<div class="row">
 					<div class="col-2">
-						<a href='/issue/{{issue.issueID}}'> <img class="card-img-top" src="/resources/Placeholder.png" alt="Issue Image"> </a><!-- add this before issue/...  /book/{{book.bookID}}"-->
+						<a href='/issue/{{issue.issueID}}'> <img style="width:100px; height:85%;" class="card-img-top ml-3 mt-3" src="{{issue.coverImage}}" alt="Issue Image"> </a>
 					</div>
 					<div class="col-4">
 					
@@ -16,23 +16,13 @@
 							<a  href="/issue/{{issue.issueID}}" > <!-- add this before issue/...  /book/{{book.bookID}}"-->
 								<h5 class="card-title">{{issue.title}} </h5>
 							</a>
-							<p class="card-text">Volume #: {{issue.volumeNum}}</p>
+							<p class="card-text">Volume #: {{issue.volume}}</p>
 							<p class="card-text">Issue #: {{issue.issueNum}}</p>
 							<p class="card-text">Year: {{issue.year}}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!--Use for testing purpose
-					<div class="col-4 bg-light">
-						<div class="card-body">
-							<a  href="/issue/{{test.issueID}}" > <h5 class="card-title">{{test.title}} </h5> </a>
-							<p class="card-text">Volume #: {{test.volume}}</p>
-							<p class="card-text">Issue #: {{test.issueNum}}</p>
-							<p class="card-text">Year: {{test.year}}</p>
-						</div>
-					</div>	
-						<!-- erase this part after testing-->
 		</div>
 		<div class="col-sm-5">
 			<div class="card">
@@ -42,9 +32,6 @@
 			<!--row1-->
 			<div class="card" ng-repeat="book in books|limitTo: 10">
 				<div class="row">
-					<div class="col-4">
-						<img class="card-img-top" src="placeholder.png" alt="Series image" href="/book/angularstuffhere">
-					</div>
 					<div class="col-8">
 						<div class="card-body">
 							<h5 class="card-title"><a href="/book/{{book.bookID}}">{{book.title}}</a></h5>

@@ -20,7 +20,7 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
-router.post('/image', function(req, res) {	
+router.post('/image', function(req, res) {
 	generateId("image").then((id) => {
 		loadForm.uploadImage(req, res, id);
 	});
@@ -104,7 +104,7 @@ router.post('/createIssue', function(req, res) {
 					}
 				}
 				
-				for(var j = 0; j < writers.length; j++) {
+				for(var j = 0; j < characters.length; j++) {
 					characterParams.Item.character = characters[j];
 					
 					db.put(characterParams);
