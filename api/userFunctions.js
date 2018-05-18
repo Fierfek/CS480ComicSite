@@ -32,6 +32,46 @@ router.post('/image/:id', function(req, res) {
 	});
 });
 
+router.post('/articleComment', function(req, res) {
+	var commentParams = {
+		TableName: "ArticleComments",
+		Item: {
+			"articleid": req.body.aticleId,
+			"userId": req.body.userId,
+			"timestamp": Date.now(),
+			"comment": req.body.comment
+		}
+	}
+	
+	db.put2(commentParams).then((result) => {
+		var response;
+		response.status = result;		
+		res.send(response);
+	});
+});
+
+router.post('/article', function(req, res) {
+	
+	generateId("article").then((id) => {
+		var articleParams = {
+			TableName: "Article",
+			Item: {
+				"articleid": id,
+				"title": req.body.title,
+				"author": req.body.author,
+				"timestamp": Date.now(),
+				"body": req.body.body
+			}
+		}
+		
+		db.put2(articleParams).then((result) => {
+			var response;
+			response.status = result;		
+			res.send(response);
+		});
+	});
+});
+
 router.post('/createIssue', function(req, res) {
 	generateId("issue").then((issueId) => {
 		generateId("image").then((imageId) => {
@@ -104,7 +144,7 @@ router.post('/createIssue', function(req, res) {
 					}
 				}
 				
-				for(var j = 0; j < writers.length; j++) {
+				for(var j = 0; j < characters.length; j++) {
 					characterParams.Item.character = characters[j];
 					
 					db.put(characterParams);
@@ -162,12 +202,20 @@ router.post('/signIn', function(req, res) {
 	
 	db.query(params).then((data) => {
 		if(data[0]) {
+			console.log(data[0]);
 			response.signedIn = true;	
+			response.userId = data[0].userID
 			//response.cookie  Send cookie
+			
+			generateId("session").then((id) => {
+				response.sessionId = id;
+				res.send(response);
+			});
+			
 		} else {
 			response.signedIn = false;
+			res.send(response);
 		}
-		res.send(response);
 	});
 });
 
@@ -211,7 +259,8 @@ router.post('/signUp', function(req, res) {
 				"illustrators": "nobody",
 				"authors": "nobody",
 				"bio": "Start your bio",
-				"profilePic": "http://via.placeholder.com/300x250"
+				"profilePic": "http://via.placeholder.com/300x250",
+				"username": user.username,
 			}
 		}
 		

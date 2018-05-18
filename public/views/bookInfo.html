@@ -11,16 +11,20 @@
 				<div class="row">
 					<div class="col">
 						<a href="/issue/{{issue.issueID}}">
-							<img style="width:50%; height:75%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
+							<div class="pb-3">
+								<img style="width:55%; height:80%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
+							</div>
 						</a>
 					</div>
 					<div class="col pt-1 my-auto mx-auto">
+						<a href="/issue/{{issue.issueID}}">
 				 			<h6 class="card-text font-weight-bold">	{{issue.title}}</h6>
-				 			<h6 class="card-text">	Volume: {{issue.volume}}<br />
-				 									Issue Number: {{issue.issueNum}}<br />
-				 									Average User Rating: {{issue.rating}}
+				 		</a>
+				 		<h6 class="card-text">	Volume: {{issue.volume}}<br />
+				 								Issue Number: {{issue.issueNum}}<br />
+				 								Average User Rating: {{issue.rating}}
 
-				 			</h6>
+				 		</h6>
 				 	</div>
 				</div>
 			</div>

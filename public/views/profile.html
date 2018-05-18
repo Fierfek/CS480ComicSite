@@ -1,101 +1,51 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<style>
-			* {
-				box-sizing: border-box;
-			}
-
-			.column {
-				float: left;
-				width: 25%;
-				padding: 5px;
-			}
-
-			/* Clearfix (clear floats) */
-			.row::after {
-				content: "";
-				clear: both;
-				display: table;
-			}
-			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
-				margin: 0;
-				padding: 0;
-				border: none;
-				box-shadow: none;
-				text-align: center;
-			}
-			.kv-avatar {
-				display: inline-block;
-			}
-			.kv-avatar .file-input {
-				display: table-cell;
-				width: 213px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="p-3 my-2 bg-light text-dark">
-			<div class="container-fluid col-md-10">
-				<div class="row">
-					<div class="column">
-						<h1>William Hang </h1>
-						<!-- Attemp to display uploaded pic -->
-							<form class="form form-vertical" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
-								<div class="col-sm-4 text-center">
-									<div class="kv-avatar">
-										<div class="file-loading">
-											<input id="avatar-1" name="avatar-1" type="file" required>
-										</div>
-									</div>
-									<div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>
-								</div>
-							</form>
-						<div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
-					</div>
-					<div class="column">
-						<h2>Bio</h2>
-						<textarea class="form-control" id="bioText" rows="8" ng-disabled="!all"> Hello, welcome to my profile page where you will see what comic books I've been reading.</textarea>
-						<div>Edit On: <input type="checkbox" ng-model="all"></div>
-					</div>
+<div class="row mt-3">
+	<div class="col-9 mx-auto bg-light pb-2">
+		<div class="row ml-3">
+			<div class="col-4">
+				<h1>{{user.username}}</h1>
+			</div>
+			<div class="col-8">
+				<div class="w-25 ml-auto pt-2">
+					<button class="btn btn-success h-75" ng-show="!showEdit && !editMode" ng-click="edit()">Edit Profile</button>
 				</div>
-				<div class="row-md-8">
-					<h2> Favorites</h2>
-							<h6>Comic Books:</h6>
-								<textarea class="form-control" id="bioText" rows="2" ng-disabled="!all"> Star Wars Adventures, Infinity Countdown, Maus, and Back to the Future: Tales from the Time Train.</textarea>
-								Edit On: <input type="checkbox" ng-model="all">
-							<h6>Issues:</h6>
-								<textarea class="form-control" id="bioText" rows="2" ng-disabled="!all"> 1, 2, and 3.</textarea>
-								Edit On: <input type="checkbox" ng-model="all">
-							<h6>Writers:</h6>
-								<textarea class="form-control" id="bioText" rows="2" ng-disabled="!all"></textarea>
-								Edit On: <input type="checkbox" ng-model="all">
-							<h6>Illustrators:</h6>
-								<textarea class="form-control" id="bioText" rows="2" ng-disabled="!all"></textarea>
-								Edit On: <input type="checkbox" ng-model="all">
-							<h6>Characters:</h6>
-								<textarea class="form-control" id="bioText" rows="2" ng-disabled="!all"></textarea>
-								Edit On: <input type="checkbox" ng-model="all">
-					<!--I like this. 
-					<img src="http://via.placeholder.com/100x100"/>
-					And this.
-					<img src="http://via.placeholder.com/100x100"/>
-					And also this.
-					<img src="http://via.placeholder.com/100x100"/> -->
-					</p>
-					 <h2>Comments: </h2>
-					 <p>
-						Dan: Your profile is trash like your taste in comics.
-					 </p>
-				</div>
-				<div class="row-md-4">
-					<h2> William's Activities</h2>
-					<p>	William liked this "Comic Title"</p>
-					<p> William added "Title" to his Favorites</p>
-					<p> William followed Brennan</p>
-					<h2> Blah blah blah</h2>
+				<div class="w-50 ml-auto pt-1" ng-show="editMode">
+					<button class="btn btn-danger h-75" ng-click="cancelEdit()">Cancel Changes</button>
+					<button class="btn btn-primary h-75" ng-click="submitEdit()">Submit Changes</button>
 				</div>
 			</div>
 		</div>
-	</body>
-</html>
+		<div class="row ml-5">
+			<div class="col-4 d-inline">
+				<img src="{{user.profilePic}}" style="width:300; height:250;"></img>
+				<input ng-show="editMode" name="avatar-1" type="file">
+				<!--<div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>-->
+			</div>		
+			<div class="col-6 ml-2 d-inline">
+				<P class="h-100" ng-show="!editMode">{{user.bio}}</p>
+				<textarea class="form-control h-100" ng-show="editMode">{{user.bio}}</textarea>
+			</div>
+		</div>
+		<hr class="my-4">
+		<div class="row pl-2">
+			<div class="col-2">
+				<h2>Favorites</h2>
+			</div>
+			<div class="col-9 mr-auto">
+				<div class="row">
+					<h5>Comic Books:</h5>
+					<p class="form-control" ng-show="!editMode"> Star Wars Adventures</p>
+					<textarea class="form-control" ng-show="editMode"> Star Wars Adventures</textarea>
+				</div>
+				<div class="row mt-2">
+					<h5>Issues:</h5>
+					<p class="form-control" ng-show="!editMode">1, 2, and 3</p>
+					<textarea class="form-control" ng-show="editMode"> 1, 2, and 3</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="row pt-5 pl-2">
+			<h2> {{user.username}}'s Activities</h2>
+			<hr class="my-4">
+		</div>
+	</div>
+</div>
