@@ -5,14 +5,14 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
     $scope.signup = {};
  
     $scope.createAccount = function (user) {
-		console.log(user);
         RestApiClientService.post('/functions/signup', {
             user: user
         }).then(function (results) {
             //RestApiClientService.toast(results);
             if (results.status == "success") {
-				$rootScope.loggedIn=true;
-                $location.path('/user/+ user._id');
+				$rootScope.loggedIn = true;
+				PersistanceService.setCookieData(result.userId, result.sessionId);
+                $location.path('/user/' + results.userId);
 			}else {
 				$scope.error='account cannot be created';
 				$rootScope.loggedIn=false;

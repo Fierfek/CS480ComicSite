@@ -11,7 +11,6 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
             user: user
         }).then(function(result) {
 			if (result){
-				console.log(result);
 				PersistanceService.setCookieData(result.userId, result.sessionId);
 				$rootScope.loggedIn = result.signedIn;
 				$location.path("/profile/" + result.userId);

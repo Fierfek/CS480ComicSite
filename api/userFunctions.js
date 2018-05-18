@@ -173,13 +173,13 @@ router.post('/createBook', function(req, res) {
 		}
 		
 		db.put2(bookParams).then((result) => {
-				response.status = result;
-				
-				if(result == "success") {
-					response.id = id;
-				}
-				
-				res.send(response);
+			response.status = result;
+			
+			if(result == "success") {
+				response.id = id;
+			}
+			
+			res.send(response);
 		});
 	});
 });
@@ -202,10 +202,8 @@ router.post('/signIn', function(req, res) {
 	
 	db.query(params).then((data) => {
 		if(data[0]) {
-			console.log(data[0]);
 			response.signedIn = true;	
 			response.userId = data[0].userID
-			//response.cookie  Send cookie
 			
 			generateId("session").then((id) => {
 				response.sessionId = id;
@@ -276,6 +274,15 @@ router.post('/signUp', function(req, res) {
 		}
 		
 		db.put(followsParams);
+		
+		generateId("session").then((sessionId) => {
+			var response = {};
+			response.status = "success";
+			response.userId = id;
+			response.sessionId = sessionId;
+			
+			res.send(response);
+		});
 	});
 });
 
