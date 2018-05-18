@@ -3,7 +3,7 @@ var app= angular.module('appRoutes', ['ngRoute']);
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
 	$routeProvider
-		.when('/profile'/*/:userId'*/, {
+		.when('/profile/:userId', {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
 			title:'Profile'
