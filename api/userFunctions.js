@@ -51,21 +51,24 @@ router.post('/articleComment', function(req, res) {
 });
 
 router.post('/article', function(req, res) {
-	var articleParams = {
-		TableName: "Article",
-		Item: {
-			"articleid": req.body.aticleId,
-			"title": req.body.title,
-			"author": req.body.author,
-			"timestamp": Date.now(),
-			"body": req.body.body
-		}
-	}
 	
-	db.put2(articleParams).then((result) => {
-		var response;
-		response.status = result;		
-		res.send(response);
+	generateId("article").then((id) => {
+		var articleParams = {
+			TableName: "Article",
+			Item: {
+				"articleid": id,
+				"title": req.body.title,
+				"author": req.body.author,
+				"timestamp": Date.now(),
+				"body": req.body.body
+			}
+		}
+		
+		db.put2(articleParams).then((result) => {
+			var response;
+			response.status = result;		
+			res.send(response);
+		});
 	});
 });
 
@@ -199,12 +202,20 @@ router.post('/signIn', function(req, res) {
 	
 	db.query(params).then((data) => {
 		if(data[0]) {
+			console.log(data[0]);
 			response.signedIn = true;	
+			response.userId = data[0].userID
 			//response.cookie  Send cookie
+			
+			generateId("session").then((id) => {
+				response.sessionId = id;
+				res.send(response);
+			});
+			
 		} else {
 			response.signedIn = false;
+			res.send(response);
 		}
-		res.send(response);
 	});
 });
 

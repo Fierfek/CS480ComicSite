@@ -33,13 +33,13 @@ router.get('/:id', function(req, res) {
 router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
-		ProjectionExpression: "bookID, title, issueList"
+		ProjectionExpression: "bookID, title"
 	}
 	
 	db.scan(params, res);
 });
 
-router.post('', function(req, res) {
+/*router.post('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Key: {
@@ -70,6 +70,6 @@ router.delete('/:id', function(req, res) {
 	}
 	
 	db.delete(params);
-});
+});*/
 
 module.exports = router;

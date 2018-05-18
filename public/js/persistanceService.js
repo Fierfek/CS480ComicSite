@@ -1,23 +1,25 @@
-var app=  angular.module('Persistance',[]);
+angular.module('Persistance',['ngCookies'])
 
-app.factory("PersistanceService", ['$cookies',
-	var apiKey = {};
-	
+.factory("PersistanceService", ['$cookies',	
 	function ($cookies) {
 		return {
-			setCookieData: function(userId, key) {
+			setCookieData: function(userId, sessionId) {
+				var apiKey = {};
 				apiKey.user = userId;
-				apiKey.key = key;
+				apiKey.sessionId = sessionId;
 				
-				$cookies.put("apiKey", apiKey);
+				$cookies.put("apiKey", JSON.stringify(apiKey));
 			},
 			
 			getCookieData: function() {
-				apiKey = $cookies.get("apiKey");
+				var json = $cookies.get("apiKey");
+				if(json) {
+					var apiKey = JSON.parse(json.toString());
+					return apiKey;
+				}
 			},
 			
 			clearCookieData: function() {
-				apiKey = {};
 				$cookies.remove("apiKey");
 			}
 		}

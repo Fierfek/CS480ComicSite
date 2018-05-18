@@ -1,5 +1,5 @@
 var comicBash = angular.module('comicBash', ['appRoutes', 'LandingCtrl', 'NavBarCtrl','ProfileCtrl', 'LoginCtrl','SignupCtrl','Service','Directives', 
-'CreateBookCtrl', 'BookInfoCtrl','IssueCtrl','CreateIssueCtrl']);
+'CreateBookCtrl', 'BookInfoCtrl','IssueCtrl','CreateIssueCtrl', 'Persistance']);
 
 comicBash.directive('navbar', function() {
 	return {
