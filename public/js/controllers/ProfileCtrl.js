@@ -2,27 +2,30 @@ var profile = angular.module('ProfileCtrl', []);
 
 profile.controller('ProfileController', function($scope,$rootScope, $route, RestApiClientService) {
 	
+	$scope.showEdit = false;
+	$scope.editMode = false;
+	
 	RestApiClientService.get("/userFavorites/" + $route.current.params.userId).then(function(response){
-		$scope.user=response;
+		$scope.user = response;
 		console.log(response);
 	});
 	
-	$scope.editEnabled = function(){
-		$scope.bio = "Welcome to my profile!";
-		$scope.editModeEnabled = false;
-		
-		$scope.enableEditor = function(){
-			$scope.editModeEnabled = true;
-			$scope.editableBio = $scope.bio;
-		};
-		$scope.disableEditor = function(){
-			$scope.editModeEnabled = false;
-		};
-		$scope.save = function(){
-			$scope.bio = $scope.editableBio;
-			$scope.disableEditor();
-		};
-	}:
+	$scope.edit = function(){	
+		$scope.editMode = true;
+	};
+	
+	$scope.cancelEdit = function() {
+		exitEdit();
+	}
+	
+	$scope.submitEdit = function() {
+		//Submit stuff then exit
+		exitEdit();
+	}
+	
+	var exitEdit = function() {
+		$scope.editMode = false;
+	}
 	
 	/*$scope.getImage = function () {
 		
