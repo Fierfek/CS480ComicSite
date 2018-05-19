@@ -30,6 +30,15 @@ router.get('/:id', function(req, res) {
 	db.get(params, res);
 });
 
+router.get('', function(req, res) {
+	var params = {
+		TableName: tableName,
+		Limit: 10
+	}
+	
+	db.scan(params, res);
+});
+
 /*router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,

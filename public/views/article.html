@@ -2,13 +2,16 @@
 	<div class="col-md-10 mx-auto bg-light">
 		<div class="row my-5">
 			<div class="col-sm-8 mx-auto bg-light">
-				<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">{{article.title}}</h2></div>								
+				<div><h2 class="font-weight-bold mt-5 align-middle text-primary text-center">{{article.title}}</h2></div>								
 					<div class="card md-10 mx-auto bg-light border-0">
 						<div class="row">
 							<div class= "col-md-10 mx-auto my-3">
+								<pre>{{date.toLocaleDateString()}} 	by {{article.author}}</pre>
+							</div>
+							<div class= "col-md-10 mx-auto ">
 								<p>{{article.body}}</p>
 							</div>
-							<div class= "col-md-12 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
+							<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
 								<div class= "border mb-3 p-3 mx-auto" style="height:50%;line-height:2em;overflow:auto">
 									<ul style="list-style:none" ng-repeat="info in comments| limitTo:5">
 										<li>
@@ -23,29 +26,30 @@
 										</li>
 									</ul>
 								</div>
-								<form>
-									<div class="form-group">
-										<textarea class="form-control col-md-11 mx-auto " type="text" placeholder="Your comments" ></textarea>
-									</div>
-									<div class="form-group">
-										<button class="btn btn-default float-right mb-5">Add</button>
-									</div>
-								</form>
 							</div>
 						</div>
 					</div>
-				
+				<div class= "col-md-11 mx-auto">
+					<form>
+						<div class="form-group">
+							<textarea class="form-control col-md-11 mx-auto " type="text" placeholder="Your comments" ></textarea>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-default float-right mb-5">Add</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		
-			<div class= "col-sm-4 bg light ">
+			<div class= "col-sm-4 bg my-5">
 				<div class="card">
-					<div class="card-header text-light font-weight-bold" >New articles</div>
+					<div class="card-header bg-dark text-light font-weight-bold" >New articles</div>
 				</div>
-				<div class="card" ng-repeat= "element in articleList| limitTo:10|orderBy :'-articleId'">
+				<div class="card" ng-repeat= "item in articleList| limitTo:10|orderBy :'-articleId'" ng-if="item.articleId!=article.articleId">
 					<div class="row">
-						<div class="col-2">
-							<a  href="/issue/{{element.articleId}}" > 
-								<h5 class="card-title">{{element.title}} </h5>
+						<div class="col-10 mx-auto pl-2">
+							<a  href="/article/{{item.articleId}}" > 
+								{{item.title}}
 							</a>
 						</div>
 					</div>

@@ -54,12 +54,12 @@
 									</li>
 								</ul>
 							</div>
-							<form>
+							<form ng-submit="formSubmit()">
 								<div class="form-group">
 									<textarea class="form-control col-md-11 mx-auto " type="text" placeholder="Your comments" ></textarea>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-default float-right mb-5">Add</button>
+									<button type= "submit" class="btn btn-default float-right mb-5" ng-click="createComment(article)">Add</button>
 								</div>
 							</form>
 						</div>
