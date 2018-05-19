@@ -9,7 +9,7 @@
 								<pre>{{date.toLocaleDateString()}} 	by {{article.author}}</pre>
 							</div>
 							<div class= "col-md-10 mx-auto ">
-								<p>{{article.body}}</p>
+								<pre style="white-space:pre-wrap;">{{article.body}}</pre>
 							</div>
 							<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
 								<div class= "border mb-3 p-3 mx-auto" style="height:50%;line-height:2em;overflow:auto">
@@ -45,7 +45,7 @@
 				<div class="card bg-dark">
 					<div class="btn-group mx-auto " role="group" aria-label="Basic example">
 						<button type="button" class="btn btn-secondary bg-dark border-0" ng-click="issueOption()">New Issues</button>
-						<button type="button" class="btn btn-secondary bg-dark border-0" ng-click="articleOption()">New Article</button>
+						<button type="button" class="btn btn-secondary bg-dark border-0" ng-click="articleOption()">New Articles</button>
 					</div>
 				</div>
 				<div  class="card" ng-repeat= "item in articleList| limitTo:10|orderBy :'-articleId'" ng-if="item.articleId!=article.articleId" ng-show="articleMode">

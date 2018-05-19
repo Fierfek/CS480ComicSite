@@ -30,13 +30,13 @@
 						</div>
 						<div class= "col-md-10 mx-auto my-3">
 							<h5 class="text-light bg-dark"> Summary</h5>
-							<p>{{issue.summary}}</p>
+							<pre style="white-space:pre-wrap;">{{issue.summary}}</pre>
 						</div>
 						<div class= "col-md-10 mx-auto mb-3">
 							<h5 class="text-light bg-dark"> Synopsis</h5>
 							<button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="collapse" ng-click="isHidden()" data-target="#synopsis">{{label}}</button>
 							<div id="synopsis" class="collapse mt-5">
-								<p>{{issue.synopsis}}</p>
+								<pre style="white-space:pre-wrap;">{{issue.synopsis}}</pre>
 							</div>	
 						</div>
 						<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
