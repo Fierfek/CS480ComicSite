@@ -61,13 +61,16 @@ router.get('/issueCharacters/byIssue/:issueId', function(req, res) {
 	});
 });
 
-router.get('/issueCharacters/byCharacter/:character', function(req, res) {
+router.get('/issueCharacters/byCharacter/:name', function(req, res) {
 	var params = {
 		TableName: "IssueCharacters",
 		IndexName: "by-character",
-		KeyConditionExpression: "character = :character",
+		KeyConditionExpression: "#charname = :name",
 		ExpressionAttributeValues: {
-			":character": req.params.character
+			":name": req.params.name
+		},
+		ExpressionAttributeNames: {
+			"#charname": "character"
 		}
 	};
 	
@@ -121,7 +124,7 @@ router.get('/issueIllustrators/byIssue/:issueId', function(req, res) {
 
 router.get('/issueIllustrators/byIllustrator/:illustrator', function(req, res) {
 	var params = {
-		TableName: "IssueWriters",
+		TableName: "IssueIllustrators",
 		IndexName: "by-illustrator",
 		KeyConditionExpression: "illustrator = :illustrator",
 		ExpressionAttributeValues: {
