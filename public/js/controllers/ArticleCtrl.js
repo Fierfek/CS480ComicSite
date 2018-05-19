@@ -2,6 +2,8 @@ articlePage= angular.module('ArticleCtrl',[]);
 
 articlePage.controller('ArticleController',function($scope,$route, RestApiClientService){
 
+	$scope.articleMode=true;
+	
 	RestApiClientService.get('/article/'+$route.current.params.articleID).then(function(response){
 		$scope.article=response;
 		console.log($scope.article);
@@ -14,11 +16,11 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 	
 	/*RestApiClientService.get('/book/').then(function(response){
 		$scope.books=response;
-	});
+	});*/
 	
 	RestApiClientService.get('/issue/').then(function(response){
-		$scope.issue=response;
-	});*/
+		$scope.issueList=response;
+	});
 	
 	
 	$scope.createComment = function (articleData) {
@@ -34,4 +36,15 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 		});
 	}	
 	
+	RestApiClientService.get('/articleComment/').then(function(response){
+		$scope.articleList=response;
+	});
+	
+	$scope.issueOption = function(){	
+		$scope.articleMode = false;
+	};
+	
+	$scope.articleOption = function(){	
+		$scope.articleMode = true;
+	};
 });
