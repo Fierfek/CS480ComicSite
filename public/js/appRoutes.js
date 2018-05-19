@@ -37,6 +37,16 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             templateUrl: '/views/createIssue.html',
             controller: 'CreateIssueController',
             title:'Create Issue'
+        })		
+		.when('/article/:articleID', { 
+            templateUrl: '/views/article.html',
+            controller: 'ArticleController',
+			title:'Article'
+        })	
+		.when('/article', { 
+            templateUrl: '/views/createArticle.html',
+            controller: 'CreateArticleController',
+			title:'Create Article'
         })
 		.otherwise({
 			redirectTo: '/',
