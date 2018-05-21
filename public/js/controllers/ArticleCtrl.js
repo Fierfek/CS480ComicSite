@@ -9,7 +9,7 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 	
 	$scope.setTime= function(time){
 		$scope.date.setTime(time);
-		return $scope.date.toLocaleString());
+		return $scope.date.toLocaleString();
 	};
 	
 	RestApiClientService.get('/article/'+$route.current.params.articleID).then(function(response){
