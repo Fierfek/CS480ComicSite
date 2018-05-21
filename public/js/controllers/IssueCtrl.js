@@ -6,6 +6,7 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 	$scope.label="more";
 	var user=PersistanceService.getCookieData();
 	var date = new Date();
+	
 		//sort by
 	$scope.sortBy=["oldest-newest","newest-oldest","A-Z","Z-A"];
 	$scope.sortByOption={};

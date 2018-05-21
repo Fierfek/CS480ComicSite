@@ -4,8 +4,8 @@
 		<!--new issues -->
 			<div class="card bg-dark">
 				<div class="btn-group mx-auto" role="group" aria-label="Basic example"><!-- basic example?-->
-					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="issueOption()">Newest Issues</button>
 					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="bookOption()">Newest Books</button>
+					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="issueOption()">Newest Issues</button>
 				</div>
 			</div>
 			<div class="card" ng-repeat= "issue in issueList| limitTo:10|orderBy :'-issueID'" ng-show="issueMode">
@@ -41,11 +41,11 @@
 			<div class="card">
 				<div class="card-header bg-dark text-light font-weight-bold" > Newest Articles</div>
 			</div>
-			<div class="card" ng-repeat="article in articleList|limitTo: 10|orderBy :'-articleID'">
+			<div class="card" ng-repeat="article in articleList|limitTo: 10|orderBy :'-articleId'">
 				<div class="row">
 					<div class="col-8">
 						<div class="card-body">
-							<h5 class="card-title"><a href="/article/{{article.articleID}}">{{article.title}}</a></h5>
+							<h5 class="card-title"><a href="/article/{{article.articleId}}">{{article.title}}</a></h5>
 						</div>
 					</div>
 				</div>
