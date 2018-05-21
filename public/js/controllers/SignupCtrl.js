@@ -8,7 +8,6 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
         RestApiClientService.post('/functions/signup', {
             user: user
         }).then(function (results) {
-            //RestApiClientService.toast(results);
             if (results.status == "success") {
 				$rootScope.loggedIn = true;
 				PersistanceService.setCookieData(result.userId, result.sessionId);
