@@ -17,28 +17,9 @@ navBar.controller('NavBarController', function($scope, $rootScope, $location, Pe
 
 	$scope.startSearch = function() {
 		if($scope.category != "Category") {
-			var call = "";
-			switch($scope.category) {
-				case "Book title": break;
-				case "Writer": call = "/query/issueWriters/byWriter/"; break;
-				case "Illustrator": call = "/query/issueIllustrators/byIllustrator/"; break;
-				case "Character": call = "/query/issueCharacters/byCharacter/"; break;
-				case "Volume": break;
-				case "Issue": break;
-				case "Year": break;
-				case "user": break;
-			}
-			call += $scope.search;
-			
-			$rootScope.results.category = $scope.category;
-			
-			RestApiClientService.get(call).then(function(response) {
-				if(response) {
-					$rootScope.results.data = response;
-					
-					$location.path('/search');
-				}
-			});
+			$location.search('category', $scope.category);
+			$location.search('param', $scope.search);
+			$location.path('/search');
 		}
 	}
 	

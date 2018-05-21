@@ -1,2 +1,17 @@
-<div ng-show="(type == Character) || (type == Illustrator) || (type == Writer) || (type == Character) || (type == Issue)">
+<div class="row w-75 mx-auto bg-light">
+	<div class="col w-100">
+		<h2>{{message}}</h2>
+		<hr class="my-4">
+	</div>
+	<div class="d-inline-flex flex-wrap w-100" ng-show="(category == 'Character') || (category == 'Illustrator') || (category == 'Writer') || (category == 'Issue')">
+		<div ng-repeat="point in data" class=" p-3 col-3 px-1 py-1">
+			<div class="w-100">
+				<img src="{{point.coverImage}}" class="w-100" >
+				<!--<img src="{{point.coverImage}}" style="width:200px; height:200px;">-->
+			</div>
+			<a class="btn btn-success w-100" href="/issue/{{point.issueID}}">
+				{{point.title}}
+			</a>
+		</div>
+	</div>
 </div>
