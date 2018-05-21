@@ -41,7 +41,7 @@ router.post('/articleComment', function(req, res) {
 		Item: {
 			"articleId": parseInt(comment.articleId),
 			"userId": comment.userId,
-			"timestamp": Date.now(),
+			"timestamp": comment.timestamp,
 			"comment": comment.comment
 		}
 	}

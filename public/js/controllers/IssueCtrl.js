@@ -3,9 +3,12 @@ var issuePage = angular.module('IssueCtrl',[]);
 issuePage.controller('IssueController',function($scope,$route, RestApiClientService,PersistanceService){
 		
 	$scope.rate = 5; //delete it.
-	
+	$scope.label="more";
 	var user=PersistanceService.getCookieData();
 	var date = new Date();
+		//sort by
+	$scope.sortBy=["oldest-newest","newest-oldest","A-Z","Z-A"];
+	$scope.sortByOption={};
 	
 	//convert timestamp to data string
 	$scope.setTime= function(time){
@@ -62,16 +65,17 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 		$scope.comments=response;
 		for (var i = 0; i < $scope.comments.length; i++) {
 			RestApiClientService.get("/userFavorites/" + $scope.comments[i].userId).then(function(response){
-				for(var j = 0; j < $scope.comments.length; j++) {
-					$scope.comments[j].username = response.username;
-				}		
+				if(response){
+					for(var j = 0; j < $scope.comments.length; j++) {
+						if($scope.comments[j].userId == response.userID) {
+							$scope.comments[j].username = response.username;
+						}
+					}
+				}
 			});
 		}
 	});
 	
-	//use in the synopsys 
-	var show=false;
-	$scope.label="more";
 	$scope.isHidden = function(){
 		if(show){
 			show=false;
@@ -82,6 +86,25 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 			
 		}
 	};
+	
+	$scope.commentMenu= function(){
+		console.log("comment menu");
+		switch($scope.sortByOption){
+			case "oldest-newest":
+				$scope.comments = $filter('orderBy')(commentsList, "timestamp", false);
+				break;
+			case "newest-oldest":
+				$scope.comments = $filter('orderBy')(commentsList, "timestamp", true);
+				break;		
+			case "A-Z":
+				$scope.comments = $filter('orderBy')(commentsList, "username", false);
+				break;
+			case "Z-A":
+				$scope.comments = $filter('orderBy')(commentsList, "username", true);
+				break;		
+		}
+	};
+	
 });
 
 //star rating
@@ -106,6 +129,8 @@ issuePage.directive('startRating',function(){
 			console.log('issue page');
         }
     }
+	
+	
 });
 
 
