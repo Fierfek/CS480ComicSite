@@ -7,7 +7,7 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/userFavorites/" + $route.current.params.userId).then(function(response){
 		$scope.user = response;
-		console.log(response);
+		console.log('favorite:' + response);
 	});
 	
 	$scope.edit = function(){	

@@ -15,7 +15,6 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
                 $location.path('/user/' + results.userId);
 			}else {
 				$scope.error='account cannot be created';
-				$rootScope.loggedIn=false;
 			}
         });
     };

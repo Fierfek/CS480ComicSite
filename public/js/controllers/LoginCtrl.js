@@ -10,7 +10,7 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
         RestApiClientService.post('/functions/signIn', {
             user: user
         }).then(function(result) {
-			if (result){
+			if (result.signedIn){
 				PersistanceService.setCookieData(result.userId, result.sessionId);
 				$rootScope.loggedIn = result.signedIn;
 				$location.path("/profile/" + result.userId);

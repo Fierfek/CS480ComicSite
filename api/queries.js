@@ -22,10 +22,10 @@ router.get('/article/newest', function(req, res) {
 	var params = {
 		TableName: "Article",
 		IndexName: "byDate",
-		KeyConditionExpression: "articleId = :articleId",
+		/*KeyConditionExpression: "articleId = :articleId",
 		ExpressionAttributeValues: {
-			":bookId": parseInt(req.params.bookId)
-		}
+			":articleId": parseInt(req.params.articledeId)
+		}*/
 	};
 	
 	db.query(params).then((data) => {
@@ -39,6 +39,20 @@ router.get('/articleComments/byArticle/:articleId', function(req, res) {
 		KeyConditionExpression: "articleId = :articleId",
 		ExpressionAttributeValues: {
 			":articleId": parseInt(req.params.articleId)
+		}
+	};
+	
+	db.query(params).then((data) => {
+		res.send(data);
+	});
+});
+
+router.get('/comments/byIssue/:issueId', function(req, res) {
+	var params = {
+		TableName: "Comments",
+		KeyConditionExpression: "issueID = :issueId",
+		ExpressionAttributeValues: {
+			":issueId": parseInt(req.params.issueId)
 		}
 	};
 	

@@ -5,7 +5,7 @@
 			<div class="card">
 				<div class="card-header bg-dark text-light font-weight-bold" >New Issues</div>
 			</div>
-			<div class="card" ng-repeat= "issue in issueList">
+			<div class="card" ng-repeat= "issue in issueList| limitTo:10|orderBy :'-issueID'">
 				<div class="row">
 					<div class="col-2">
 						<a href='/issue/{{issue.issueID}}'> <img style="width:100px; height:85%;" class="card-img-top ml-3 mt-3" src="{{issue.coverImage}}" alt="Issue Image"> </a>
@@ -30,7 +30,7 @@
 			</div>
 			<!--Copy and paste this for every row-->
 			<!--row1-->
-			<div class="card" ng-repeat="book in books|limitTo: 10">
+			<div class="card" ng-repeat="book in books|limitTo: 10|orderBy :'-bookID'">
 				<div class="row">
 					<div class="col-8">
 						<div class="card-body">
@@ -40,11 +40,16 @@
 					</div>
 				</div>
 			</div>
-			<!-- This div is use to create an book. Erase after we can create an issue in a specific book-->
+			<!-- This div is use to create an book. Move this to profile-->
 				<div class="form-group">
-					<a class="btn btn-primary" href="/book" role="button">Add book</a>
+					<a class="btn btn-primary" href="/book" role="button">Add Book</a>
 				</div>
 				<!--end>-->
+			<!-- This div is use to create an article. Move this to profile-
+				<div class="form-group">
+					<a class="btn btn-primary" href="/article" role="button">Add Article</a>
+				</div>
+				end>-->	
 		</div>
 	</div>
 </div>

@@ -33,41 +33,52 @@ router.post('/image/:id', function(req, res) {
 });
 
 router.post('/articleComment', function(req, res) {
+	var comment= req.body.comment;
+	console.log("creating article comment: ");
+	
 	var commentParams = {
 		TableName: "ArticleComments",
 		Item: {
-			"articleid": req.body.aticleId,
-			"userId": req.body.userId,
+			"articleId": parseInt(comment.articleId),
+			"userId": comment.userId,
 			"timestamp": Date.now(),
-			"comment": req.body.comment
+			"comment": comment.comment
 		}
 	}
 	
 	db.put2(commentParams).then((result) => {
 		var response;
-		response.status = result;		
+		response.status = result;
 		res.send(response);
 	});
 });
 
 router.post('/article', function(req, res) {
 	
+	var article = req.body.article;
+	
 	generateId("article").then((id) => {
 		var articleParams = {
 			TableName: "Article",
 			Item: {
-				"articleid": id,
-				"title": req.body.title,
-				"author": req.body.author,
+				"articleId": id,
+				"title": article.title,
+				"author": article.author,
 				"timestamp": Date.now(),
-				"body": req.body.body
+				"body": article.body
 			}
 		}
 		
 		db.put2(articleParams).then((result) => {
-			var response;
-			response.status = result;		
+			var response={};
+			response.status = result;
+			
+			if(result == "success") {
+				response.id = id;
+			}
+				
 			res.send(response);
+			
 		});
 	});
 });
@@ -155,6 +166,28 @@ router.post('/createIssue', function(req, res) {
 	});
 });
 
+//I created this post but I don't know what the attributes are needed
+router.post('/comment', function(req, res) {
+	var comment= req.body.comment;
+	var commentParams = {
+		TableName: "Comments",
+		Item: {
+			"issueID": parseInt(comment.issueId),
+			"userId": comment.userId,
+			"timestamp": Date.now(),
+			"comment": comment.comment,
+			"rating":parseInt(comment.rating)
+		}
+	}
+	
+	db.put2(commentParams).then((result) => {
+		var response;
+		response.status = result;
+		res.send(response);
+	});
+});
+
+
 router.post('/createBook', function(req, res) {	
 	
 	var response = {};
@@ -218,6 +251,7 @@ router.post('/signIn', function(req, res) {
 });
 
 router.post('/signUp', function(req, res) {
+	//need to send a response
 	console.log(req.body.user);
 	
 	var user = req.body.user;

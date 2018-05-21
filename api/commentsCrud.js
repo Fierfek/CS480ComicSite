@@ -8,7 +8,7 @@ router.put('', function(req, res) {
 	var params = {
 		TableName: tableName,
 		Item: {
-			"issueID": req.userID,
+			"issueID": req.issueID,
 			"userId": req.userID,
 			"comment": req.comment,
 			"timestamp": req.timestamp,
@@ -18,6 +18,7 @@ router.put('', function(req, res) {
 	
 	db.put(params, res);
 });
+
 
 /*router.get('/:id', function(req, res) {
 	var params = {

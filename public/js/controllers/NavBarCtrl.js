@@ -5,7 +5,6 @@ navBar.controller('NavBarController', function($scope, $rootScope, $location, Pe
 	$scope.data= ["Book title","Writer","Illustrator","Character","Volume","Issue","Year"];
 	
 	$rootScope.results = {};
-	
 	var key = PersistanceService.getCookieData();
 	
 	$scope.category = "Category";
