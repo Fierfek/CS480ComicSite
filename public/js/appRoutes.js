@@ -57,15 +57,25 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
     $locationProvider.html5Mode(true);
 }]);
 
-//Update title
-/*app.run(['$location', '$rootScope', function($location, $rootScope) {
+
+app.run(['$location', '$rootScope', function($location, $rootScope) {
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
-    {
+    {	
+	
+		if(previous && previous.$$route){
+			console.log('previous: '+ previous.$$route.originalPath);
+			$rootScope.previousPage = previous.$$route.originalPath;
+			console.log('previous page: '+$rootScope.previouPage);
+			
+		}
+		
 		if(current.$$route) {
             // Set current page title
 			$rootScope.title = current.$$route.title;
+			console.log('current: '+current.$$route.originalPath);
+			
 		}
+		
     });
 }]);
-*/
