@@ -2,10 +2,13 @@
 	<div class="row" position="relative" style="margin-top:3%;margin-bottom:3% ">
 		<div class="col-sm-7">
 		<!--new issues -->
-			<div class="card">
-				<div class="card-header bg-dark text-light font-weight-bold" >New Issues</div>
+			<div class="card bg-dark">
+				<div class="btn-group mx-auto" role="group" aria-label="Basic example"><!-- basic example?-->
+					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="issueOption()">Newest Issues</button>
+					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="bookOption()">Newest Books</button>
+				</div>
 			</div>
-			<div class="card" ng-repeat= "issue in issueList| limitTo:10|orderBy :'-issueID'">
+			<div class="card" ng-repeat= "issue in issueList| limitTo:10|orderBy :'-issueID'" ng-show="issueMode">
 				<div class="row">
 					<div class="col-2">
 						<a href='/issue/{{issue.issueID}}'> <img style="width:100px; height:85%;" class="card-img-top ml-3 mt-3" src="{{issue.coverImage}}" alt="Issue Image"> </a>
@@ -23,33 +26,30 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-5">
-			<div class="card">
-				<div class="card-header bg-dark text-light font-weight-bold" > This Season's Series </div>
-			</div>
-			<!--Copy and paste this for every row-->
-			<!--row1-->
-			<div class="card" ng-repeat="book in books|limitTo: 10|orderBy :'-bookID'">
+			<div class="card" ng-repeat="book in books| limitTo:10|orderBy :'-bookID'"ng-show="!issueMode">
 				<div class="row">
-					<div class="col-8">
+					<div class="col-6">
 						<div class="card-body">
-							<h5 class="card-title"><a href="/book/{{book.bookID}}">{{book.title}}</a></h5>
+							<h5 class="card-title"><a href="/book/{{book.bookID}}"> {{book.title}}</a></h5>
 							<p class="card-text">Number of Issues: {{book.numberOfIssues}}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- This div is use to create an book. Move this to profile-->
-				<div class="form-group">
-					<a class="btn btn-primary" href="/book" role="button">Add Book</a>
+		</div>
+		<div class="col-sm-5">
+			<div class="card">
+				<div class="card-header bg-dark text-light font-weight-bold" > Newest Articles</div>
+			</div>
+			<div class="card" ng-repeat="article in articleList|limitTo: 10|orderBy :'-articleID'">
+				<div class="row">
+					<div class="col-8">
+						<div class="card-body">
+							<h5 class="card-title"><a href="/article/{{article.articleID}}">{{article.title}}</a></h5>
+						</div>
+					</div>
 				</div>
-				<!--end>-->
-			<!-- This div is use to create an article. Move this to profile-
-				<div class="form-group">
-					<a class="btn btn-primary" href="/article" role="button">Add Article</a>
-				</div>
-				end>-->	
+			</div>
 		</div>
 	</div>
 </div>
