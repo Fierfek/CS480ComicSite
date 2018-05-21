@@ -25,6 +25,8 @@
 					</div>
 				</div>
 			</form>
-			
+			<div ng-show= "!loggedIn" class= "bg-dark">
+				<h3 ng-show= "!loggedIn" class="text-danger my-3 text-center">{{error}}</h3>
+			</div>	
 		</div>	
 </div>

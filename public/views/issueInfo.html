@@ -9,12 +9,17 @@
 					<div class="row">
 						<div class="mx-auto col-4">
 							<img src="{{issue.coverImage}}" style="width:50%; height:75%;" alt="Issue Image">
-							<div class ="my-3 text-danger"> Rating:
+							<!--div class ="my-3 text-danger"> Rating:
 								<span class="fa fa-star-o ml-2"></span>
 								<span class="fa fa-star-o"></span>
 								<span class="fa fa-star-o"></span>
 								<span class="fa fa-star-o"></span>
 								<span class="fa fa-star-o"></span>
+							</div-->
+							<div class ="my-3 text-danger">
+								<span >{{rating.current}} out of {{rating.max}}
+									<div startRating ratingValue="rating.current" max="rating.max" ></div>
+								</span>
 							</div>
 						</div>
 						
@@ -40,29 +45,35 @@
 							</div>	
 						</div>
 						<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
-							<div class= "border mb-3 p-3 mx-auto" style="height:50%;line-height:2em;overflow:auto">
-								<ul style="list-style:none" ng-repeat="info in comments| limitTo:5">
+							<div class= "border mb-3 p-3 mx-auto" style="height:100%;line-height:2em;overflow:auto">
+								<ul style="list-style:none" ng-repeat="info in comments">
 									<li>
 										<div class = "border border-secondary rounded">
-											<label class="font-weight-bold">username {{info.userID.username}}</label> <!--I do not know if I can do this-->
-											<p class="">Hello this is a test comment.{{info.comment}}</p>			
+											<label class="font-weight-bold">{{info.username}}</label> <!--I do not know if I can do this-->
+											<p class="">{{info.comment}}</p>			
 										</div>
 										<div>
-											<span class="date sub-text">on March 5th, 2014 {{info.timestamp}}</span>
-											<a ng-show="isUser(username)" href="#" class ="float-right">delete</a>
+											<span class="date sub-text">on {{ setTime(info.timestamp)}} </span>
+											<!--a ng-show="isUser(username)" href="#" class ="float-right">delete</a-->
 										</div>
 									</li>
 								</ul>
 							</div>
-							<form ng-submit="formSubmit()">
-								<div class="form-group">
-									<textarea class="form-control col-md-11 mx-auto " type="text" placeholder="Your comments" ></textarea>
-								</div>
-								<div class="form-group">
-									<button type= "submit" class="btn btn-default float-right mb-5" ng-click="createComment(article)">Add</button>
-								</div>
-							</form>
 						</div>
+				</div>
+				<div class= "col-md-11 mx-auto">
+					<form>
+						<div class="form-group">
+							<textarea class="form-control col-md-11 mx-auto mt-3 " type="text" placeholder="Your comments" ng-model="comment.comment" ng-readonly='!loggedIn' ></textarea>
+						</div>
+						<div class="form-group text-primary col-md-11">
+							<a href="/login" style="cursor:pointer">Log in</a>
+							<a> or</a>	
+							<a href="/signup" style="cursor:pointer">sign up </a>
+							<a>to comment</a>
+							<button class="btn btn-default text-primary float-right mb-5" ng-click="createComment(comment)">Add</button>
+						</div>
+					</form>
 				</div>
 			</div>
 				

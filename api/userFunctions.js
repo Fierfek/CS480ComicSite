@@ -34,10 +34,12 @@ router.post('/image/:id', function(req, res) {
 
 router.post('/articleComment', function(req, res) {
 	var comment= req.body.comment;
+	console.log("creating article comment: ");
+	
 	var commentParams = {
 		TableName: "ArticleComments",
 		Item: {
-			"articleId": comment.articleId,
+			"articleId": parseInt(comment.articleId),
 			"userId": comment.userId,
 			"timestamp": Date.now(),
 			"comment": comment.comment
@@ -164,16 +166,17 @@ router.post('/createIssue', function(req, res) {
 	});
 });
 
-//I created this function but I don't know what the attributes are needed
+//I created this post but I don't know what the attributes are needed
 router.post('/comment', function(req, res) {
 	var comment= req.body.comment;
 	var commentParams = {
-		TableName: "comment",
+		TableName: "Comments",
 		Item: {
-			"issueID": comment.issueId,
+			"issueID": parseInt(comment.issueId),
 			"userId": comment.userId,
 			"timestamp": Date.now(),
-			"comment": comment.comment
+			"comment": comment.comment,
+			"rating":parseInt(comment.rating)
 		}
 	}
 	
@@ -250,6 +253,7 @@ router.post('/signIn', function(req, res) {
 });
 
 router.post('/signUp', function(req, res) {
+	//need to send a response
 	console.log(req.body.user);
 	
 	var user = req.body.user;

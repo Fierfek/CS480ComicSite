@@ -49,7 +49,9 @@
 					</div>	
 				</div>
 			</form>
-			<div  ng-show= "error" class="alert alert-danger" role="alert">{{error}}</div>
+			<div ng-show= "!loggedIn" class= "bg-dark">
+				<h3 ng-show= "!loggedIn" class="text-danger my-3 text-center">{{error}}</h3>
+			</div>
 		</div>
 	</div>
 </div>

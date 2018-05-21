@@ -3,7 +3,7 @@ var navBar = angular.module('NavBarCtrl', []);
 navBar.controller('NavBarController', function($scope, $rootScope, PersistanceService) {
 	$scope.searchTest = 'Advanced Search';
 	$scope.data= ["Book tittle","Writer","Illustrator","Character","Volume","Issue","Year"];
-	
+	$rootScope.previousPage={};
 	var key = PersistanceService.getCookieData();
 	
 	if(key) {
