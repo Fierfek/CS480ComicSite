@@ -19,18 +19,26 @@ router.get('/issue/byBook/:bookId', function(req, res) {
 });
 
 router.get('/article/newest', function(req, res) {
-	var params = {
+	/*var params = {
 		TableName: "Article",
 		IndexName: "byDate",
-		/*KeyConditionExpression: "articleId = :articleId",
+		KeyConditionExpression: "articleId = :articleId",
 		ExpressionAttributeValues: {
-			":articleId": parseInt(req.params.articledeId)
-		}*/
+			":articleId": parseInt(req.params.articleId)
+		}
 	};
 	
 	db.query(params).then((data) => {
 		res.send(data);
-	});
+	});*/
+	
+	var params = {
+		TableName: "Article",
+		IndexName: "byDate",
+		Limit: 10
+	}
+	
+	db.scan(params, res);
 });
 
 router.get('/articleComments/byArticle/:articleId', function(req, res) {

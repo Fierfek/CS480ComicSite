@@ -44,16 +44,22 @@
 								<pre style="white-space:pre-wrap;">{{issue.synopsis}}</pre>
 							</div>	
 						</div>
-						<div class= "col-md-10 mx-auto mb-6"><h5 class="text-light bg-dark"> Comments</h5>
+						<div class= "col-md-10 mx-auto mb-6">
+							<nav class="navbar navbar-dark bg-dark">
+								<h5 class="text-light bg-dark"> Comments</h5>
+								<select ng-model="sortByOption" ng-click="commentMenu()"> 
+									<option value= "" selected disabled hidden> Sort By </option>
+									<option value={{item}} ng-repeat="item in sortBy" >{{item}}</option>
+								</select>
+							</nav>
 							<div class= "border mb-3 p-3 mx-auto" style="height:100%;line-height:2em;overflow:auto">
-								<ul style="list-style:none" ng-repeat="info in comments">
+								<ul style="list-style:none" ng-repeat="info in comments|orderBy:''">
 									<li>
-										<div class = "border border-secondary rounded">
-											<label class="font-weight-bold">{{info.username}}</label> <!--I do not know if I can do this-->
-											<p class="">{{info.comment}}</p>			
-										</div>
-										<div>
-											<span class="date sub-text">on {{ setTime(info.timestamp)}} </span>
+										<div class = "border border-secondary rounded mr-4 my-2">
+											<span class="font-weight-bold ml-3 float-left">{{info.username}}</span>
+											<span class="date sub-text float-right mr-4">on {{ setTime(info.timestamp)}}</span>	
+											<br>			
+											<p class="mx-3">{{info.comment}}</p>
 											<!--a ng-show="isUser(username)" href="#" class ="float-right">delete</a-->
 										</div>
 									</li>
@@ -61,17 +67,17 @@
 							</div>
 						</div>
 				</div>
-				<div class= "col-md-11 mx-auto">
+				<div class= "col-md-11 mx-auto my-5">
 					<form>
-						<div class="form-group">
-							<textarea class="form-control col-md-11 mx-auto mt-3 " type="text" placeholder="Your comments" ng-model="comment.comment" ng-readonly='!loggedIn' ></textarea>
+						<div class="form-group" ng-show="loggedIn">
+							<textarea class="form-control col-md-11 mx-auto my-3 " type="text" ng-model="commentBox" ></textarea>
+							<button class="btn btn-default text-primary float-right" ng-click="createComment()">Add</button>
 						</div>
 						<div class="form-group text-primary col-md-11">
 							<a href="/login" style="cursor:pointer">Log in</a>
 							<a> or</a>	
 							<a href="/signup" style="cursor:pointer">sign up </a>
 							<a>to comment</a>
-							<button class="btn btn-default text-primary float-right mb-5" ng-click="createComment(comment)">Add</button>
 						</div>
 					</form>
 				</div>
