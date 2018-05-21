@@ -26,4 +26,16 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 	RestApiClientService.get("/issue").then(function(response){
 		$scope.issueList = response;
 	});
+
+	RestApiClientService.get("/article").then(function(response){
+		$scope.articleList = response;
+	});
+
+	$scope.issueOption = function(){	
+		$scope.issueMode = true;
+	};
+	
+	$scope.bookOption = function(){	
+		$scope.issueMode = false;
+	};
 }); 
