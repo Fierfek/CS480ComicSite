@@ -18,6 +18,20 @@ router.get('/issue/byBook/:bookId', function(req, res) {
 	});
 });
 
+router.get('/issueRating/byIssue/:issueID', function(req, res) {
+	var params = {
+		TableName: "IssueRatings",
+		KeyConditionExpression: "issueID = :bookID",
+		ExpressionAttributeValues: {
+			":issueID": parseInt(req.params.issueID)
+		}
+	};
+	
+	db.query(params).then((data) => {
+		res.send(data);
+	});
+});
+
 router.get('/article/newest', function(req, res) {
 	var params = {
 		TableName: "Article",
