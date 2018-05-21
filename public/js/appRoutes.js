@@ -48,6 +48,11 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'CreateArticleController',
 			title:'Create Article'
         })
+		.when('/search', {
+            templateUrl: '/views/searchResult.html',
+            controller: 'SearchResultController',
+            title:'Search'
+        })
 		.otherwise({
 			redirectTo: '/',
 			templateUrl: '/views/landing.html',

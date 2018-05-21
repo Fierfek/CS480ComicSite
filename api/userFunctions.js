@@ -83,6 +83,38 @@ router.post('/article', function(req, res) {
 	});
 });
 
+router.post('/rateIssue', function(req, res) { 
+	var params = {
+		TableName: "IssueRating",
+		Item: {
+			"issueID": req.body.issueId,
+			"userID": req.body.userId,
+			"rating": req.body.rating
+		}
+	}
+	
+	db.put2(params).then((result) => {
+		response.status = result;		
+		res.send(response);
+	});
+});
+
+router.post('/changeIssueRating', function(req, res) {
+	var params = {
+		TableName: "IssueRatings",
+		Key: {
+			"issueID": req.body.issueID,
+			"userID": req.body.userID
+		},
+		UpdateExpression: "set rating = :r",
+		ExpressionAttributeValues: {
+			":r": req.body.rating,
+		}
+	}
+	
+	db.update(params);
+});
+
 router.post('/createIssue', function(req, res) {
 	generateId("issue").then((issueId) => {
 		generateId("image").then((imageId) => {
@@ -103,7 +135,6 @@ router.post('/createIssue', function(req, res) {
 						"volume": parseInt(issue.volume),
 						"issueNum": parseInt(issue.issueNum),
 						"year": parseInt(issue.year),
-						"rating": parseInt(issue.rating),
 						"bookId": parseInt(issue.bookId)
 					}
 				}
@@ -160,7 +191,6 @@ router.post('/createIssue', function(req, res) {
 					
 					db.put(characterParams);
 				}
-				
 			});
 		});
 	});
@@ -206,13 +236,13 @@ router.post('/createBook', function(req, res) {
 		}
 		
 		db.put2(bookParams).then((result) => {
-				response.status = result;
-				
-				if(result == "success") {
-					response.id = id;
-				}
-				
-				res.send(response);
+			response.status = result;
+			
+			if(result == "success") {
+				response.id = id;
+			}
+			
+			res.send(response);
 		});
 	});
 });
@@ -235,10 +265,8 @@ router.post('/signIn', function(req, res) {
 	
 	db.query(params).then((data) => {
 		if(data[0]) {
-			console.log(data[0]);
 			response.signedIn = true;	
 			response.userId = data[0].userID
-			//response.cookie  Send cookie
 			
 			generateId("session").then((id) => {
 				response.sessionId = id;
@@ -310,6 +338,15 @@ router.post('/signUp', function(req, res) {
 		}
 		
 		db.put(followsParams);
+		
+		generateId("session").then((sessionId) => {
+			var response = {};
+			response.status = "success";
+			response.userId = id;
+			response.sessionId = sessionId;
+			
+			res.send(response);
+		});
 	});
 });
 
