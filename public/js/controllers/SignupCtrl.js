@@ -4,19 +4,30 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
  
     $scope.signup = {};
  
-    $scope.createAccount = function (user) {
-        RestApiClientService.post('/functions/signup', {
-            user: user
-        }).then(function (results) {
-            if (results.status == "success") {
-				$rootScope.loggedIn = true;
-				PersistanceService.setCookieData(result.userId, result.sessionId);
-                $location.path('/user/' + results.userId);
-			}else {
-				$scope.error='account cannot be created';
-			}
-        });
+    $scope.createAccount = function () {
+        if (!$scope.signup.username||!$scope.signup.email||!$scope.signup.Password||!$scope.signup.passwordConfirm||!$scope.signup.question1||
+			!$scope.signup.answer1||!$scope.signup.question2||!$scope.signup.answer2){
+		}else if (!angular.equals($scope.signup.Password,$scope.signup.passwordConfirm))
+			$scope.msg= "password No Match";
+		else{
+
+			RestApiClientService.post('/functions/signup', {
+				user: signup
+			}).then(function (results) {
+				if (results.status == "success") {
+					$rootScope.loggedIn = true;
+					PersistanceService.setCookieData(result.userId, result.sessionId);
+					$location.path('/user/' + results.userId);
+				}else {
+					$scope.error='account cannot be created';
+				}
+			});
+		}
     };
+	
+	$scope.resetMsg=function(){
+		$scope.msg="";
+	}
 });
 
 

@@ -48,7 +48,7 @@ router.post('/articleComment', function(req, res) {
 	
 	db.put2(commentParams).then((result) => {
 		var response;
-		response.status = result;
+		//response.status = result;
 		res.send(response);
 	});
 });
@@ -64,7 +64,7 @@ router.post('/article', function(req, res) {
 				"articleId": id,
 				"title": article.title,
 				"author": article.author,
-				"timestamp": Date.now(),
+				"timestamp": article.timestamp,
 				"body": article.body
 			}
 		}
@@ -196,7 +196,7 @@ router.post('/createIssue', function(req, res) {
 	});
 });
 
-//I created this post but I don't know what the attributes are needed
+
 router.post('/comment', function(req, res) {
 	var comment= req.body.comment;
 	var commentParams = {
@@ -212,7 +212,7 @@ router.post('/comment', function(req, res) {
 	
 	db.put2(commentParams).then((result) => {
 		var response;
-		response.status = result;
+		//response.status = result;
 		res.send(response);
 	});
 });
@@ -305,7 +305,7 @@ router.post('/signUp', function(req, res) {
 				"userID": id,
 				"question1": user.question1,
 				"answer1": user.answer1,
-				"question2": user.answer2,
+				"question2": user.question2,
 				"answer2": user.answer2
 			}
 		}

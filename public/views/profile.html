@@ -5,10 +5,11 @@
 				<h1>{{user.username}}</h1>
 			</div>
 			<div class="col-8">
-				<div class="w-25 ml-auto pt-2">
-					<button class="btn btn-success h-75" ng-show="!showEdit && !editMode" ng-click="edit()">Edit Profile</button>
+				<div class="btn-group w-25 ml-auto pt-2"" role="group" aria-label=""  ng-show="!showEdit && !editMode">
+					<button class="btn btn-success h-75" ng-click="edit()">Edit Profile</button>
+					<a href="/profile/{{userId}}/setting" ><button class="btn btn-success h-100" ng-click="setting()">Advanced Setting</button></a>
 				</div>
-				<div class="w-50 ml-auto pt-1" ng-show="editMode">
+				<div class="w-50 ml-auto pt-1 " ng-show="editMode">
 					<button class="btn btn-danger h-75" ng-click="cancelEdit()">Cancel Changes</button>
 					<button class="btn btn-primary h-75" ng-click="submitEdit()">Submit Changes</button>
 				</div>

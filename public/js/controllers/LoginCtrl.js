@@ -1,6 +1,6 @@
 var loginPage = angular.module('LoginCtrl', []);
 
-loginPage.controller('LoginController', function ($scope, $rootScope, $location, RestApiClientService, PersistanceService) {
+loginPage.controller('LoginController', function ($scope, $rootScope, $location,$window, RestApiClientService, PersistanceService) {
  
     //initially set those objects to null to avoid undefined error
     $scope.login = {};
@@ -13,9 +13,14 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 			if (result.signedIn){
 				PersistanceService.setCookieData(result.userId, result.sessionId);
 				$rootScope.loggedIn = result.signedIn;
-				$location.path("/profile/" + result.userId);
+				console.log("location: "+$rootScope.OldUrl);
+				if($rootScope.OldUrl!=$location.path())
+					$window.location = $rootScope.OldUrl;
+				else
+					$location.path('/profile'+result.userId);
 			}else {
 				$scope.error='user not found';
+				$rootScope.NewUrl=$rootScope.OldUrl;
 			}
 		});     
     };

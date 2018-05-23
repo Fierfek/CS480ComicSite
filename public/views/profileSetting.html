@@ -1,0 +1,37 @@
+<div class="container-fluid" >
+	<div class="row my-5">
+		<div class="col-md-10 mx-auto bg-light">
+			<div class= "col-md-10 mx-auto my-5">
+				<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">Advanced Setting</h2></div>
+				<div><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#username">change username</button></div>
+				<div id="username" class="collapse mt-2">
+					<input type="text" class="form-control" ng-model="user.username" placeholder="New username" required=""/>
+				</div>
+				<div><button type="button" class="btn btn-primary mt-3 " data-toggle="collapse" data-target="#password">change password</button></div>
+				<div id="password" class="collapse mt-2">
+					<input type="text" class="form-control" ng-model="user.current" placeholder="Current Password" required=""/>
+					<div>
+						<input type="password" class="form-control" ng-model="user.password" placeholder="New Password" required=""/>
+					</div>
+					<div>
+						<input type="password" class="form-control" ng-model="user.confirmPass" placeholder="Confirm Password"  password-match="user.password" required=""/>
+					</div>
+				</div>
+				<div><button type="button" class="btn btn-primary mt-3" data-toggle="collapse" data-target="#email">Change Email</button></div>
+				<div id="email" class="collapse mt-2">
+					<input type="email" class="form-control" ng-model="user.email" placeholder="New Email" required focus/>
+				</div>	
+				<div><button type="button" class="btn btn-primary mt-3" data-toggle="collapse" data-target="#question">Change Security Questions</button></div>
+				<div id="question" class="collapse mt-2">
+					<input type="text" class="form-control" ng-model="user.question1" placeholder="Question 1" required=""/>
+					<input type="text" class="form-control" ng-model="user.answer1" placeholder="Answer 1" required=""/>
+					<input type="text" class="form-control" ng-model="user.question2" placeholder="Question 2" required=""/>
+					<input type="text" class="form-control" ng-model="user.answer2"  placeholder="Answer 2" required=""/>
+				</div>
+				<div>
+					<button type="submit" ng-click="updateInfo()" class="btn btn-primary float-right my-5">Save</button>
+				</div>
+			</div>
+		</div>	
+	</div>	
+</div>	
