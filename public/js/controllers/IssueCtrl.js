@@ -1,11 +1,14 @@
 var issuePage = angular.module('IssueCtrl',[]);
 
-issuePage.controller('IssueController',function($scope,$route, RestApiClientService,PersistanceService){
+issuePage.controller('IssueController',function($scope,$route,$filter ,RestApiClientService,PersistanceService){
 		
 	$scope.rate = 5; //delete it.
 	$scope.label="more";
 	var user=PersistanceService.getCookieData();
 	var date = new Date();
+	var comment={};
+	var commentsList = [];
+	var show;
 	
 		//sort by
 	$scope.sortBy=["oldest-newest","newest-oldest","A-Z","Z-A"];
@@ -41,29 +44,35 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 		$scope.illustrators=response;
 	});
 	
-	
-	//create a comment
-	$scope.createComment = function (comment) {
+	var getCommentObject=function(){
 		comment.userId=user.user;
 		comment.issueId=$route.current.params.issueID;
 		comment.rating=0;
+		comment.timestamp=Date.now();
+		comment.comment=$scope.commentBox;
+	}
+	
+	//create a comment
+	$scope.createComment = function () {
+		
+		getCommentObject();
 		console.log(comment);
         RestApiClientService.post('/functions/comment',
 			{
 				comment: comment
 			}
 		).then(function(result) {
-			if(result.status == "success") {
-				console.log("result: "+result)
-				$route.current.reload();
-				
-			}
+			//if(result.status == "success") {
+				addComment();
+				resetComment();
+			//}
 		});
 	}
 	
 	//get list of comments
 	RestApiClientService.get('/query/comments/byIssue/'+$route.current.params.issueID).then(function(response){
 		$scope.comments=response;
+		commentsList = response;
 		for (var i = 0; i < $scope.comments.length; i++) {
 			RestApiClientService.get("/userFavorites/" + $scope.comments[i].userId).then(function(response){
 				if(response){
@@ -89,7 +98,6 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 	};
 	
 	$scope.commentMenu= function(){
-		console.log("comment menu");
 		switch($scope.sortByOption){
 			case "oldest-newest":
 				$scope.comments = $filter('orderBy')(commentsList, "timestamp", false);
@@ -106,10 +114,21 @@ issuePage.controller('IssueController',function($scope,$route, RestApiClientServ
 		}
 	};
 	
+	var addComment=function(){
+		RestApiClientService.get("/userFavorites/" + comment.userId).then(function(response){
+			comment.username = response.username;
+			$scope.comments.push(angular.copy(comment));
+		});
+	}
+	
+	var resetComment=function(){
+		$scope.commentBox="";
+	}
+	
 });
 
 //star rating
-issuePage.directive('startRating',function(){
+/*issuePage.directive('startRating',function(){
 	return {
 		restrict:'A'+
 		 '<li ng-repeat="star in stars" ng-class="star">' +
@@ -132,7 +151,7 @@ issuePage.directive('startRating',function(){
     }
 	
 	
-});
+});*/
 
 
 

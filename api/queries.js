@@ -48,8 +48,7 @@ router.get('/article/newest', function(req, res) {
 	
 	var params = {
 		TableName: "Article",
-		IndexName: "byDate",
-		Limit: 10
+		IndexName: "byDate"
 	}
 	
 	db.scan(params, res);
@@ -172,5 +171,35 @@ router.get('/issueIllustrators/byIllustrator/:illustrator', function(req, res) {
 		res.send(data);
 	});
 });
+
+router.get('/user/:userId', function(req, res) {
+	
+	var params = {
+		TableName: "User",
+		KeyConditionExpression: "userID = :userId",
+		ExpressionAttributeValues: {
+			":userId": parseInt(req.params.userId)
+		}
+	};
+	
+	db.query(params).then((data) => {
+		res.send(data);
+	});
+});
+
+router.get('/user/securityQuestions/:userId', function(req, res) {
+	var params = {
+		TableName: "SecurityQuestions",
+		KeyConditionExpression: "userID = :userId",
+		ExpressionAttributeValues: {
+			":userId": parseInt(req.params.userId)
+		}
+	};
+	
+	db.query(params).then((data) => {
+		res.send(data);
+	});
+});
+
 
 module.exports = router;

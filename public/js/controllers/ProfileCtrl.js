@@ -1,11 +1,13 @@
 var profile = angular.module('ProfileCtrl', []);
 
+	
 profile.controller('ProfileController', function($scope,$rootScope, $route, RestApiClientService) {
 	
+	$scope.userId=$route.current.params.userId;
 	$scope.showEdit = false;
 	$scope.editMode = false;
 	
-	RestApiClientService.get("/userFavorites/" + $route.current.params.userId).then(function(response){
+	RestApiClientService.get("/userFavorites/" +$scope.userId ).then(function(response){
 		$scope.user = response;
 		console.log('favorite:' + response);
 	});

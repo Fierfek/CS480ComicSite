@@ -5,15 +5,15 @@ createBook.controller('CreateBookController', function($scope, $location, RestAp
 	$scope.book = {};
 	
     $scope.createBook = function (bookData) {
-
-        RestApiClientService.post('/functions/createBook',
-			{
+		if ($scope.book.title && $scope.book.publisher && $scope.book.publishDate){
+			
+			RestApiClientService.post('/functions/createBook',{
 				book: bookData
-			}
-		).then(function(result) {
-			if(result.status == "success") {
-				$location.path('/book/' + result.id);
-			}
-		});
+			}).then(function(result) {
+				if(result.status == "success") {
+					$location.path('/book/' + result.id);
+				}
+			});
+		}
 	}	
 });

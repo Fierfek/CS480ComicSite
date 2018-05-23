@@ -6,16 +6,18 @@ articlePage.controller('CreateArticleController', function($scope, $location, Re
 	
     $scope.createArticle = function (articleData) {
 
-        RestApiClientService.post('/functions/article',
-			{
+		if ($scope.article.title && $scope.article.author && $scope.article.body){
+			
+			RestApiClientService.post('/functions/article',{
 				article: articleData
 			}
-		).then(function(result) {
-			if(result.status == "success") {
-				$location.path('/article/' + result.id);
-			}
-		});
-	}	
+			).then(function(result) {
+				if(result.status == "success") {
+					$location.path('/article/' + result.id);
+				}
+			});
+		}
+	}		
 });
 
 

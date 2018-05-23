@@ -7,20 +7,9 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 	$scope.articleMode=true;
 	$scope.sortBy=["oldest-newest","newest-oldest","A-Z","Z-A"];
 	$scope.sortByOption={};
-
-	var initCommentBox="Your comment";
-	
+	var comment={};
 	$scope.comment={};//comment that is made
 	var commentsList = [];
-	
-	//reset the comment box
-	var resetCommentBox=function(){
-		$scope.commentBox = angular.copy(initCommentBox);
-	};
-	
-	resetCommentBox();
-	
-
 	$scope.date = new Date();
 	
 	//Convert the miliseconds to date
@@ -47,34 +36,35 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 		$scope.issueList=response;
 	});
 	
+	//get the comment object
+	var getCommentObject=function(){
+		comment.userId=user.user;
+		comment.articleId=$route.current.params.articleID;
+		comment.comment=angular.copy($scope.commentBox);
+		comment.timestamp=Date.now();
+	}
+	
 	//create comment 
 	$scope.createComment = function () {
-		$scope.comment.userId=user.user;
-		$scope.comment.articleId=$route.current.params.articleID;
-		$scope.comment.comment=angular.copy($scope.commentBox);
-		$scope.comment.timestamp=Date.now();
-		console.log($scope.comment);
+		getCommentObject();
         RestApiClientService.post('/functions/articleComment',
 			{
-				comment: $scope.comment
+				comment: comment
 			}
 		).then(function(result) {
-			if(result.status == "success") {
-				console.log("result: "+result)
-				$scope.comments.push(angular.copy($scope.comment));
-				resetCommentBox();	
-			}
+		//	if(result.status == "success") {
+				addComment();
+				resetComment();	
+			//}
 		});
 	}	
 	
 	//get the list of comment
 	RestApiClientService.get('/query/articleComments/byArticle/'+$route.current.params.articleID).then(function(response){
 		$scope.comments=response;
-		commentsList = response;
-		
+		commentsList = response;	
 		$scope.comments = $filter('orderBy')(commentsList, "timestamp", false);
-		
-		console.log(response);
+	
 		for (var i = 0; i < $scope.comments.length; i++) {
 			RestApiClientService.get("/userFavorites/" + $scope.comments[i].userId).then(function(response){
 				if(response){
@@ -93,14 +83,13 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 		$scope.articleMode = false;
 	};
 	
-	//set artucle mode true when the article list is show in the side menu
+	//set article mode true when the article list is show in the side menu
 	$scope.articleOption = function(){	
 		$scope.articleMode = true;
 	};
 	
 	//comment menu
 	$scope.commentMenu= function(){
-		console.log("comment menu");
 		switch($scope.sortByOption){
 			case "oldest-newest":
 				$scope.comments = $filter('orderBy')(commentsList, "timestamp", false);
@@ -116,4 +105,15 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 				break;		
 		}
 	};
+	
+	var addComment=function(){
+		RestApiClientService.get("/userFavorites/" + comment.userId).then(function(response){
+			comment.username = response.username;
+			$scope.comments.push(angular.copy(comment));
+		});
+	}
+	
+	var resetComment=function(){
+		$scope.commentBox="";
+	}
 });

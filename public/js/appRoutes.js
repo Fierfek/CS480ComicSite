@@ -8,6 +8,11 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             controller: 'ProfileController',
 			title:'Profile'
         })
+		.when('/profile/:userId/setting', {
+            templateUrl: '/views/profileSetting.html',
+            controller: 'ProfileSettingController',
+			title:'Setting'
+        })
 		.when('/login', {
             templateUrl: '/views/login.html',
             controller: 'LoginController',
@@ -65,22 +70,21 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 
 app.run(['$location', '$rootScope', function($location, $rootScope) {
 
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous)
-    {	
+	$rootScope.$on("$locationChangeStart", function (event, newUrl, oldUrl) {
+		$rootScope.Path = $location.path();
+		$rootScope.NewUrl = newUrl;
+		$rootScope.OldUrl = oldUrl;
+	});
 	
-		if(previous && previous.$$route){
-			console.log('previous: '+ previous.$$route.originalPath);
-			$rootScope.previousPage = previous.$$route.originalPath;
-			console.log('previous page: '+$rootScope.previouPage);
-			
-		}
+	$rootScope.$on("$locationChangeSuccess", function (event, newUrl, oldUrl) {
+		$rootScope.Path = $location.path();
+		$rootScope.NewUrl = newUrl;
+		$rootScope.OldUrl = oldUrl;
 		
-		if(current.$$route) {
+		if(newUrl.$$route) {
             // Set current page title
-			$rootScope.title = current.$$route.title;
-			console.log('current: '+current.$$route.originalPath);
-			
+			$rootScope.title = current.$$route.title;	
 		}
-		
-    });
+  });
+	
 }]);
