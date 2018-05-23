@@ -5,6 +5,7 @@
 				<h3 style="text-align: left">{{book.title}}</h3>
 				<h4 style="text-align: left">{{book.publisher}}</h4>
 				<h6 style="text-align: left">{{month}} {{year}}</h6>
+				<button type="button" class="btn btn-primary">Follow</button>
 				<p>{{numOfIssues}} Issues</p>
 			</div>
 			<div class="card my-2" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
