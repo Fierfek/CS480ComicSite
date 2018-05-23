@@ -60,7 +60,9 @@
 								<ul style="list-style:none" ng-repeat="info in comments|orderBy:''">
 									<li>
 										<div class = "border border-secondary rounded mr-4 my-2">
-											<span class="font-weight-bold ml-3 float-left">{{info.username}}</span>
+											<a href="/profile/{{info.userId}}">
+												<span class="font-weight-bold ml-3 float-left">{{info.username}}</span>
+											</a>
 											<span class="date sub-text float-right mr-4">on {{ setTime(info.timestamp)}}</span>	
 											<br>			
 											<p class="mx-3">{{info.comment}}</p>
