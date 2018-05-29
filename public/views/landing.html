@@ -8,12 +8,12 @@
 					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto" ng-click="bookOption()">Newest Books</button>
 				</div>
 			</div>
-			<div class="card" ng-repeat= "issue in issueList| limitTo:10|orderBy :'-issueID'" ng-show="issueMode">
+			<div class="card" ng-repeat= "issue in issueList|limitTo:10:begin|orderBy :'-issueID'" ng-show="issueMode">
 				<div class="row">
 					<div class="col-2">
 						<a href='/issue/{{issue.issueID}}'> <img style="width:100px; height:85%;" class="card-img-top ml-3 mt-3" src="{{issue.coverImage}}" alt="Issue Image"> </a>
 					</div>
-					<div class="col-4">
+					<div class="col-5">
 					
 						<div class="card-body">
 							<a  href="/issue/{{issue.issueID}}" > <!-- add this before issue/...  /book/{{book.bookID}}"-->

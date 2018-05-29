@@ -6,7 +6,7 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 		
 	RestApiClientService.get('/query/user/securityQuestions/'+$route.current.params.userId).then(function(response){
 		$scope.security=response;
-		console.log($scope.security);
+		console.log("response: "+response);
 		getSecurityQuestion();
 	});
 	
@@ -24,5 +24,5 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 		console.log(userInfo);
 	});
 	
-	
+
 });
