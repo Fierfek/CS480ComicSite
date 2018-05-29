@@ -37,7 +37,6 @@ router.get('/:id', function(req, res) {
 router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
-		Limit: 10
 	}
 	
 	db.scan(params, res);

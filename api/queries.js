@@ -172,33 +172,51 @@ router.get('/issueIllustrators/byIllustrator/:illustrator', function(req, res) {
 	});
 });
 
+router.get('/byIssue/:title', function(req, res) {
+	var params = {
+		TableName: "Issue",
+		IndexName: "by-title",
+		Key: {
+			"title": req.params.title
+		}
+	}
+
+	db.get(params, res);
+	
+});
+
+router.get('/byBook/:title', function(req, res) {
+	var params = {
+		TableName: "Book",
+		IndexName: "by-title",
+		Key: {
+			"title": req.params.title
+		}
+	}
+	db.get(params, res);
+	
+});
+
 router.get('/user/:userId', function(req, res) {
 	
 	var params = {
 		TableName: "User",
-		KeyConditionExpression: "userID = :userId",
-		ExpressionAttributeValues: {
-			":userId": parseInt(req.params.userId)
+		Key: {
+			"userID": parseInt(req.params.userId)
 		}
 	};
-	
-	db.query(params).then((data) => {
-		res.send(data);
-	});
+	db.query(params,res);
 });
 
 router.get('/user/securityQuestions/:userId', function(req, res) {
 	var params = {
 		TableName: "SecurityQuestions",
-		KeyConditionExpression: "userID = :userId",
-		ExpressionAttributeValues: {
-			":userId": parseInt(req.params.userId)
+		Key: {
+			"userID": parseInt(req.params.userId)
 		}
 	};
 	
-	db.query(params).then((data) => {
-		res.send(data);
-	});
+	db.get(params,res);
 });
 
 
