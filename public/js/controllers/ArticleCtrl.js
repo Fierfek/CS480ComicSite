@@ -52,10 +52,10 @@ articlePage.controller('ArticleController',function($scope,$route, RestApiClient
 				comment: comment
 			}
 		).then(function(result) {
-		//	if(result.status == "success") {
+			if(result.status == "success") {
 				addComment();
 				resetComment();	
-			//}
+			}
 		});
 	}	
 	

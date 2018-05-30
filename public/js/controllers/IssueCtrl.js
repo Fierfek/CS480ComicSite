@@ -62,10 +62,10 @@ issuePage.controller('IssueController',function($scope,$route,$filter ,RestApiCl
 				comment: comment
 			}
 		).then(function(result) {
-			//if(result.status == "success") {
+			if(result.status == "success") {
 				addComment();
 				resetComment();
-			//}
+			}
 		});
 	}
 	

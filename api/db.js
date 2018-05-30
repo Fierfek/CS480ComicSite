@@ -45,6 +45,18 @@ db.get = function (params, res) {
 	});
 };
 
+db.get2 = function(params) {
+	return new Promise((res, rej) => {		  
+		docClient.get(params, function(err, data) {
+			if (err) {
+				console.error("Unable to get. Error:", JSON.stringify(err, null, 2));
+			} else {
+				res(data);
+			}
+		});
+	})
+};
+
 db.query = function(params) {
 	return new Promise((res, rej) => {		  
 		docClient.query(params, function(err, data) {
