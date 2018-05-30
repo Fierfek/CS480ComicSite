@@ -73,26 +73,44 @@ router.post('/article', function(req, res) {
 
 router.post('/rateIssue', function(req, res) { 
 	var params = {
-		TableName: "IssueRating",
+		TableName: "IssueRatings",
 		Item: {
-			"issueID": req.body.issueId,
-			"userID": req.body.userId,
-			"rating": req.body.rating
+			"issueID": parseInt(req.body.issueID),
+			"userID": parseInt(req.body.userID),
+			"rating": parseInt(req.body.rating)
 		}
 	}
 	
 	db.put2(params).then((result) => {
+		var response = {};
 		response.status = result;		
 		res.send(response);
 	});
+	
+	var eventParams = {
+		TableName: "UserEvents",
+		Item: {
+			"userID": parseInt(req.body.userID),
+			"type": "rate",
+			"data": JSON.stringify(parseInt(req.body.issueID)) + "," + JSON.stringify(req.body.rating),
+			"timestamp": Date.now(),
+		}
+	}	
+	
+	db.put2(eventParams).then((result) => {
+	});
+	
 });
 
 router.post('/changeIssueRating', function(req, res) {
+	
+	console.log(req.body);
+	
 	var params = {
 		TableName: "IssueRatings",
 		Key: {
-			"issueID": req.body.issueID,
-			"userID": req.body.userID
+			"issueID": parseInt(req.body.issueID),
+			"userID": parseInt(req.body.userID)
 		},
 		UpdateExpression: "set rating = :r",
 		ExpressionAttributeValues: {
@@ -100,7 +118,24 @@ router.post('/changeIssueRating', function(req, res) {
 		}
 	}
 	
-	db.update(params);
+	db.update2(params).then((result) => {
+		var response = {};
+		response.status = result;
+		res.send(response);
+	});
+	
+	var eventParams = {
+		TableName: "UserEvents",
+		Item: {
+			"userID": parseInt(req.body.userID),
+			"type": "rate",
+			"data": JSON.stringify(parseInt(req.body.issueID)) + "," + JSON.stringify(req.body.rating),
+			"timestamp": Date.now(),
+		}
+	}	
+	
+	db.put2(eventParams).then((result) => {
+	});
 });
 
 router.post('/followBook', function(req, res) {

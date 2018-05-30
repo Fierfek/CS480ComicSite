@@ -5,7 +5,7 @@
 				<h3 style="text-align: left">{{book.title}}</h3>
 				<h4 style="text-align: left">{{book.publisher}}</h4>
 				<h6 style="text-align: left">{{month}} {{year}}</h6>
-				<button type="button" class="btn btn-primary" ng-click="follow()">Follow</button>
+				<button type="button" class="btn btn-primary" ng-click="follow()" ng-show="loggedIn">Follow</button>
 				<p>{{numOfIssues}} Issues</p>
 			</div>
 			<div class="card my-2" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
@@ -24,7 +24,6 @@
 				 		<h6 class="card-text">	Volume: {{issue.volume}}<br />
 				 								Issue Number: {{issue.issueNum}}<br />
 				 								Average User Rating: {{issue.rating}}
-
 				 		</h6>
 				 	</div>
 				</div>

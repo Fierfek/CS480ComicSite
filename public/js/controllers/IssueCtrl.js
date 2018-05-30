@@ -1,14 +1,16 @@
 var issuePage = angular.module('IssueCtrl',[]);
 
-issuePage.controller('IssueController',function($scope,$route,$filter ,RestApiClientService,PersistanceService){
+issuePage.controller('IssueController',function($scope, $rootScope, $route,$filter ,RestApiClientService,PersistanceService){
 		
-	$scope.rate = 5; //delete it.
 	$scope.label="more";
 	var user=PersistanceService.getCookieData();
 	var date = new Date();
 	var comment={};
 	var commentsList = [];
 	var show;
+	
+	$scope.rating = 0;
+	var rated = false;
 	
 		//sort by
 	$scope.sortBy=["oldest-newest","newest-oldest","A-Z","Z-A"];
@@ -20,13 +22,16 @@ issuePage.controller('IssueController',function($scope,$route,$filter ,RestApiCl
 		return date.toLocaleString();
 	};
 	
+	if($rootScope.loggedIn) {
+		RestApiClientService.get('/ratings/' + $route.current.params.issueID + '/' + PersistanceService.getCookieData().user).then(function(response) {
+			$scope.rating = response.rating;
+			rated = true;
+		});
+	}
+	
 	//get the issue information
 	RestApiClientService.get('/issue/'+$route.current.params.issueID).then(function(response){
-		$scope.issue=response;
-		$scope.rating={current:3, max:5};
-		$scope.getSelectedRating= function (rating){
-			console.log(rating);
-		}
+		$scope.issue = response;
 	});
 	
 	//get the writers
@@ -125,33 +130,30 @@ issuePage.controller('IssueController',function($scope,$route,$filter ,RestApiCl
 		$scope.commentBox="";
 	}
 	
+	$scope.rate = function(rating) {
+		if(!rated) {
+			RestApiClientService.post('/functions/rateIssue',{
+				issueID: $route.current.params.issueID,
+				userID: PersistanceService.getCookieData().user,
+				rating: rating
+			}
+			).then(function(result) {
+				if(result.status == "success") {
+					
+				}
+			});
+		} else {
+			console.log(rating);
+			RestApiClientService.post('/functions/changeIssueRating',{
+				issueID: $route.current.params.issueID,
+				userID: PersistanceService.getCookieData().user,
+				rating: rating,
+			}
+			).then(function(result) {
+				if(result.status == "success") {
+				}
+			});
+		}
+	}
+	
 });
-
-//star rating
-/*issuePage.directive('startRating',function(){
-	return {
-		restrict:'A'+
-		 '<li ng-repeat="star in stars" ng-class="star">' +
-            '\u2605' +
-            '</li>' +
-            '</ul>',
-        scope: {
-            ratingValue: '=',
-            max: '='
-        },
-        link: function (scope, elem, attrs) {
-            scope.stars = [];
-            for (var i = 0; i < scope.max; i++) {
-                scope.stars.push({
-                    filled: i < scope.ratingValue
-                });
-            }
-			console.log('issue page');
-        }
-    }
-	
-	
-});*/
-
-
-

@@ -35,7 +35,7 @@ router.get('/events/byuser/:userId', function(req, res) {
 router.get('/issueRating/byIssue/:issueID', function(req, res) {
 	var params = {
 		TableName: "IssueRatings",
-		KeyConditionExpression: "issueID = :bookID",
+		KeyConditionExpression: "issueID = :issueID",
 		ExpressionAttributeValues: {
 			":issueID": parseInt(req.params.issueID)
 		}

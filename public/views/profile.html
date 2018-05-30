@@ -66,6 +66,11 @@
 					<h5><a href="/book/{{event.data}}">{{event.type}}</a></h5>
 				</div>
 			</div>
+			<div class="card bg-dark text-white" ng-show="event.type=='rate'">
+				<div class="card-header row">
+					<h5><div class="">{{event.timestamp}}:</div></h5>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
