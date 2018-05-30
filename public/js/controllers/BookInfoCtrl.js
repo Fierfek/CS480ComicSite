@@ -35,9 +35,11 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 								$scope.issueList[j].rating += response[k].rating;
 							}
 							$scope.issueList[j].rating /= response.length;
+							$scope.issueList[j].rating = Math.round($scope.issueList[j].rating * 10) / 10;
 						}
 					}
 				}
+
 			});
 		}
 	});
