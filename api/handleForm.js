@@ -154,7 +154,7 @@ uploader.createIssue = function(req, imageId) {
 							console.log("Upload Success", data.Location);
 						}
 						
-						fs.unlink(__dirname + "/uploads/" + id + ".jpg", function(error) {
+						fs.unlink(__dirname + "/uploads/" + imageId + ".jpg", function(error) {
 							if (error) {
 								console.log('unable to delete image');
 							}
