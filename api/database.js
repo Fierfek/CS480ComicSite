@@ -14,6 +14,7 @@ router.use('/article', require(__dirname + '/articleCrud.js'));
 router.use('/comment', require(__dirname + '/commentsCrud.js'));
 router.use('/functions', require(__dirname + '/userFunctions.js'));
 router.use('/query', require(__dirname + '/queries.js'));
+router.use('/ratings', require(__dirname + '/ratingCrud.js'));
 
 router.get('/', function(req, res) {
 	console.log("get anything");

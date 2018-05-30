@@ -22,7 +22,24 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 
 		$scope.issueList = response;
 		$scope.numOfIssues = response.length;
-		console.log(response);
+		
+		for(var i = 0; i < response.length; i++) {
+			response[i].rating = 0;
+			RestApiClientService.get('/query/issueRating/byIssue/' + $scope.issueList[i].issueID).then(function(response) {
+				
+				if(response[0]) {
+					console.log("ratings: " + response[0].rating);
+					for(var j = 0; j < $scope.issueList.length; j++) {
+						if($scope.issueList[j].issueID == response[0].issueID) {
+							for(var k = 0; k < response.length; k++) {
+								$scope.issueList[j].rating += response[k].rating;
+							}
+							$scope.issueList[j].rating /= response.length;
+						}
+					}
+				}
+			});
+		}
 	});
 	
 	$scope.follow = function() {
