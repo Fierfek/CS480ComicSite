@@ -10,7 +10,7 @@ var port = process.env.PORT || 8080;
 
 //Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extend:true}));
+//app.use(bodyParser.urlencoded({extend:true}));
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 //app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
