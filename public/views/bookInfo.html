@@ -8,24 +8,21 @@
 				<button type="button" class="btn btn-primary" ng-click="follow()" ng-show="loggedIn">Follow</button>
 				<p>{{numOfIssues}} Issues</p>
 			</div>
-			<div class="card my-2" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
-				<div class="row">
-					<div class="col">
-						<a href="/issue/{{issue.issueID}}">
-							<div class="pb-3">
-								<img style="width:55%; height:80%;" class="card-img-top mt-3 ml-3" src="{{issue.coverImage}}" alt="Card image">
-							</div>
+		</div>
+		<div class="ml-5">
+			<div class="d-inline-flex flex-wrap w-140">
+				<div class="card p-3 col-3 px-1 py-1" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
+					<a href="/issue/{{issue.issueID}}" class="w-100 pt-1">
+						<img style="width:100%; height:90%;" class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
+					</a>
+					<div class="card-body">
+						<a class="w-100" href="/issue/{{issue.issueID}}">
+							<p style= "white-space:normal">{{issue.title}}</p>
 						</a>
+						<p style= "white-space:normal">Volume: {{issue.volume}}</p>
+						<p style= "white-space:normal">Issue Number: {{issue.issueNum}}</p>
+						<p style= "white-space:normal">Average User Rating: {{issue.rating}}</p>
 					</div>
-					<div class="col pt-1 my-auto mx-auto">
-						<a href="/issue/{{issue.issueID}}">
-				 			<h6 class="card-text font-weight-bold">	{{issue.title}}</h6>
-				 		</a>
-				 		<h6 class="card-text">	Volume: {{issue.volume}}<br />
-				 								Issue Number: {{issue.issueNum}}<br />
-				 								Average User Rating: {{issue.rating}}
-				 		</h6>
-				 	</div>
 				</div>
 			</div>
 		</div>
