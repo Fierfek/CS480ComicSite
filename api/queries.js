@@ -241,7 +241,8 @@ router.get('/byUserName/:username', function(req, res) {
 		KeyConditionExpression: "username = :username",
 		ExpressionAttributeValues: {
 			":username": req.params.username
-		}
+		},
+		ProjectionExpression:"username,userID"
 	};
 	
 	db.query(params).then((data) => {

@@ -75,7 +75,7 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 			break;
 			case "User":
 				for (var i = 0; i < response.length; i++) {
-					RestApiClientService.get("/query/user/" + response[i].userID).then(function(res){
+					RestApiClientService.get("/userFavorites/" + response[i].userID).then(function(res){
 						$scope.data.push(res);
 					});
 				}

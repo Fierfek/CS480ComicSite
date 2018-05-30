@@ -11,6 +11,7 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/userFavorites/" + $scope.userId ).then(function(response) {
 		$scope.user = response;
+		console.log(response);
 	});
 	
 	RestApiClientService.get("/userFollows/" + $scope.userId ).then(function(response) {
