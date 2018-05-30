@@ -5,9 +5,9 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
     $scope.signup = {};
  
     $scope.createAccount = function () {
-        if (!$scope.signup.username||!$scope.signup.email||!$scope.signup.Password||!$scope.signup.passwordConfirm||!$scope.signup.question1||
+        if (!$scope.signup.username||!$scope.signup.email||!$scope.signup.password||!$scope.signup.passwordConfirm||!$scope.signup.question1||
 			!$scope.signup.answer1||!$scope.signup.question2||!$scope.signup.answer2){
-		}else if (!angular.equals($scope.signup.Password,$scope.signup.passwordConfirm))
+		}else if (!angular.equals($scope.signup.password,$scope.signup.passwordConfirm))
 			$scope.msg= "password No Match";
 		else{
 

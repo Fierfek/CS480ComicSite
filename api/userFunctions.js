@@ -20,18 +20,6 @@ router.post('/signedIn', function(req, res) {
 	res.send(signedIn);
 });
 
-router.post('/image', function(req, res) {
-	generateId("image").then((id) => {
-		loadForm.uploadImage(req, res, id);
-	});
-});
-
-router.post('/image/:id', function(req, res) {
-	generateId("image").then((id) => {
-		loadForm.uploadImage(req, res, id);
-	});
-});
-
 router.post('/articleComment', function(req, res) {
 	var comment= req.body.comment;
 	console.log("creating article comment: ");
@@ -47,8 +35,8 @@ router.post('/articleComment', function(req, res) {
 	}
 	
 	db.put2(commentParams).then((result) => {
-		var response;
-		//response.status = result;
+		var response = {};
+		response.status = result;
 		res.send(response);
 	});
 });
@@ -115,13 +103,134 @@ router.post('/changeIssueRating', function(req, res) {
 	db.update(params);
 });
 
+router.post('/followBook', function(req, res) {
+	
+	var params = {
+		TableName: "UserFollows",
+		Key: {
+			"userID": parseInt(req.body.userId)
+		}
+	}
+	
+	db.get2(params).then((result) => {
+		
+		var bookList = result.Item.books;
+		bookList += "," + req.body.followBook;
+		
+		var followParams = {
+			TableName: "UserFollows",
+			Key: {
+				"userID": parseInt(req.body.userId)
+			},
+			UpdateExpression: "set books = :book",
+			ExpressionAttributeValues: {
+				":book": bookList,
+			}
+		}
+		
+		db.update(followParams);
+		
+		var eventParams = {
+			TableName: "UserEvents",
+			Item: {
+				"userID": parseInt(req.body.userId),
+				"type": "followBook",
+				"data": parseInt(req.body.followBook),
+				"timestamp": Date.now(),
+			}
+		}	
+		
+		db.put2(eventParams).then((result) => {
+			var response = {};
+			response.status = result;
+			res.send(response)
+		});
+	});
+});
+
+router.post('/followUser', function(req, res) {
+	
+	var params = {
+		TableName: "UserFollows",
+		Key: {
+			"userID": parseInt(req.body.userId)
+		}
+	}
+	
+	db.get2(params).then((result) => {
+		
+		var userList = result.Item.users;
+		userList += "," + req.body.followUser;
+		
+		var followParams = {
+			TableName: "UserFollows",
+			Key: {
+				"userID": parseInt(req.body.userId)
+			},
+			UpdateExpression: "set #list = :user",
+			ExpressionAttributeValues: {
+				":user": userList,
+			},
+			ExpressionAttributeNames: {
+				"#list": "users"
+			}
+		}
+		
+		db.update(followParams);
+		
+		var eventParams = {
+			TableName: "UserEvents",
+			Item: {
+				"userID": parseInt(req.body.userId),
+				"type": "followUser",
+				"data": parseInt(req.body.followUser),
+				"timestamp": Date.now(),
+			}
+		}	
+		
+		db.put2(eventParams).then((result) => {
+			var response = {};
+			response.status = result;
+			res.send(response)
+		});
+	});
+});
+
+router.post('/updateProfile/:userId', function(req, res) {
+	generateId("image").then((imageId) => {
+		loadForm.parseProfile(req, imageId).then((profileUpdates) => {
+			var response = {};
+			
+			updates = JSON.parse(profileUpdates);
+			
+			var params = {
+				TableName: "UserFavorites",
+				Key: {
+					"userID": parseInt(req.params.userId)
+				},
+				UpdateExpression: "set profilePic = :profilePic, bio = :bio",
+				ExpressionAttributeValues: {
+					":profilePic": "https://s3-us-west-2.amazonaws.com/comicbashimages/" + imageId + ".jpg",
+					":bio": updates.bio,
+				}
+			}
+			
+			db.update2(params).then((result) => {
+				response.status = result;
+				response.pic = "https://s3-us-west-2.amazonaws.com/comicbashimages/" + imageId + ".jpg";
+				response.bio = updates.bio;
+				res.send(response);
+			});
+		});
+	});
+});
+
 router.post('/createIssue', function(req, res) {
 	generateId("issue").then((issueId) => {
 		generateId("image").then((imageId) => {
 			loadForm.createIssue(req, imageId).then((issueString) => {
 				
 				var response = {};
-				console.log("issue: " + issueString);
 				
 				var issue = JSON.parse(issueString);
 				var issueParams = {
@@ -211,8 +320,8 @@ router.post('/comment', function(req, res) {
 	}
 	
 	db.put2(commentParams).then((result) => {
-		var response;
-		//response.status = result;
+		var response = {};
+		response.status = result;
 		res.send(response);
 	});
 });
@@ -281,7 +390,6 @@ router.post('/signIn', function(req, res) {
 });
 
 router.post('/signUp', function(req, res) {
-	//need to send a response
 	console.log(req.body.user);
 	
 	var user = req.body.user;
@@ -349,8 +457,6 @@ router.post('/signUp', function(req, res) {
 		});
 	});
 });
-
-
 
 var generateId = function(type) {
 	

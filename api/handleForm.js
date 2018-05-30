@@ -3,7 +3,6 @@ var fs = require('fs');
 var path = require('path');
 var aws = require('aws-sdk');
 var db = require('./db.js');
-var sharp = require('sharp');
 
 // Set the region 
 aws.config.update({
@@ -20,6 +19,66 @@ var s3bucketName = "comicbashimages"
 
 var uploader = {};
 
+uploader.parseProfile = function(req, imageId) {
+	
+	var profile = {};
+	
+	return new Promise((res, rej) => {
+		var updates = {};
+		
+		var form = new formidable.IncomingForm();
+
+		form.parse(req);
+		
+		form.on('fileBegin', function(name, file) {
+			file.path = __dirname + '/uploads/' + file.name;
+		});
+		
+		form.on('field', function(name, value) {
+			
+			console.log('found: ' + name);
+			
+			switch(name) {
+				case "name": profile.name = value; break;
+				case "bio": profile.bio = value; break;
+			}
+		});		
+		
+		form.on('file', function(name, file) {
+			fs.rename(file.path, __dirname + "/uploads/" + imageId + ".jpg", function(err) {
+				if ( err ) {
+					console.log('ERROR: ' + err);
+				} else {
+					var fileStream = fs.createReadStream(__dirname + "/uploads/" + imageId + ".jpg");
+					
+					var uploadParams = {
+						Bucket: s3bucketName,
+						Key: path.basename(imageId + ".jpg"),
+						Body: fileStream,
+						ACL: 'public-read'
+					};
+					
+					s3.upload (uploadParams, function (err, data) {
+						if (err) {
+							console.log("Error", err);
+						} if (data) {
+							console.log("Upload Success", data.Location);
+						}
+						
+						fs.unlink(__dirname + "/uploads/" + imageId + ".jpg", function(error) {
+							if (error) {
+								console.log('unable to delete image');
+							}
+						});
+						
+						res(JSON.stringify(profile));
+					});	
+				}
+			});
+		});
+	});
+}
+
 uploader.createIssue = function(req, imageId) {
 	return new Promise((res, rej) => {
 		var issue = {};
@@ -28,7 +87,7 @@ uploader.createIssue = function(req, imageId) {
 
 		form.parse(req);
 		
-		form.on('fileBegin', function (name, file){
+		form.on('fileBegin', function(name, file) {
 			file.path = __dirname + '/uploads/' + file.name;
 		});
 		
@@ -74,79 +133,62 @@ uploader.createIssue = function(req, imageId) {
 		form.on('file', function (name, file){
 			console.log('Uploaded ' + file.name);
 			
-			var fileStream = fs.createReadStream(file.path);
 			
-			sharp(file.path)
-			//.resize(225, 250);
-			.toFile(__dirname + "/uploads/" + imageId + ".jpg")
-			.then(function() {
-				
-				var fileStream2 = fs.createReadStream(__dirname + "/uploads/" + imageId + ".jpg");
-				
-				var uploadParams = {
-					Bucket: s3bucketName,
-					Key: path.basename(imageId + ".jpg"),
-					Body: fileStream2,
-					ACL: 'public-read'
-				};
-				
-				s3.upload (uploadParams, function (err, data) {
-					if (err) {
-						console.log("Error", err);
-					} if (data) {
-						console.log("Upload Success", data.Location);
-					}
-					res(JSON.stringify(issue));
-				});
-			});		
+			fs.rename(file.path, __dirname + "/uploads/" + imageId + ".jpg", function(err) {
+				if ( err ) {
+					console.log('ERROR: ' + err);
+				} else {
+					var fileStream = fs.createReadStream(__dirname + "/uploads/" + imageId + ".jpg");
+					
+					var uploadParams = {
+						Bucket: s3bucketName,
+						Key: path.basename(imageId + ".jpg"),
+						Body: fileStream,
+						ACL: 'public-read'
+					};
+					
+					s3.upload (uploadParams, function (err, data) {
+						if (err) {
+							console.log("Error", err);
+						} if (data) {
+							console.log("Upload Success", data.Location);
+						}
+						
+						fs.unlink(__dirname + "/uploads/" + id + ".jpg", function(error) {
+							if (error) {
+								console.log('unable to delete image');
+							}
+						});
+						
+						res(JSON.stringify(issue));
+					});	
+				}
+			});
 		});
 	})
 }
 
-uploader.uploadImage = function(req, res, id){
+var generateId = function(type) {
 	
-	var form = new formidable.IncomingForm();
-
-    form.parse(req);
-
-    form.on('fileBegin', function (name, file){
-		file.path = __dirname + '/uploads/' + file.name;
-	});
+	var params = {
+		TableName: "UID",
+		Key:{
+			"type": type,
+		},
+		UpdateExpression: "set id = id + :incr",
+		ExpressionAttributeValues:{
+			":incr": 1
+		},
+		ReturnValues:"UPDATED_NEW"
+	};
 	
-	form.on('field', function(name, value) {
-		console.log(name + ": " + value);
-	});
-
-	form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name);
-		
-		var fileStream = fs.createReadStream(file.path);
-		
-		
-		sharp(file.path)
-		//.resize(300, 250)
-		.toFile(__dirname + "/uploads/" + id + ".jpg")
-		.then(function() {
-			console.log("resized");
-			
-			var fileStream2 = fs.createReadStream(__dirname + "/uploads/" + id + ".jpg");
-			
-			var uploadParams = {
-				Bucket: s3bucketName,
-				Key: path.basename(id + ".jpg"),
-				Body: fileStream2,
-				ACL: 'public-read'
-			};
-			
-			s3.upload (uploadParams, function (err, data) {
-				if (err) {
-					console.log("Error", err);
-				} if (data) {
-					console.log("Upload Success", data.Location);
-				}
-			});
-		});		
-    });
-}
+	return new Promise((res, rej) => {		  
+		db.update2(params).then(data => {
+			res(parseInt(data.Attributes.id));
+		}).catch(err => {
+			rej(err);
+		})
+	})
+};
 
 module.exports = uploader;
