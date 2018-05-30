@@ -18,12 +18,12 @@
 						<div class="dropdown-menu">
 							<a ng-repeat="item in data" ng-click="setCategory(item)" class="dropdown-item" name={{item}} style="cursor:pointer">{{item}}</a>
 							<div role="separator" class="dropdown-divider"></div>
-							<a class="dropdown-item" ng-click= "setCategory('User')";>User</a>
+							<a class="dropdown-item" ng-click= "setCategory('User')" style="cursor:pointer">User</a>
 							<!-- <div role="separator" class="dropdown-divider"></div>
 							<a class="dropdown-item">Advanced Search</a> -->
 						</div>
 					</div>
-					<input ng-model="search" class="form-control" type="text" placeholder="Search" aria-label="seach input with segmented dropdown button" >
+					<input ng-readonly="!searchCategory" ng-model="search" class="form-control" type="text" placeholder="Search" aria-label="seach input with segmented dropdown button" >
 					<button ng-click="startSearch()" class="btn btn-outline-secondary input-group-append text-white" type="submit">Search
 						<i class="fa fa-search ml-2 mt-1"></i>
 					</button>

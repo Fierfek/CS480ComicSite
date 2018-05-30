@@ -12,9 +12,9 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 		case "Illustrator": call = "/query/issueIllustrators/byIllustrator/"; break;
 		case "Character": call = "/query/issueCharacters/byCharacter/"; break;
 		case "Issue Title": call= "/query/byIssue/"; break;
-		case "Book by Year": break;
-		case "Issue by Year": break;
-		case "user": break;
+		//case "Book by Year": break;
+		//case "Issue by Year": call="/query/issue/byYear/"; break;
+		case "User": call= "/query/byUserName/";break;
 	}
 	call += search.param;
 	console.log("call: " + call);
@@ -22,11 +22,14 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 		$scope.data = [];
 		console.log("response: " + response);
 		switch(search.category) {
-			case "Book Title": break;
-				RestApiClientService.get("/book/" + response[i].bookID).then(function(res){
-					$scope.data.push(res);
-				})
+			case "Book Title": 
+				for (var i = 0; i < response.length; i++) {
+					RestApiClientService.get("/book/" + response[i].bookID).then(function(res){
+						$scope.data.push(res);
+					})
+				}
 				$scope.message = "Found " + response.length + " book with the title: " + search.param;
+				break;
 			case "Writer":
 				for (var i = 0; i < response.length; i++) {
 					RestApiClientService.get("/issue/" + response[i].issueID).then(function(res){
@@ -61,9 +64,24 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 				}
 				$scope.message = "Found " + response.length + " issues with the title: " + search.param;
 				break;
-			case "Book by Year": break;
-			case "Issue by Year": break;
-			case "user": break;
+		//	case "Book by Year": break;
+			case "Issue by Year":
+				/*for (var i = 0; i < response.length; i++) {
+					RestApiClientService.get("/issue/" + response[i].issueID).then(function(res){
+						$scope.data.push(res);
+					});
+				}
+				$scope.message = "Found " + response.length + " issues in: " + search.param;*/
+			break;
+			case "User":
+				for (var i = 0; i < response.length; i++) {
+					RestApiClientService.get("/query/user/" + response[i].userID).then(function(res){
+						$scope.data.push(res);
+					});
+				}
+				$scope.message = "Found " + response.length + " user(s): " + search.param;
+			break;
 		}
+
 	});
 });	

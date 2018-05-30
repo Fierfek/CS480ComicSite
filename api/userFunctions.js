@@ -115,6 +115,7 @@ router.post('/changeIssueRating', function(req, res) {
 	db.update(params);
 });
 
+
 router.post('/createIssue', function(req, res) {
 	generateId("issue").then((issueId) => {
 		generateId("image").then((imageId) => {
@@ -350,7 +351,83 @@ router.post('/signUp', function(req, res) {
 	});
 });
 
+router.post('/changeQuestion', function(req, res) {
+	
+	var user = req.body.user;
+	var userParams = {
+		TableName: "SecurityQuestions",
+		Key: {
+			"userID": parseInt(req.body.user.userID)
+		},
+		UpdateExpression: "set question1 = :question1,answer1 = :answer1,question2 = :question2,answer2 = :answer2",
+		ExpressionAttributeValues: {
+			":question1": user.question1,
+			":answer1": user.answer1,
+			":question2": user.question2,
+			":answer2": user.answer2
+		}
+	}
+	
+	db.update(userParams);
+});
 
+router.post('/changePassword', function(req, res) {
+	var userParams = {
+		TableName: "User",
+		Key: {
+			"userID": parseInt(req.body.user.userID)
+		},
+		UpdateExpression: "set password = :password",
+		ExpressionAttributeValues: {
+			":password": req.body.user.password,
+		}
+	}
+	
+	db.update(userParams);
+});
+
+router.post('/changeEmail', function(req, res) {
+	var userParams = {
+		TableName: "User",
+		Key: {
+			"userID": parseInt(req.body.user.userID)
+		},
+		UpdateExpression: "set email = :email",
+		ExpressionAttributeValues: {
+			":email": req.body.user.email,
+		}
+	}
+	
+	db.update(userParams);
+});
+
+router.post('/changeUsername', function(req, res) {
+	var userParams = {
+		TableName: "User",
+		Key: {
+			"userID": parseInt(req.body.user.userID)
+		},
+		UpdateExpression: "set username = :username",
+		ExpressionAttributeValues: {
+			":username": req.body.user.username,
+		}
+	}
+	
+	db.update(userParams);
+	
+	var favParams = {
+		TableName: "UserFavorites",
+		Key: {
+			"userID": parseInt(req.body.user.userID)
+		},
+		UpdateExpression: "set username = :username",
+		ExpressionAttributeValues: {
+			":username": req.body.user.username,
+		}
+	}
+	
+	db.update(favParams);
+});
 
 var generateId = function(type) {
 	
