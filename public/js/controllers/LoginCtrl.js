@@ -19,7 +19,6 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 			if (result.signedIn){
 				PersistanceService.setCookieData(result.userId, result.sessionId);
 				$rootScope.loggedIn = result.signedIn;
-				console.log("location: "+$rootScope.OldUrl);
 				if($rootScope.OldUrl!=$location.path())
 					$window.location = $rootScope.OldUrl;
 				else
@@ -45,11 +44,9 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 			}else
 				$scope.message="email not found";
 		});
-		console.log("user " + $scope.user);
 	}
 	
 	$scope.updatePassword= function(){
-		console.log("update password " + $scope.user);
 		if (angular.equals($scope.user.password,$scope.user.confirmPass)){
 			RestApiClientService.post("/functions/changePassword",{
 				user:$scope.user
