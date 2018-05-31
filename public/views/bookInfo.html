@@ -10,8 +10,8 @@
 			</div>
 		</div>
 		<div class="ml-5">
-			<div class="d-inline-flex flex-wrap w-140">
-				<div class="card p-3 col-3 px-1 py-1" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
+			<div class="d-inline-flex flex-wrap w-140 pr-5 pb-5">
+				<div class="card p-2 col-3 px-1 py-1" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
 					<a href="/issue/{{issue.issueID}}" class="w-100 pt-1">
 						<img style="width:100%; height:90%;" class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
 					</a>
