@@ -23,7 +23,6 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 	
 	RestApiClientService.get('/query/user/'+$route.current.params.userId).then(function(response){
 		userInfo=response;
-		console.log(userInfo);
 	});
 	
 	$scope.updateUsername= function(){
@@ -31,49 +30,45 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 		RestApiClientService.post("/functions/changeUsername",{
 			user:$scope.user
 		}).then(function(result){
-			if (result=="success"){
-				$window.alert("Save Changes");
+			if (result.status=="success"){
+				$scope.message="Save Changes";
 			}
 		})
 	}
 	
 	$scope.updateEmail= function(){
-		console.log("update email");
 		RestApiClientService.post("/functions/changeEmail",{
 			user:$scope.user
 		}).then(function(result){
-			if (result=="success"){
-				$window.alert("Save Changes");
+			if (result.status=="success"){
+				$scope.message="Save Changes";
 			}
 		})
 	}
 	
 	$scope.updateQuestions= function(){
-		console.log("update questions");
 		RestApiClientService.post("/functions/changeQuestion",{
 			user:$scope.user
 		}).then(function(result){
-			if (result=="success"){
-				$window.alert("Save Changes");
+			if (result.status=="success"){
+				$scope.message="Save Changes";
 			}
 		})
 	}
 	
 	$scope.updatePassword= function(){
-		console.log("update password");
-		
 		if (!angular.equals(userInfo.password,$scope.user.current)){
-			$window.alert("Current password is wrong");
+			$scope.message="Current password is wrong";
 		}else if (angular.equals($scope.user.password,$scope.user.confirmPass)){
 			RestApiClientService.post("/functions/changePassword",{
 				user:$scope.user
 			}).then(function(result){
-				if (result=="success"){
-					$window.alert("Save Changes");
+				if (result.status=="success"){
+					$scope.mesage="Save Changes";
 				}
 			})
 		}else 
-			$window.alert("password No Match")
+			$scope.message="password No Match"
 	}
 
 	$scope.verifyPassword= function(){

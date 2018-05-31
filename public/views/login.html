@@ -1,8 +1,7 @@
 <div class="container" >
 	<div class ="row" style="margin: 5%">
-		<div class="col-md-5 bg-dark">
+		<div ng-show = "!forgotMode && !newPasswordMode && !questionMode" class="col-md-5 bg-dark">
 			<h2 class = "text-light font-weight-bold" style="margin: 3%">Login</h2>
-      
 			<form ng-submit="formSubmit()" class="form-center" >
         
 				<div class="col-md-12">
@@ -19,7 +18,7 @@
 							<button ng-click="doLogin(user)" type="submit" class="btn btn-success" style= "margin-right:15px">Login</button>
 						</div>
 						<div>
-							<a href="" class="text-light" style="cursor:pointer; margin-right:15px">Forgot Password?</a>
+							<a ng-click="forgot()" class="text-light" style="cursor:pointer; margin-right:15px">Forgot Password?</a>
 							<a href="/signup" class="text-light" style="cursor:pointer ">Create Account</a>
 						</div>
 					</div>
@@ -28,5 +27,47 @@
 			<div ng-show= "!loggedIn" class= "bg-dark">
 				<h3 ng-show= "!loggedIn" class="text-danger my-3 text-center">{{error}}</h3>
 			</div>	
-		</div>	
+		</div>
+		<div class = "col-md-5 mx-auto my-5 bg-light" ng-show="forgotMode">
+			<h3 class="my-3">Email</h3></br>
+			<input ng-click ="resetMessage()" ng-model="user.email" type="email" class="form-control" placeholder="Email" required=""/>
+			<button type="submit" ng-click="verifyEmail()" class="btn btn-primary float-right my-4">Submit</button>
+			<h6 class="text-danger my-1">{{message}}</h6>
+		</div>
+		<div ng-show="questionMode" class="col-md-6 bg-light mx-auto">
+			<div class="mt-4">
+				<input type="text" class="form-control" ng-readonly="true" ng-model="user.question1" placeholder="Question 1" required=""/>
+				<input type="text" class="form-control" ng-model="user.answer1" placeholder="Answer" required=""/>
+				<input type="text" class="form-control" ng-readonly="true" ng-model="user.question2" placeholder="Question 2" required=""/>
+				<input type="text" class="form-control" ng-model="user.answer2"  placeholder="Answer" required=""/>
+				<div>
+					<button type="submit" ng-click="checkAnswer()" class="btn btn-primary float-right my-3">Submit</button>
+				</div>
+			</div>
+			<div class="mb-4">
+				<h6>{{message}}</h6>
+			</div>
+		</div>
+		<div ng-show="newPasswordMode" class="col-md-5 bg-light mx-auto">
+			<div class="mt-2">
+				<span> username: </span>
+				<span> {{user.username}}</span>
+				<h3 > Password</h3>
+			</div>
+			<div >
+				<input type="password" class="form-control" ng-model="user.password" placeholder="New Password" required=""/>
+			</div>
+			<div>
+				<input type="password" class="form-control" ng-model="user.confirmPass" placeholder="Confirm Password"  password-match="user.password" required=""/>
+			</div>
+			<div>
+				<button type="submit" ng-click="updatePassword()" class="btn btn-primary float-right my-2">Save Password</button>
+				<button type="button" ng-click="goToLogin()" class="btn btn-primary float-left my-2">Login</button>
+			</div>
+			<div class="my-5">
+				<h6>{{message}}</h6>
+			</div>
+		</div>
+		
+	</div>
 </div>

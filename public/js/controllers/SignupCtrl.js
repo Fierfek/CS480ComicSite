@@ -17,7 +17,7 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
 				if (results.status == "success") {
 					$rootScope.loggedIn = true;
 					PersistanceService.setCookieData(results.userId, results.sessionId);
-					$location.path('/user/' + results.userID);
+					$location.path('/profile/' + results.userID);
 				}else {
 					$scope.error='account cannot be created';
 				}
