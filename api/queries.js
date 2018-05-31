@@ -226,7 +226,7 @@ router.get('/byBook/:title', function(req, res) {
 		KeyConditionExpression: "title = :title",
 		ExpressionAttributeValues: {
 			":title": req.params.title
-		}
+		},
 	};
 	
 	db.query(params).then((data) => {

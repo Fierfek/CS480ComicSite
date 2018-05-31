@@ -493,6 +493,104 @@ router.post('/signUp', function(req, res) {
 	});
 });
 
+router.post('/changeQuestion', function(req, res) { 
+   
+	var user = req.body.user; 
+	var userParams = { 
+		TableName: "SecurityQuestions", 
+		Key: { 
+			"userID": parseInt(req.body.user.userID) 
+		}, 
+		UpdateExpression: "set question1 = :question1,answer1 = :answer1,question2 = :question2,answer2 = :answer2", 
+		ExpressionAttributeValues: { 
+		":question1": user.question1, 
+		":answer1": user.answer1, 
+		":question2": user.question2, 
+		":answer2": user.answer2 
+		},
+		ReturnValues:"UPDATED_NEW"
+	} 
+   
+	db.update2(userParams).then((data) => {
+		console.log(data.status);
+	});
+
+	
+}); 
+ 
+ router.post('/changePassword', function(req, res) { 
+	var userParams = { 
+		TableName: "User", 
+		Key: { 
+			"userID": parseInt(req.body.user.userID) 
+		}, 
+		UpdateExpression: "set password = :password", 
+		ExpressionAttributeValues: { 
+		":password": req.body.user.password, 
+		} ,
+		ReturnValues:"UPDATED_NEW"
+	} 
+	
+	db.update2(userParams).then((data) => {
+		res.send(data);
+	});
+}); 
+
+router.post('/changeEmail', function(req, res) { 
+	var userParams = { 
+		TableName: "User", 
+		Key: { 
+			"userID": parseInt(req.body.user.userID) 
+		}, 
+		UpdateExpression: "set email = :email", 
+		ExpressionAttributeValues: { 
+			":email": req.body.user.email, 
+		},
+		ReturnValues:"UPDATED_NEW"
+	} 
+	db.update2(userParams).then((data) => {
+		res.send(data);
+	});
+}); 
+
+router.post('/changeUsername', function(req, res) { 
+	var userParams = { 
+		TableName: "User", 
+		Key: { 
+			"userID": parseInt(req.body.user.userID) 
+		}, 
+		UpdateExpression: "set username = :username", 
+		ExpressionAttributeValues: { 
+		":username": req.body.user.username, 
+		},
+		ReturnValues:"UPDATED_NEW"	
+	} 
+   
+	db.update2(userParams).then((data) => {
+		var updateUser = data;
+	});
+   
+	var favParams = { 
+		TableName: "UserFavorites", 
+		Key: { 
+		"userID": parseInt(req.body.user.userID) 
+		}, 
+		UpdateExpression: "set username = :username", 
+		ExpressionAttributeValues: { 
+		":username": req.body.user.username, 
+		},
+		ReturnValues:"UPDATED_NEW"	
+	} 
+   
+	db.update2(favParams).then((data) => {
+		var updateFav = data;
+	});
+	if (updateFav !== updateUser){
+		updateFav.status="failed"
+	}
+	res.send(updateFav);	
+}); 
+
 var generateId = function(type) {
 	
 	var params = {
@@ -504,7 +602,6 @@ var generateId = function(type) {
 		ExpressionAttributeValues:{
 			":incr": 1
 		},
-		ReturnValues:"UPDATED_NEW"
 	};
 	
 	return new Promise((res, rej) => {		  
