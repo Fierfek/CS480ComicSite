@@ -19,10 +19,10 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 			if (result.signedIn){
 				PersistanceService.setCookieData(result.userId, result.sessionId);
 				$rootScope.loggedIn = result.signedIn;
-				if($rootScope.OldUrl!=$location.path())
+				if(!angular.equals($rootScope.OldUrl,$rootScope.NewUrl))
 					$window.location = $rootScope.OldUrl;
 				else
-					$location.path('/profile'+result.userId);
+					$location.path('/profile/' + result.userId);
 			}else {
 				$scope.error='user not found';
 				$rootScope.NewUrl=$rootScope.OldUrl;

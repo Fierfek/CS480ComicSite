@@ -512,7 +512,10 @@ router.post('/changeQuestion', function(req, res) {
 	} 
    
 	db.update2(userParams).then((data) => {
-		console.log(data.status);
+		if(data){
+			data.status="success"
+			res.send(data);
+		}
 	});
 
 	
@@ -532,7 +535,10 @@ router.post('/changeQuestion', function(req, res) {
 	} 
 	
 	db.update2(userParams).then((data) => {
-		res.send(data);
+		if(data){
+			data.status="success"
+			res.send(data);
+		}
 	});
 }); 
 
@@ -549,7 +555,10 @@ router.post('/changeEmail', function(req, res) {
 		ReturnValues:"UPDATED_NEW"
 	} 
 	db.update2(userParams).then((data) => {
-		res.send(data);
+		if(data){
+			data.status="success"
+			res.send(data);
+		}
 	});
 }); 
 
@@ -585,8 +594,8 @@ router.post('/changeUsername', function(req, res) {
 	db.update2(favParams).then((data) => {
 		var updateFav = data;
 	});
-	if (updateFav !== updateUser){
-		updateFav.status="failed"
+	if (updateFav && updateUser){
+		updateFav.status="success"
 	}
 	res.send(updateFav);	
 }); 
@@ -602,6 +611,7 @@ var generateId = function(type) {
 		ExpressionAttributeValues:{
 			":incr": 1
 		},
+		ReturnValues:"UPDATED_NEW" 
 	};
 	
 	return new Promise((res, rej) => {		  
