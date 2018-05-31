@@ -5,10 +5,10 @@
 				<h1>{{user.username}}</h1>
 			</div>
 			<div class="col-8">
-				<div class="w-50 ml-auto pt-2" ng-show="!showEdit && !editMode && isMyprofile()">
+				<div class="w-50 ml-auto pt-3" ng-show="!showEdit && !editMode && isMyprofile()">
 					<button class="btn btn-success h-75" ng-click="edit()">Edit Profile</button>
 					<a  ng-show="isMyprofile()" href="/profile/{{userId}}/setting" >
-						<button class="btn btn-success h-100" ng-click="setting()">Advanced Setting</button>
+						<button class="btn btn-success h-100" ng-click="setting()">Advanced Settings</button>
 					</a>
 				</div>
 				<div class="w-50 ml-auto pt-2" ng-show="editMode">
@@ -37,15 +37,19 @@
 				<h2>Follows</h2>
 			</div>
 			<div class="col-9 mr-auto">
-				<div class="row">
+				<div class="row pr-1">
 					<h5>Comic Books:</h5>
-					<div ng-repeat="book in books">
+				</div>
+				<div class= row>
+					<div class="pl-2" ng-repeat="book in books">
 						<a class="btn btn-success" href="/book/{{book.bookID}}">{{book.title}}</a>
 					</div>
 				</div>
 				<div class="row mt-2">
 					<h5>Users:</h5>
-					<div ng-repeat="user in users">
+				</div>
+				<div class="row">
+					<div class="pl-2" ng-repeat="user in users">
 						<a class="btn btn-success" href="/profile/{{user.userID}}">{{user.username}}</a>
 					</div>
 				</div>
