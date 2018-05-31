@@ -246,9 +246,27 @@ router.get('/byUserName/:username', function(req, res) {
 	};
 	
 	db.query(params).then((data) => {
+		console.log(data.userID);
 		res.send(data);
 	});
 });
+
+router.get('/byEmail/:email', function(req, res) {
+	var params = {
+		TableName: "User",
+		IndexName: "emailpass",
+		KeyConditionExpression: "email = :email",
+		ExpressionAttributeValues: {
+			":email": req.params.email
+		},
+		ProjectionExpression:"userID, username"
+	};
+	
+	db.query(params).then((data) => {
+		res.send(data);
+	});
+});
+
 
 router.get('/user/:userId', function(req, res) {
 	
