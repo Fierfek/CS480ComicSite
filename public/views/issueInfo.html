@@ -1,6 +1,6 @@
 <div class="container-fluid" >
 	<div class="row my-5">
-		<div class="col-md-10 mx-auto bg-light">
+		<div class="col-md-8 mx-auto bg-light">
 			<div class= "mt-5 ">
 				<i class="fa fa-arrow-left"></i>
 				<a class="ml-1 text-dark" href= "/book/{{issue.bookId}}" >  go back to Book</a></div>
@@ -9,23 +9,8 @@
 					<div class="row">
 						<div class="col-4 mx-auto">
 							<img src="{{issue.coverImage}}" style="width:50%; height:75%;" alt="Issue Image"></br>
-							<!--<button type="button" class="btn btn-primary mx-auto my-2">Follow</button>-->
-							<!--div class ="my-3 text-danger"> Rating:
-								<span class="fa fa-star-o ml-2"></span>
-								<span class="fa fa-star-o"></span>
-								<span class="fa fa-star-o"></span>
-								<span class="fa fa-star-o"></span>
-								<span class="fa fa-star-o"></span>
-							</div-->
 							<jk-rating-stars max-rating="8" rating="rating" read-only="ctrl.readOnly" ng-click="rate(rating)" ng-show="loggedIn">
 							</jk-rating-stars>
-							<!--div class ="my-3 text-danger">
-								<span >{{rating.current}} out of {{rating.max}}
-									<div startRating ratingValue= max= ></div>
-									<jk-rating-stars max-rating="rating.max" rating="rating.current"  >
-									</jk-rating-stars>
-								</span>
-							</div -->
 						</div>
 						
 						<div class="col-6 mx-auto">

@@ -23,7 +23,6 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 	
 	RestApiClientService.get('/query/user/'+$route.current.params.userId).then(function(response){
 		userInfo=response;
-		console.log(userInfo.username)
 	});
 	
 	$scope.updateUsername= function(){

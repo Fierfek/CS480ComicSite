@@ -53,7 +53,7 @@
 		<div ng-show="newPasswordMode" class="col-md-5 bg-light mx-auto">
 			<div class="mt-2">
 				<span> username: </span>
-				<span> {{user.username}}</span>
+				<span class="text-capitalize"> {{user.username}}</span>
 				<h3 > Password</h3>
 			</div>
 			<div >
@@ -62,7 +62,7 @@
 			<div>
 				<input type="password" class="form-control" ng-model="user.confirmPass" placeholder="Confirm Password"  password-match="user.password" required=""/>
 			</div>
-			<div>
+			<div class="mt-3">
 				<button type="submit" ng-click="updatePassword()" class="btn btn-primary float-right my-2">Save Password</button>
 				<button type="button" ng-click="goToLogin()" class="btn btn-danger float-right my-2 mr-2">Cancel</button>
 				<button type="button" ng-click="goToLogin()" class="btn btn-primary float-left my-2 ">Login</button>
