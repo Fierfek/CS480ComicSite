@@ -37,6 +37,17 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/query/events/byuser/" + $route.current.params.userId).then(function(response) {
 		$scope.events = response;
+		console.log($scope.events);
+		for( var $x, x=0; x < $scope.events.length){
+			if(){
+
+			}else if(){
+
+			}else if(){
+
+			}
+
+		};
 	});
 	
 	$scope.follow = function() {
