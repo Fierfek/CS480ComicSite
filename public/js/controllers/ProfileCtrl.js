@@ -8,6 +8,13 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	$scope.editMode = false;
 	$scope.books = [];
 	$scope.users = [];
+	var date = new Date();
+	
+	//convert timestamp to data string
+	$scope.setTime= function(time){
+		date.setTime(time);
+		return date.toLocaleString();
+	};
 	
 	RestApiClientService.get("/userFavorites/" + $scope.userId ).then(function(response) {
 		$scope.user = response;
@@ -37,6 +44,53 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/query/events/byuser/" + $route.current.params.userId).then(function(response) {
 		$scope.events = response;
+		var done=false;
+		
+		for (var i = 0; i < $scope.events.length; i++) {
+			if(angular.equals("followBook",$scope.events[i].type)){
+				RestApiClientService.get("/book/" + $scope.events[i].data).then(function(response){		
+					if(response){
+						done=false;
+						for(var j = 0; j < $scope.events.length && !done; j++) {
+							if(angular.equals($scope.events[j].data,response.bookID) && angular.equals("followBook",$scope.events[j].type)) {
+								$scope.events[j].info = response.title;
+								done=true;
+							}
+						}
+					}	
+				});
+			}
+			if(angular.equals("followUser",$scope.events[i].type)){
+				RestApiClientService.get("/userFavorites/" + $scope.events[i].data).then(function(response){
+					if(response){
+						done=false;
+						for(var j = 0; j < $scope.events.length && !done; j++) {
+							if(angular.equals($scope.events[j].data,response.userID) && angular.equals("followUser",$scope.events[j].type)) {
+								$scope.events[j].info = response.username;
+								done=true;
+							}
+						}
+					}	
+				});
+			}
+			
+			if(angular.equals("rate",$scope.events[i].type)){
+				var index=$scope.events[i].data.substr(0, $scope.events[i].data.indexOf(','));
+				RestApiClientService.get("/book/" + index).then(function(response){		
+					if(response){
+						done=false;
+						for(var j = 0; j < $scope.events.length && !done; j++) {
+							if(angular.equals("rate",$scope.events[j].type) &&
+							angular.equals($scope.events[j].data.substr(0, $scope.events[j].data.indexOf(',')),response.bookID.toString())){
+								$scope.events[j].info = response.title;
+								console.log("book"+response.title);
+								done=true;
+							}
+						}
+					}	
+				});
+			}
+		};
 	});
 	
 	$scope.follow = function() {
@@ -103,4 +157,5 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 			}
 		});
     };
+
 });
