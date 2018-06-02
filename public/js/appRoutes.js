@@ -3,6 +3,11 @@ var app= angular.module('appRoutes', ['ngRoute']);
 app.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
 
 	$routeProvider
+		.when('/', {
+            templateUrl: '/views/landing.html',
+            controller: 'LandingPage',
+			title:'Comic Bash!'
+        })
 		.when('/profile/:userId', {
             templateUrl: '/views/profile.html',
             controller: 'ProfileController',
@@ -59,10 +64,9 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
             title:'Search'
         })
 		.otherwise({
-			redirectTo: '/',
-			templateUrl: '/views/landing.html',
-            controller: 'LandingPage',
-			title:'Comic Bash!'
+			redirectTo: 'error404',
+			templateUrl: '/views/error404.html',
+			title:'Error 404'
 		});
     $locationProvider.html5Mode(true);
 }]);
