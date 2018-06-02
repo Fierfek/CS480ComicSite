@@ -32,6 +32,7 @@
 			<h3 class="my-3">Email</h3></br>
 			<input ng-click ="resetMessage()" ng-model="user.email" type="email" class="form-control" placeholder="Email" required=""/>
 			<button type="submit" ng-click="verifyEmail()" class="btn btn-primary float-right my-4">Submit</button>
+			<button type="button" ng-click="goToLogin()" class="btn btn-danger float-right my-4 mr-2">Cancel</button>
 			<h6 class="text-danger my-1">{{message}}</h6>
 		</div>
 		<div ng-show="questionMode" class="col-md-6 bg-light mx-auto">
@@ -42,6 +43,7 @@
 				<input type="text" class="form-control" ng-model="user.answer2"  placeholder="Answer" required=""/>
 				<div>
 					<button type="submit" ng-click="checkAnswer()" class="btn btn-primary float-right my-3">Submit</button>
+					<button type="button" ng-click="goToLogin()" class="btn btn-danger float-right my-3 mr-2">Cancel</button>
 				</div>
 			</div>
 			<div class="mb-4">
@@ -62,7 +64,8 @@
 			</div>
 			<div>
 				<button type="submit" ng-click="updatePassword()" class="btn btn-primary float-right my-2">Save Password</button>
-				<button type="button" ng-click="goToLogin()" class="btn btn-primary float-left my-2">Login</button>
+				<button type="button" ng-click="goToLogin()" class="btn btn-danger float-right my-2 mr-2">Cancel</button>
+				<button type="button" ng-click="goToLogin()" class="btn btn-primary float-left my-2 ">Login</button>
 			</div>
 			<div class="my-5">
 				<h6>{{message}}</h6>

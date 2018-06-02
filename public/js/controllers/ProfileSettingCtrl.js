@@ -23,37 +23,48 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 	
 	RestApiClientService.get('/query/user/'+$route.current.params.userId).then(function(response){
 		userInfo=response;
+		console.log(userInfo.username)
 	});
 	
 	$scope.updateUsername= function(){
-		console.log("update username");
-		RestApiClientService.post("/functions/changeUsername",{
-			user:$scope.user
-		}).then(function(result){
-			if (result.status=="success"){
-				$scope.message="Save Changes";
-			}
-		})
+		$scope.user.username=$scope.user.username.toLowerCase();
+		if($scope.user.username){
+			RestApiClientService.post("/functions/changeUsername",{
+				user:$scope.user
+			}).then(function(result){
+				if (result.status=="success"){
+					$scope.message="Save Changes";
+					$scope.resetUser();
+				}
+			})
+		}
 	}
-	
+
 	$scope.updateEmail= function(){
-		RestApiClientService.post("/functions/changeEmail",{
-			user:$scope.user
-		}).then(function(result){
-			if (result.status=="success"){
-				$scope.message="Save Changes";
-			}
-		})
+		if ($scope.user.email){
+			RestApiClientService.post("/functions/changeEmail",{
+				user:$scope.user
+			}).then(function(result){
+				if (result.status=="success"){
+					$scope.message="Save Changes";
+					$scope.resetUser();
+				}
+			})
+		}else
+			$scope.message="email is incomplete";
+		
 	}
 	
 	$scope.updateQuestions= function(){
-		RestApiClientService.post("/functions/changeQuestion",{
-			user:$scope.user
-		}).then(function(result){
-			if (result.status=="success"){
-				$scope.message="Save Changes";
-			}
-		})
+		if ($scope.user.question1 || $scope.user.question2 || $scope.user.answer1 || $scope.user.answer2){
+			RestApiClientService.post("/functions/changeQuestion",{
+				user:$scope.user
+			}).then(function(result){
+				if (result.status=="success"){
+					$scope.message="Save Changes";
+				}
+			})
+		}
 	}
 	
 	$scope.updatePassword= function(){
@@ -65,6 +76,7 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 			}).then(function(result){
 				if (result.status=="success"){
 					$scope.mesage="Save Changes";
+					$scope.resetUser();
 				}
 			})
 		}else 
@@ -81,6 +93,12 @@ profile.controller('ProfileSettingController', function($scope,$rootScope, $rout
 	$scope.resetMessage= function(){
 		$scope.message="";
 		$scope.password="";
+	}
+	
+	$scope.resetUser=function(){
+		$scope.user={};
+		$scope.user.userID=$route.current.params.userId;
+		getSecurityQuestion();
 	}
 		
 });

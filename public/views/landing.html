@@ -17,7 +17,7 @@
 					
 						<div class="card-body">
 							<a  href="/issue/{{issue.issueID}}" > <!-- add this before issue/...  /book/{{book.bookID}}"-->
-								<h5 class="card-title">{{issue.title}} </h5>
+								<h5 class="card-title text-capitalize">{{issue.title}} </h5>
 							</a>
 							<p class="card-text">Volume #: {{issue.volume}}</p>
 							<p class="card-text">Issue #: {{issue.issueNum}}</p>
@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-6">
 						<div class="card-body">
-							<h5 class="card-title"><a href="/book/{{book.bookID}}"> {{book.title}}</a></h5>
+							<h5 class="card-title text-capitalize"><a href="/book/{{book.bookID}}"> {{book.title}}</a></h5>
 							<p class="card-text">Number of Issues: {{book.numberOfIssues}}</p>
 						</div>
 					</div>
