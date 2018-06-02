@@ -107,7 +107,6 @@ db.update2 = function(params) {
 			} else {
 				res(data);
 			}
-			
 		});
 	})
 };

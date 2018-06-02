@@ -1,8 +1,8 @@
 <div class="row mt-3">
-	<div class="col-9 mx-auto bg-light pb-2">
+	<div class="col-9 mx-auto bg-light pb-2" style="height:100vh;">
 		<div class="row ml-3">
 			<div class="col-4">
-				<h1>{{user.username}}</h1>
+				<h1 class="text-capitalize">{{user.username}}</h1>
 			</div>
 			<div class="col-8">
 				<div class="w-50 ml-auto pt-2" ng-show="!showEdit && !editMode && isMyprofile()">
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="pt-5 pl-2">
-			<h2> {{user.username}}'s Activities</h2>
+			<h2 class="text-capitalize"> {{user.username}}'s Activities</h2>
 			<hr class="my-4">
 		</div>
 		<div class="w-100" ng-repeat= "event in events">

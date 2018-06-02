@@ -19,11 +19,13 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 				}
 			});
 		}
+		
 	});	
-	
+
 	RestApiClientService.get("/issue").then(function(response){
 		$scope.issueList = response;
 		$scope.begin=response.length-11;
+		console.log($scope.issueList);
 	});
 
 	RestApiClientService.get("/article").then(function(response){
@@ -37,4 +39,7 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 	$scope.bookOption = function(){	
 		$scope.issueMode = false;
 	};
+	
+	
+	
 }); 

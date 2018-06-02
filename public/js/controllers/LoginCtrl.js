@@ -81,7 +81,9 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 	}
 	
 	$scope.goToLogin=function(){
+		$scope.forgotMode=false;
 		$scope.newPasswordMode=false;
+		$scope.questionMode=false;
 		$scope.resetMessage();
 		$scope.user={};
 	}

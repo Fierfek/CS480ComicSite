@@ -1,23 +1,24 @@
 <div class="container-fluid" >
-	<div class="row my-5">
+	<div class="row my-5" ">
 		<div class = "col-md-3 mx-auto my-5 bg-light" ng-show="!isVerify">
 			<h3 class="my-3">Verify password</h3></br>
 			<input ng-click ="resetMessage()" ng-model="password" type="password" class="form-control" placeholder="password" required=""/>
 			<button type="submit" ng-click="verifyPassword()" class="btn btn-primary float-right my-4">Submit</button>
 			<h6 class="text-danger mt-1">{{message}}</h6>
 		</div>
-		<div class="col-md-9 mx-auto bg-light" ng-show="isVerify" ng-click="resetMessage()">
+		<div class="col-md-9 mx-auto bg-light" ng-show="isVerify" ng-click="resetMessage()" style="height:100vh">
 			<div class= "col-md-10 mx-auto my-5">
 				<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">Account Setting</h2></div>
-				<div><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#username">change username</button></div>
-				<div id="username" class="collapse mt-2">
+				<div class="form-group"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#username">Change username</button>
+				<div id="username" class="collapse mt-2" style="padding:0">
 					<input type="text" class="form-control" ng-model="user.username" placeholder="New username" required=""/>
 					<div>
 						<button type="submit" ng-click="updateUsername()" class="btn btn-primary float-right my-1">Save Changes</button>
+						<button type="button" ng-click ="resetUser()" class="btn btn-danger float-right my-1 mr-2">Cancel</button></a>
 					</div>
-				</div>
-				<div><button type="button" class="btn btn-primary mt-4 " data-toggle="collapse" data-target="#password">change password</button></div>
-				<div id="password" class="collapse mt-2">
+				</div></div>
+				<div class="form-group"><button type="button" class="btn btn-primary mt-5 " data-toggle="collapse" data-target="#password">Change password</button>
+				<div id="password" class="collapse mt-2" style="padding:0">
 					<input type="password" class="form-control" ng-model="user.current" placeholder="Current Password" required=""/>
 					<div>
 						<input type="password" class="form-control" ng-model="user.password" placeholder="New Password" required=""/>
@@ -27,13 +28,15 @@
 					</div>
 					<div>
 						<button type="submit" ng-click="updatePassword()" class="btn btn-primary float-right my-1">Save Changes</button>
+						<button type="button" ng-click ="resetUser()" class="btn btn-danger float-right my-1 mr-2">Cancel</button></a>
 					</div>
-				</div>
+				</div></div>
 				<div><button type="button" class="btn btn-primary mt-4" data-toggle="collapse" data-target="#email">Change Email</button></div>
 				<div id="email" class="collapse mt-2">
-					<input type="email" class="form-control" ng-model="user.email" placeholder="New Email" required=""/>
+					<input name="email" type="email" class="form-control" ng-model="user.email" placeholder="New Email" required=""/>
 					<div>
 						<button type="submit" ng-click="updateEmail()" class="btn btn-primary float-right my-1">Save Changes</button>
+						<button type="button" ng-click ="resetUser()" class="btn btn-danger float-right my-1 mr-2">Cancel</button></a>
 					</div>
 				</div>	
 				<div><button type="button" class="btn btn-primary mt-4" data-toggle="collapse" data-target="#question">Change Security Questions</button></div>
@@ -44,6 +47,7 @@
 					<input type="text" class="form-control" ng-model="user.answer2"  placeholder="Answer 2" required=""/>
 					<div>
 						<button type="submit" ng-click="updateQuestions()" class="btn btn-primary float-right my-3">Save Changes</button>
+						<button type="button" ng-click ="resetUser()" class="btn btn-danger float-right my-3 mr-2">Cancel</button></a>
 					</div>
 				</div>
 				<h6 class="text-danger mt-2">{{message}}</h6>

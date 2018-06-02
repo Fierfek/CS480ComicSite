@@ -305,7 +305,7 @@ router.post('/createIssue', function(req, res) {
 				}
 				
 				for(var i = 0; i < writers.length; i++) {
-					writerParams.Item.writer = writers[i];
+					writerParams.Item.writer = writers[i].trim();
 					
 					db.put(writerParams);
 				}
@@ -318,7 +318,7 @@ router.post('/createIssue', function(req, res) {
 				}
 				
 				for(var k = 0; k < illustrators.length; k++) {
-					illustratorParams.Item.illustrator = illustrators[k];
+					illustratorParams.Item.illustrator = illustrators[k].trim();
 					
 					db.put(illustratorParams);
 				}
@@ -331,7 +331,7 @@ router.post('/createIssue', function(req, res) {
 				}
 				
 				for(var j = 0; j < characters.length; j++) {
-					characterParams.Item.character = characters[j];
+					characterParams.Item.character = characters[j].trim();
 					
 					db.put(characterParams);
 				}
@@ -563,6 +563,8 @@ router.post('/changeEmail', function(req, res) {
 }); 
 
 router.post('/changeUsername', function(req, res) { 
+	var updateFav;
+	var updateUser;
 	var userParams = { 
 		TableName: "User", 
 		Key: { 
@@ -576,7 +578,12 @@ router.post('/changeUsername', function(req, res) {
 	} 
    
 	db.update2(userParams).then((data) => {
-		var updateUser = data;
+		updateUser = data;
+		console.log(updateFav+","+updateUser)
+		if (updateFav && updateUser){
+			updateFav.status="success"
+		}
+		res.send(updateFav);
 	});
    
 	var favParams = { 
@@ -592,12 +599,9 @@ router.post('/changeUsername', function(req, res) {
 	} 
    
 	db.update2(favParams).then((data) => {
-		var updateFav = data;
+		updateFav = data;	
 	});
-	if (updateFav && updateUser){
-		updateFav.status="success"
-	}
-	res.send(updateFav);	
+	
 }); 
 
 var generateId = function(type) {
@@ -622,5 +626,25 @@ var generateId = function(type) {
 		})
 	})
 };
+
+router.post('/changeTitle', function(req, res) { 
+	var userParams = { 
+		TableName: "Issue", 
+		Key: { 
+			"issueID": parseInt(req.body.issue.issueID) 
+		}, 
+		UpdateExpression: "set title = :title", 
+		ExpressionAttributeValues: { 
+			":title": req.body.issue.title, 
+		},
+		ReturnValues:"UPDATED_NEW"
+	} 
+	db.update2(userParams).then((data) => {
+		if(data){
+			data.status="success"
+			res.send(data);
+		}
+	});
+}); 
 
 module.exports = router;
