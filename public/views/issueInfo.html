@@ -9,7 +9,7 @@
 					<div class="row">
 						<div class="col-4 mx-auto">
 							<img src="{{issue.coverImage}}" style="width:50%; height:75%;" alt="Issue Image"></br>
-							<jk-rating-stars max-rating="8" rating="rating" read-only="ctrl.readOnly" ng-click="rate(rating)" ng-show="loggedIn">
+							<jk-rating-stars max-rating="8" rating="rating" ng-click="rate(rating)" ng-show="loggedIn">
 							</jk-rating-stars>
 						</div>
 						
@@ -21,6 +21,9 @@
 								<p class="card-text d-inline ">Writer(s): <div ng-repeat="writer in writers" class="d-inline text-capitalize">{{writer.writer}}, </div></p>
 								<p class="card-text d-inline">Illustrator(s): <div ng-repeat="illustrator in illustrators" class="d-inline text-capitalize">{{illustrator.illustrator}}, </div></p>
 								<p class="card-text d-inline">Character(s): <div ng-repeat="character in characters" class="d-inline text-capitalize">{{character.character}}, </div></p>
+								<p style= "white-space:normal">Average User Rating: </p>
+								<jk-rating-stars max-rating="8" rating=issue.rating read-only=true>
+								</jk-rating-stars>
 							</div>
 						</div>
 						<div class= "col-md-10 mx-auto my-3">
