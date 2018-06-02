@@ -8,7 +8,7 @@
 					<button type="button" class="btn btn-secondary bg-dark border-0 mx-auto  btn-lg font-weight-bold" ng-click="bookOption()">Newest Books</button>
 				</div>
 			</div>
-			<div class="card border-0" ng-repeat= "issue in issueList|limitTo:10:begin|orderBy :'-issueID'" ng-show="issueMode">
+			<div class="card border-0" ng-repeat= "issue in issueList|orderBy :'-issueID'|limitTo:10" ng-show="issueMode">
 				<div class="row">
 					<div class="col-2">
 						<a href='/issue/{{issue.issueID}}'> <img style="width:100px; height:85%;" class="card-img-top ml-3 mt-3" src="{{issue.coverImage}}" alt="Issue Image"> </a>
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card border-0" ng-repeat="book in books| limitTo:10|orderBy :'-bookID'"ng-show="!issueMode">
+			<div class="card border-0" ng-repeat="book in books|orderBy :'-bookID'| limitTo:10"ng-show="!issueMode">
 				<div class="row">
 					<div class="col-6">
 						<div class="card-body">
@@ -41,7 +41,7 @@
 			<div class="card  bg-dark">
 				<h5><div class="card-header text-light font-weight-bold text-center border-0" > Newest Articles</div></h5>
 			</div>
-			<div class="card border-0" ng-repeat="article in articleList|limitTo: 10|orderBy :'-articleId'">
+			<div class="card border-0" ng-repeat="article in articleList|orderBy :'-articleId'|limitTo: 10">
 				<div class="row">
 					<div class="col-8">
 						<div class="card-body">

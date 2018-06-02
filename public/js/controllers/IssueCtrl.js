@@ -32,6 +32,16 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	//get the issue information
 	RestApiClientService.get('/issue/'+$route.current.params.issueID).then(function(response){
 		$scope.issue = response;
+		$scope.issue.rating=0;
+		RestApiClientService.get('/query/issueRating/byIssue/' + response.issueID).then(function(response) {
+			if(response) {	
+				for(var k = 0; k < response.length; k++) {
+					$scope.issue.rating += response[k].rating;
+				}
+				$scope.issue.rating /= response.length;
+				$scope.issue.rating = Math.round($scope.issue.rating * 10) / 10;
+			}
+		});
 	});
 	
 	//get the writers
