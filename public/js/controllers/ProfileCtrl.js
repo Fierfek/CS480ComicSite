@@ -37,6 +37,24 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/query/events/byuser/" + $route.current.params.userId).then(function(response) {
 		$scope.events = response;
+		console.log($scope.events);
+		for(var x = 0; x < $scope.events.length; x++){
+			if($scope.events[x].type == "followBook"){
+				RestApiClientService.get('/book').then(function(response){
+					$scope.books = response;
+					console.log($scope.events[x].data);
+					$scope.thisBookTitle = $scope.books[$scope.events[x].data].title;
+					$scope.events[x].data.toString();
+					$scope.events[x].data = $scope.events[x].data + $scope.thisBookTitle;
+					console.log($scope.events[x]);
+				});
+			}else if($scope.events.type == "rate"){
+
+			}else if($scope.events.type == "followUser"){
+
+			}
+
+		};
 	});
 	
 	$scope.follow = function() {
