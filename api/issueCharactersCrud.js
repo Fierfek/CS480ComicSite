@@ -29,8 +29,7 @@ router.put('', function(req, res) {
 
 /*router.get('', function(req, res) {
 	var params = {
-		TableName: tableName,
-		ProjectionExpression: "bookID, title, issueList"
+		TableName: tableName
 	}
 	
 	db.scan(params, res);

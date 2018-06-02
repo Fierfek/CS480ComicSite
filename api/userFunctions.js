@@ -627,24 +627,6 @@ var generateId = function(type) {
 	})
 };
 
-router.post('/changeTitle', function(req, res) { 
-	var userParams = { 
-		TableName: "Issue", 
-		Key: { 
-			"issueID": parseInt(req.body.issue.issueID) 
-		}, 
-		UpdateExpression: "set title = :title", 
-		ExpressionAttributeValues: { 
-			":title": req.body.issue.title, 
-		},
-		ReturnValues:"UPDATED_NEW"
-	} 
-	db.update2(userParams).then((data) => {
-		if(data){
-			data.status="success"
-			res.send(data);
-		}
-	});
-}); 
+
 
 module.exports = router;

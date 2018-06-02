@@ -16,7 +16,7 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 		//case "Issue by Year": call="/query/issue/byYear/"; break;
 		case "User": call= "/query/byUserName/";break;
 	}
-	call += search.param;
+	call += search.param.toLowerCase();
 	console.log("call: " + call);
 	RestApiClientService.get(call).then(function(response) {
 		$scope.data = [];
@@ -79,7 +79,7 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 						$scope.data.push(res);
 					});
 				}
-				$scope.message = "Found " + response.length + " user(s): " + search.param;
+				$scope.message = "Found " + response.length + " user(s): " + search.param.toLowerCase();
 			break;
 		}
 

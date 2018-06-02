@@ -4,7 +4,7 @@
 			<div class= "mt-5 ">
 				<i class="fa fa-arrow-left"></i>
 				<a class="ml-1 text-dark" href= "/book/{{issue.bookId}}" >  go back to Book</a></div>
-			<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center">{{issue.title}}</h2></div>								
+			<div><h2 class="font-weight-bold my-4 align-middle text-primary text-center text-capitalize">{{issue.title}}</h2></div>								
 				<div class="card md-10 mx-auto bg-light border-0">
 					<div class="row">
 						<div class="col-4 mx-auto">
@@ -33,9 +33,9 @@
 								<p class="card-text">Volume #: {{issue.volume}}</p> 
 								<p class="card-text">Issue #: {{issue.issueNum}}</p>
 								<p class="card-text">Year: {{issue.year}}</p>
-								<p class="card-text d-inline">Writer(s): <div ng-repeat="writer in writers" class="d-inline">{{writer.writer}}, </div></p>
-								<p class="card-text d-inline">Illustrator(s): <div ng-repeat="illustrator in illustrators" class="d-inline">{{illustrator.illustrator}}, </div></p>
-								<p class="card-text d-inline">Character(s): <div ng-repeat="character in characters" class="d-inline">{{character.character}}, </div></p>
+								<p class="card-text d-inline ">Writer(s): <div ng-repeat="writer in writers" class="d-inline text-capitalize">{{writer.writer}}, </div></p>
+								<p class="card-text d-inline">Illustrator(s): <div ng-repeat="illustrator in illustrators" class="d-inline text-capitalize">{{illustrator.illustrator}}, </div></p>
+								<p class="card-text d-inline">Character(s): <div ng-repeat="character in characters" class="d-inline text-capitalize">{{character.character}}, </div></p>
 							</div>
 						</div>
 						<div class= "col-md-10 mx-auto my-3">
@@ -62,7 +62,7 @@
 									<li>
 										<div class = "border border-secondary rounded mr-4 my-2">
 											<a href="/profile/{{info.userId}}">
-												<span class="font-weight-bold ml-3 float-left text-dark">{{info.username}}</span>
+												<span class="font-weight-bold ml-3 float-left text-dark text-capitalize">{{info.username}}</span>
 											</a>
 											<span class="date sub-text float-right mr-4">on {{ setTime(info.timestamp)}}</span>	
 											<br>			

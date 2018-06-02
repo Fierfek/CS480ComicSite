@@ -148,7 +148,7 @@ router.get('/issueWriters/byWriter/:writer', function(req, res) {
 		IndexName: "by-writer",
 		KeyConditionExpression: "writer = :writer",
 		ExpressionAttributeValues: {
-			":writer": req.params.character
+			":writer": req.params.writer
 		}
 	};
 	

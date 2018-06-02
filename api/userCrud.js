@@ -35,11 +35,10 @@ var tableName = "User";
 /*router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
-		ProjectionExpression: "userID, title, issueList"
 	}
 	
 	db.scan(params, res);
-});
+})
 
 router.post('', function(req, res) {
 	var params = {
