@@ -27,14 +27,12 @@ router.get('/:id', function(req, res) {
 	db.get(params, res);
 });
 
-router.get('', function(req, res) {
+/*router.get('', function(req, res) {
 	var params = {
 		TableName: tableName,
-		ProjectionExpression: "bookID, title, issueList"
 	}
-	
 	db.scan(params, res);
-});
+});*/
 
 /*router.post('', function(req, res) {
 	var params = {

@@ -10,7 +10,7 @@ signUpPage.controller('SignupController', function ($scope, $rootScope, $locatio
 		}else if (!angular.equals($scope.signup.password,$scope.signup.passwordConfirm))
 			$scope.msg= "password No Match";
 		else{
-
+			$scope.signup.username=$scope.signup.username.toLowerCase();
 			RestApiClientService.post('/functions/signup', {
 				user: $scope.signup
 			}).then(function (results) {
