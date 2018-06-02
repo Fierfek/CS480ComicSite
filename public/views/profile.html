@@ -1,5 +1,5 @@
 <div class="row mt-3">
-	<div class="col-9 mx-auto bg-light pb-2">
+	<div class="col-9 mx-auto bg-light pb-5">
 		<div class="row ml-3 my-5">
 			<div class="col-4">
 				<h1 class="text-capitalize">{{user.username}}</h1>
@@ -22,7 +22,7 @@
 		</div>
 		<div class="row ml-5">
 			<div class="col-4 d-inline">
-				<img src="{{user.profilePic}}" style="width:300px; height:250px;"></img>
+				<img src="{{user.profilePic}}" style="width:250px; height:250px;"></img>
 				<input ng-show="editMode" file-model="profilePicture" type="file">
 				<!--<div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>-->
 			</div>		
@@ -41,7 +41,7 @@
 					<h5>Comic Books:</h5>
 				</div>
 				<div class= row>
-					<div class="pl-2" ng-repeat="book in books">
+					<div class="pl-2 pb-2" ng-repeat="book in books">
 						<a class="btn btn-success text-capitalize" href="/book/{{book.bookID}}">{{book.title}}</a>
 					</div>
 				</div>
@@ -49,32 +49,34 @@
 					<h5>Users:</h5>
 				</div>
 				<div class="row">
-					<div class="pl-2" ng-repeat="user in users">
+					<div class="pl-2 pb-2" ng-repeat="user in users">
 						<a class="btn btn-success text-capitalize" href="/profile/{{user.userID}}">{{user.username}}</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="pt-5 pl-2">
+		<div class="pt-5 pl-2 pb-2">
 			<h2 class="text-capitalize"> {{user.username}}'s Activities</h2>
 			<hr class="my-4">
 		</div>
-		<div class="w-100 " ng-repeat= "event in events">
-			<div class="card bg-dark text-white border-0"" ng-show="event.type=='followUser'">
+		<div class="w-100 mt-2" ng-repeat= "event in events|orderBy:'-timestamp'">
+			<div class="card bg-secondary text-white border-0" ng-show="event.type=='followUser'">
 				<div class="card-header row">
 					<h5><div class=""> {{ setTime(event.timestamp)}}: </div></h5>
 					<pre><h5><a href="/profile/{{event.data}}" class="text-white text-capitalize"> {{event.type}}: {{event.info}}</a></h5></pre>
 				</div>
 			</div>
-			<div class="card bg-dark text-white border-0"" ng-show="event.type=='followBook'">
+			<div class="card bg-secondary text-white border-0" ng-show="event.type=='followBook'">
 				<div class="card-header row">
 					<h5><div class="">{{setTime(event.timestamp)}}: </div></h5>
 					<pre><h5><a href="/book/{{event.data}}" class="text-white text-capitalize"> {{event.type}}: {{event.info}}</a></h5></pre>
 				</div>
 			</div>
-			<div class="card bg-dark text-white border-0"" ng-show="event.type=='rate'">
+			<div class="card bg-secondary text-white border-0" ng-show="event.type=='rate'">
 				<div class="card-header row">
-					<pre><h5><div class="text-white text-capitalize">{{setTime(event.timestamp)}}: {{event.type}}: {{event.info}} </div></h5></pre>
+					<a class="text-white " href="/issue/{{event.data}}">
+						<pre><h5><div class="text-white text-capitalize">{{setTime(event.timestamp)}}: {{event.type}}: {{event.info}} {{event.rating}} star(s) </div></h5></pre>
+					</a>
 				</div>
 			</div>
 		</div>

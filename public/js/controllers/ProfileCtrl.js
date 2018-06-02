@@ -18,7 +18,6 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	RestApiClientService.get("/userFavorites/" + $scope.userId ).then(function(response) {
 		$scope.user = response;
-		console.log(response);
 	});
 	
 	RestApiClientService.get("/userFollows/" + $scope.userId ).then(function(response) {
@@ -45,6 +44,7 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	RestApiClientService.get("/query/events/byuser/" + $route.current.params.userId).then(function(response) {
 		$scope.events = response;
 		var done=false;
+		var rating=0;
 		
 		for (var i = 0; i < $scope.events.length; i++) {
 			if(angular.equals("followBook",$scope.events[i].type)){
@@ -76,15 +76,18 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 			
 			if(angular.equals("rate",$scope.events[i].type)){
 				var index=$scope.events[i].data.substr(0, $scope.events[i].data.indexOf(','));
-				RestApiClientService.get("/book/" + index).then(function(response){		
+				RestApiClientService.get("/issue/" + index).then(function(response){
 					if(response){
 						done=false;
 						for(var j = 0; j < $scope.events.length && !done; j++) {
 							if(angular.equals("rate",$scope.events[j].type) &&
-							angular.equals($scope.events[j].data.substr(0, $scope.events[j].data.indexOf(',')),response.bookID.toString())){
-								$scope.events[j].info = response.title;
-								console.log("book"+response.title);
-								done=true;
+							angular.equals($scope.events[j].data.substr(0, $scope.events[j].data.indexOf(',')),response.issueID.toString())){
+								rating=$scope.events[j].data.substr($scope.events[j].data.length-$scope.events[j].data.indexOf(','));
+								if(!angular.equals($scope.events[j].rating,rating)){
+									$scope.events[j].info = response.title;
+									$scope.events[j].rating=rating;
+									done=true;
+								}
 							}
 						}
 					}	
