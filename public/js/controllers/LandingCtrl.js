@@ -8,7 +8,6 @@ landingPage.controller('LandingPage', function($scope, $route, RestApiClientServ
 	RestApiClientService.get('/book').then(function(response) {
 		
 		$scope.books = response;
-		console.log(response)
 		for (var i = 0; i < $scope.books.length; i++) {
 			RestApiClientService.get("/query/issue/byBook/" + $scope.books[i].bookID).then(function(response){
 				if(response[0]) {

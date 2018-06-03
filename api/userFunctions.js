@@ -627,6 +627,4 @@ var generateId = function(type) {
 	})
 };
 
-
-
 module.exports = router;

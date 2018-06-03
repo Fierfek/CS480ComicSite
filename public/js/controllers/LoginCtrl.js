@@ -12,7 +12,6 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 	$scope.security={};
  
     $scope.doLogin = function (user) {
-
         RestApiClientService.post('/functions/signIn', {
             user: user
         }).then(function(result) {
@@ -24,7 +23,7 @@ loginPage.controller('LoginController', function ($scope, $rootScope, $location,
 				else
 					$location.path('/profile/' + result.userId);
 			}else {
-				$scope.error='user not found';
+				$scope.message='user not found';
 				$rootScope.NewUrl=$rootScope.OldUrl;
 			}
 		});     
