@@ -206,10 +206,10 @@ router.get('/issue/byYear/:year', function(req, res) {
 	console.log("year: "+req.params.year);
 	var params = {
 		TableName: "Issue",
-		IndexName: " yeartitle",
+		IndexName: " yearpass",
 		KeyConditionExpression: "year = :year",
 		ExpressionAttributeValues: {
-			":year": req.params.year
+			":year":  req.params.year
 		}
 	};
 	
