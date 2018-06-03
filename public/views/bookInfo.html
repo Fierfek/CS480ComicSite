@@ -1,28 +1,27 @@
-<div class="container my-5" style="background-color:black">
-	<div class="row">
-		<div class="col-md-8 my-5 mx-auto pt-2 bg-primary">
-			<div class="py-auto text-white">
-				<h3 class="text-capitalize" style="text-align: left">{{book.title}}</h3>
-				<h4 style="text-align: left">{{book.publisher}}</h4>
-				<h6 style="text-align: left">{{month}} {{year}}</h6>
-				<button type="button" class="btn btn-secondary border" ng-click="follow()" ng-show="loggedIn">Follow</button>
-				<p>{{numOfIssues}} Issues</p>
-			</div>
+<div class="container mx-auto bg-light">
+	<div class="my-5 mx-auto pt-2">
+		<div class="pl-5 py-auto text-dark">
+			<h1 class="text-capitalize" style="text-align: left">{{book.title}}</h1>
+			<h4 style="text-align: left">{{book.publisher}}</h4>
+			<h6 style="text-align: left">{{month}} {{year}}</h6>
+			<button type="button" class="btn btn-secondary border" ng-click="follow()" ng-show="loggedIn">Follow</button>
+			<p>{{numOfIssues}} Issues</p>
 		</div>
-		<div class="ml-5">
-			<div class="d-inline-flex flex-wrap w-140 pr-5 pb-5">
-				<div class="card p-2 col-3 px-1 py-1 border-0" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
-					<a href="/issue/{{issue.issueID}}" class="w-100 pt-1">
-						<img style="width:95%; height:90%;" class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
+	</div>
+	<hr class="my-4">
+	<div class="ml-5">
+		<div class="d-inline-flex flex-wrap w-100 pr-5 pb-5">
+			<div class="card p-2 px-1 py-1 border-0" style="width:250px" ng-repeat="issue in issueList | orderBy:['volume', 'issueNum']">
+				<a href="/issue/{{issue.issueID}}" class="w-100 pt-1">
+					<img style="width:95%; height:90%;" class="card-img-top" src="{{issue.coverImage}}" alt="Card image">
+				</a>
+				<div class="card-body">
+					<a class="w-100" href="/issue/{{issue.issueID}}">
+						<p class="text-capitalize" style= "white-space:normal">{{issue.title}}</p>
 					</a>
-					<div class="card-body">
-						<a class="w-100" href="/issue/{{issue.issueID}}">
-							<p class="text-capitalize" style= "white-space:normal">{{issue.title}}</p>
-						</a>
-						<p style= "white-space:normal">Volume: {{issue.volume}}</p>
-						<p style= "white-space:normal">Issue Number: {{issue.issueNum}}</p>
-						<p style= "white-space:normal">Average User Rating: {{issue.rating}}</p>
-					</div>
+					<p style= "white-space:normal">Volume: {{issue.volume}}</p>
+					<p style= "white-space:normal">Issue Number: {{issue.issueNum}}</p>
+					<p style= "white-space:normal">Average User Rating: {{issue.rating}}</p>
 				</div>
 			</div>
 		</div>

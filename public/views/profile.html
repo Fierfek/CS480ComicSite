@@ -2,7 +2,7 @@
 	<div class="col-9 mx-auto bg-light pb-5">
 		<div class="row ml-3 my-5">
 			<div class="col-4">
-				<h1 class="text-capitalize">{{user.username}}</h1>
+				<h1>{{user.username}}</h1>
 			</div>
 			<div class="col-8">
 				<div class="w-50 ml-auto pt-3" ng-show="!showEdit && !editMode && isMyprofile()">
@@ -42,7 +42,7 @@
 				</div>
 				<div class= row>
 					<div class="pl-2 pb-2" ng-repeat="book in books">
-						<a class="btn btn-success text-capitalize" href="/book/{{book.bookID}}">{{book.title}}</a>
+						<a class="btn btn-success" href="/book/{{book.bookID}}">{{book.title}}</a>
 					</div>
 				</div>
 				<div class="row mt-2">

@@ -17,7 +17,7 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 		case "User": call= "/query/byUserName/";break;
 		case "All Books": call="/";break;
 	}
-	call += search.param.toLowerCase();
+	call += search.param;
 	RestApiClientService.get(call).then(function(response) {
 		$scope.data = [];
 		switch(search.category) {
