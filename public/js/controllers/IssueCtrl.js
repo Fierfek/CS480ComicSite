@@ -8,6 +8,7 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	var comment={};
 	var commentsList = [];
 	var show;
+	var previousRating=0;
 	
 	$scope.rating = 0;
 	var rated = false;
@@ -24,8 +25,11 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	
 	if($rootScope.loggedIn) {
 		RestApiClientService.get('/ratings/' + $route.current.params.issueID + '/' + PersistanceService.getCookieData().user).then(function(response) {
-			$scope.rating = response.rating;
-			rated = true;
+			if(response){
+				$scope.rating = response.rating;
+				previousRating=$scope.rating;
+				rated = true;
+			}
 		});
 	}
 	
@@ -154,8 +158,9 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 					
 				}
 			});
+			$scope.issue.votes+=1;
+			rated=true;
 		} else {
-			console.log(rating);
 			RestApiClientService.post('/functions/changeIssueRating',{
 				issueID: $route.current.params.issueID,
 				userID: PersistanceService.getCookieData().user,
@@ -166,10 +171,12 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 				}
 			});
 		}
+		$scope.issue.rating *= $scope.issue.votes;
 		$scope.issue.rating += rating;
-		$scope.issue.votes+=1;
+		$scope.issue.rating -=previousRating;
 		$scope.issue.rating /= ($scope.issue.votes);
 		$scope.issue.rating = Math.round($scope.issue.rating);
+		previousRating=rating;
 	}
 	
 });
