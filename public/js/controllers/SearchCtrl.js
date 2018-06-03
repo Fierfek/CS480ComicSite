@@ -15,12 +15,11 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 		//case "Book by Year": break;
 		//case "Issue by Year": call="/query/issue/byYear/"; break;
 		case "User": call= "/query/byUserName/";break;
+		case "All Books": call="/";break;
 	}
 	call += search.param.toLowerCase();
-	console.log("call: " + call);
 	RestApiClientService.get(call).then(function(response) {
 		$scope.data = [];
-		console.log("response: " + response);
 		switch(search.category) {
 			case "Book Title": 
 				for (var i = 0; i < response.length; i++) {
@@ -80,6 +79,10 @@ createBook.controller('SearchResultController', function($scope, $rootScope, $lo
 					});
 				}
 				$scope.message = "Found " + response.length + " user(s): " + search.param.toLowerCase();
+			break;
+			case "All Books":
+				$scope.data=response;
+				$scope.message = "Found " + response.length + " books ";
 			break;
 		}
 
