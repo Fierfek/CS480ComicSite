@@ -1,9 +1,9 @@
-<div class="row w-75 mx-auto my-5 bg-light" ">
+<div class="row w-75 mx-auto my-5 bg-info">
 	<div class="col w-100 mt-5">
 		<h2 class="text-capitalize">{{message}}</h2>
 		<hr class="my-4">
 	</div>
-	<div class="d-inline-flex flex-wrap w-100" ng-show="(category == 'Character') || (category == 'Illustrator') || (category == 'Writer') || 
+	<div class="d-inline-flex flex-wrap w-100 bg-light mb-5" ng-show="(category == 'Character') || (category == 'Illustrator') || (category == 'Writer') || 
 	(category == 'Issue') ||(category == 'Issue Title')">
 		<div ng-repeat="point in data | orderBy:'issueID'" class=" p-3 col-3 px-1 py-1">
 			<div class="w-100">
@@ -16,12 +16,19 @@
 		</div>
 	</div>
 
-	<div class="d-inline-flex flex-wrap w-100"  ng-show="(category == 'Book Title' || category == 'All Books')" ng-repeat="point in data | orderBy:'title'">
-		<a  class="text-dark" href="/book/{{point.bookID}}">
-			<h4 class="text-dark ml-5 text-capitalize">{{point.title}}</h4>
-		</a>
+	<div class="d-inline-flex flex-wrap w-100 mb-5 py-5 bg-light" ng-show="(category == 'Book Title')" ng-repeat="point in data | orderBy:'title'">
+			<a  class="text-dark" href="/book/{{point.bookID}}">
+				<h4 class="text-dark ml-5 text-capitalize">{{point.title}}</h4>
+			</a>
+	</div>
+	<div class="mb-5 bg-light">
+		<div class="d-inline-flex flex-wrap w-100 " ng-show="(category == 'All Books')" ng-repeat="point in data | orderBy:'title'">
+			<a  class="text-dark" href="/book/{{point.bookID}}">
+				<h4 class="text-dark ml-5 text-capitalize">{{point.title}}</h4>
+			</a>
+		</div>
 	</div>	
-	<div class="d-inline-flex flex-wrap w-100 mb-5 " ng-show="(category == 'User')" ng-repeat="point in data">
+	<div class="d-inline-flex flex-wrap w-100  mb-5 py-5 bg-light" ng-show="(category == 'User')" ng-repeat="point in data">
 		<a  href="/profile/{{point.userID}}">
 			<img class="ml-3" src="{{point.profilePic}}" style="width:200px; height:200px;"></img>
 			<span class="ml-5 text-capitalize" style="font-size: 150%">{{point.username}}</span>
