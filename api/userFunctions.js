@@ -401,7 +401,7 @@ router.post('/signIn', function(req, res) {
 		IndexName: "userpass",
 		KeyConditionExpression: "username = :username and password = :password",
 		ExpressionAttributeValues: {
-			":username": user.username,
+			":username": user.username.toLowerCase(),
 			":password": user.password
 		}
 	};
