@@ -21,9 +21,10 @@
 								<p class="card-text d-inline ">Writer(s): <div ng-repeat="writer in writers" class="d-inline text-capitalize">{{writer.writer}}, </div></p>
 								<p class="card-text d-inline">Illustrator(s): <div ng-repeat="illustrator in illustrators" class="d-inline text-capitalize">{{illustrator.illustrator}}, </div></p>
 								<p class="card-text d-inline">Character(s): <div ng-repeat="character in characters" class="d-inline text-capitalize">{{character.character}}, </div></p>
-								<p style= "white-space:normal">Average User Rating: </p>
+								<label style= "white-space:normal">Average User Rating: </label>
 								<jk-rating-stars max-rating="8" rating=issue.rating read-only=true>
 								</jk-rating-stars>
+								<pre>{{issue.votes}} votes, average: {{issue.rating}} out of 8</pre>
 							</div>
 						</div>
 						<div class= "col-md-10 mx-auto my-3">

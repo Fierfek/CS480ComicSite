@@ -33,13 +33,15 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	RestApiClientService.get('/issue/'+$route.current.params.issueID).then(function(response){
 		$scope.issue = response;
 		$scope.issue.rating=0;
+		$scope.issue.votes=0;
 		RestApiClientService.get('/query/issueRating/byIssue/' + response.issueID).then(function(response) {
-			if(response) {	
-				for(var k = 0; k < response.length; k++) {
+			if(response[0]) {	
+				$scope.issue.votes=response.length;
+				for(var k = 0; k < $scope.issue.votes; k++) {
 					$scope.issue.rating += response[k].rating;
 				}
-				$scope.issue.rating /= response.length;
-				$scope.issue.rating = Math.round($scope.issue.rating * 10) / 10;
+				$scope.issue.rating /= $scope.issue.votes;
+				$scope.issue.rating = Math.round($scope.issue.rating);
 			}
 		});
 	});
@@ -164,6 +166,10 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 				}
 			});
 		}
+		$scope.issue.rating += rating;
+		$scope.issue.votes+=1;
+		$scope.issue.rating /= ($scope.issue.votes);
+		$scope.issue.rating = Math.round($scope.issue.rating);
 	}
 	
 });
