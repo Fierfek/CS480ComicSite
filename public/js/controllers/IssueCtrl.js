@@ -9,6 +9,7 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	var commentsList = [];
 	var show;
 	var previousRating=0;
+	var previouVotes=1;
 	
 	$scope.rating = 0;
 	var rated = false;
@@ -148,6 +149,8 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	}
 	
 	$scope.rate = function(rating) {
+		if ($scope.issue.votes != 0)
+			previouVotes=$scope.issue.votes;
 		if(!rated) {
 			RestApiClientService.post('/functions/rateIssue',{
 				issueID: $route.current.params.issueID,
@@ -172,7 +175,8 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 				}
 			});
 		}
-		$scope.issue.rating *= $scope.issue.votes;
+		$scope.issue.rating *=previouVotes ;
+		console.log("issue: "+$scope.issue.rating+ "previous: "+previousRating + " rating: "+rating + "votes: "+$scope.issue.votes)
 		$scope.issue.rating += rating;
 		$scope.issue.rating -=previousRating;
 		$scope.issue.rating /= ($scope.issue.votes);
