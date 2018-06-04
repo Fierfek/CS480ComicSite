@@ -181,6 +181,11 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 		$scope.issue.rating -=previousRating;
 		$scope.issue.rating /= ($scope.issue.votes);
 		$scope.issue.rating = Math.round($scope.issue.rating);
+		if($scope.issue.rating > 8){
+			$scope.issue.rating = 8;
+		}else if($scope.issue.rating < 1){
+			$scope.issue.rating = 1;
+		}
 		previousRating=rating;
 	}
 	
