@@ -14,8 +14,7 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
   		"July", "August", "September", "October", "November", "December"
 		];
 
-		$scope.month = monthNames[monthNum];
-		
+		$scope.month = monthNames[monthNum];		
 	});
 	
 	RestApiClientService.get("/query/issue/byBook/" + $route.current.params.bookID).then(function(response){
@@ -43,6 +42,7 @@ bookInfo.controller('BookInfoController', function($scope, $route, RestApiClient
 			});
 		}
 	});
+	
 	
 	$scope.follow = function() {
 		var userId = PersistanceService.getCookieData().user;

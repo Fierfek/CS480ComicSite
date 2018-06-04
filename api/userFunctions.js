@@ -401,13 +401,14 @@ router.post('/signIn', function(req, res) {
 		IndexName: "userpass",
 		KeyConditionExpression: "username = :username and password = :password",
 		ExpressionAttributeValues: {
-			":username": user.username.toLowerCase(),
+			":username": user.username,
 			":password": user.password
 		}
 	};
 	
 	
 	db.query(params).then((data) => {
+		console.log(data[0]);
 		if(data[0]) {
 			response.signedIn = true;	
 			response.userId = data[0].userID
@@ -626,7 +627,5 @@ var generateId = function(type) {
 		})
 	})
 };
-
-
 
 module.exports = router;

@@ -53,6 +53,7 @@ issuePage.controller('IssueController',function($scope, $rootScope, $route,$filt
 	//get the writers
 	RestApiClientService.get('/query/issueWriters/byIssue/'+$route.current.params.issueID).then(function(response){
 		$scope.writers=response;
+		console.log(response);
 	});
 	
 	//get the characters
