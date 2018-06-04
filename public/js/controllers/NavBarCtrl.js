@@ -3,8 +3,8 @@ var navBar = angular.module('NavBarCtrl', []);
 navBar.controller('NavBarController', function($scope, $rootScope, $location, PersistanceService, RestApiClientService) {
 
 	$scope.data= ["Book Title","Writer","Illustrator","Character","Issue Title","All Books"];//"Book by Year"
-	$scope.categoryMode=true;
-	$scope.search="chose a category";
+	$scope.categoryMode = true;
+	$scope.search = "chose a category";
 	$rootScope.results = {};
 	var key = PersistanceService.getCookieData();
 	$scope.category = "Category";
@@ -12,6 +12,7 @@ navBar.controller('NavBarController', function($scope, $rootScope, $location, Pe
 	if(key) {
 		$rootScope.key = key;
 		$rootScope.loggedIn = true;
+		console.log($rootScope.key);
 	}
 
 	$scope.startSearch = function() {

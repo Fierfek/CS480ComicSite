@@ -4,7 +4,7 @@
 			<h1 class="text-capitalize" style="text-align: left">{{book.title}}</h1>
 			<h4 style="text-align: left">{{book.publisher}}</h4>
 			<h6 style="text-align: left">{{month}} {{year}}</h6>
-			<button type="button" class="btn btn-secondary border" ng-click="follow()" ng-show="loggedIn">Follow</button>
+			<button type="button" class="btn btn-secondary border" ng-click="follow()" ng-show="loggedIn && showFollow">Follow</button>
 			<p>{{numOfIssues}} Issues</p>
 		</div>
 	</div>

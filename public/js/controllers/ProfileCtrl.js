@@ -10,6 +10,24 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	$scope.users = [];
 	var date = new Date();
 	
+	if($rootScope.loggedIn) {
+		RestApiClientService.get("/userFollows/" + $rootScope.key.user).then(function(response) {
+			var userFollows = response.users.split(',');
+			userFollows.shift();
+			if(userFollows.find(checkForUser)) {
+				$scope.showFollow = false;
+			}
+		});
+	}
+	
+	var checkForUser = function(id) {
+		if(parseInt(id) == $route.current.params.userId) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	//convert timestamp to data string
 	$scope.setTime= function(time){
 		date.setTime(time);
@@ -98,6 +116,8 @@ profile.controller('ProfileController', function($scope,$rootScope, $route, Rest
 	
 	$scope.follow = function() {
 		var userId = PersistanceService.getCookieData().user;
+		
+		$scope.showFollow = false;
 		
 		RestApiClientService.post('/functions/followUser',{
 			userId: userId,

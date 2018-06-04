@@ -16,7 +16,7 @@
 					<button class="btn btn-primary h-75" ng-click="submitEdit()">Submit Changes</button>
 				</div>
 				<div class="w-25 ml-auto pt-1" ng-show="!isMyprofile() && signedIn()">
-					<button class="btn btn-primary h-75" ng-click="follow()">Follow</button>
+					<button class="btn btn-primary h-75" ng-click="follow()" ng-show="showFollow">Follow</button>
 				</div>
 			</div>
 		</div>
