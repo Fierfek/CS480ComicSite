@@ -11,10 +11,10 @@ issueCreator.controller('CreateIssueController', function ($scope, $route, $loca
 			var fd = new FormData();
 		
 			fd.append('file', file);
-			fd.append('title', $scope.issue.title.toLowerCase());
-			fd.append('writer', $scope.issue.writer.toLowerCase());
-			fd.append('characters', $scope.issue.characters.toLowerCase());
-			fd.append('illustrators', $scope.issue.illustrators.toLowerCase());
+			fd.append('title', $scope.issue);
+			fd.append('writer', $scope.issue);
+			fd.append('characters', $scope.issue.characters);
+			fd.append('illustrators', $scope.issue.illustrators);
 			fd.append('year', $scope.issue.year);
 			fd.append('volume', $scope.issue.volume);
 			fd.append('issueNum', $scope.issue.issueNum);
